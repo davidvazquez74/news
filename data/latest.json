@@ -1,101 +1,51 @@
 {
-  "generated_at": "2025-09-16T21:37:47.605Z",
+  "generated_at": "2025-09-16T21:54:27.127Z",
   "global": [
     {
-      "title": "Acting legend Robert Redford dies aged 89",
-      "link": "https://www.bbc.com/news/articles/c1dqe9ey0kgo?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T18:25:25.000Z",
-      "summary": "The acting star was famous for roles in The Sting and Butch Cassidy and the Sundance Kid.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: The acting star was famous for roles in The Sting and Butch Cassidy and the Sundance Kid."
+      "title": "Qué significa que EE.UU. retire a Colombia la certificación en la lucha contra el narcotráfico y qué tiene que ver la tensa relación entre Trump y Petro",
+      "link": "https://www.bbc.com/mundo/articles/cn0xgj25vnno?at_medium=RSS&amp;at_campaign=rss",
+      "published": "2025-09-16T11:30:04.000Z",
+      "summary": "Cada año Estados Unidos certifica la lucha antidrogas de varios países. De esa certificación dependen millones de dólares y Colombia no la ha logrado por primera vez en 30 años.",
+      "impact": "Facturas de energía más altas y transporte más caro: compensa con eficiencia y planifica consumos.",
+      "glossary": [
+        {
+          "term": "ia",
+          "def": "Inteligencia Artificial: software que automatiza tareas."
+        }
+      ],
+      "source": "BBC Mundo"
     },
     {
-      "title": "Israel launches ground offensive on Gaza City",
-      "link": "https://www.bbc.com/news/articles/c749q1245pwo?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T16:08:26.000Z",
-      "summary": "It comes as a UN commission of inquiry found that Israel was committing genocide in Gaza.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: It comes as a UN commission of inquiry found that Israel was committing genocide in Gaza."
+      "title": "\"El bombardeo ha sido demencial\": la huida de miles de palestinos tras el inicio de la toma israelí de Ciudad de Gaza",
+      "link": "https://www.bbc.com/mundo/articles/c0r01jw0p8no?at_medium=RSS&amp;at_campaign=rss",
+      "published": "2025-09-16T17:34:55.000Z",
+      "summary": "Una larga columna de desplazados trata de escapar de la ciudad en medio de intensos bombardeos israelíes",
+      "impact": "Cambios en el trabajo: algunas tareas se automatizan; conviene formarse en habilidades digitales.",
+      "glossary": [
+        {
+          "term": "ia",
+          "def": "Inteligencia Artificial: software que automatiza tareas."
+        }
+      ],
+      "source": "BBC Mundo"
     },
     {
-      "title": "Israel has committed genocide in Gaza, UN commission of inquiry says",
-      "link": "https://www.bbc.com/news/articles/c8641wv0n4go?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T13:43:59.000Z",
-      "summary": "The panel finds that four of the five genocidal acts defined under international law have been carried out against Palestinians during the war.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: The panel finds that four of the five genocidal acts defined under international law have been carried out against Palestinians during the war."
+      "title": "Los 7 cargos de los que acusan a Tyler Robinson, sospechoso de asesinar al comentarista conservador Charlie Kirk",
+      "link": "https://www.bbc.com/mundo/articles/cp982e9zgp4o?at_medium=RSS&amp;at_campaign=rss",
+      "published": "2025-09-16T21:28:21.000Z",
+      "summary": "Tyler Robinson ha sido acusado de asesinato agravado y otros cargos.",
+      "impact": "Afecta a tu bolsillo y decisiones: valora precios, contratos y plazos antes de comprar, vender o invertir.",
+      "glossary": [],
+      "source": "BBC Mundo"
     },
     {
-      "title": "Judge dismisses terrorism charges against Luigi Mangione",
-      "link": "https://www.bbc.com/news/articles/cj4y2p8qq5qo?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T14:27:27.000Z",
-      "summary": "Judge Gregory Carro also ruled a second-degree murder charge against Mangione could stand during a hearing on Tuesday.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: Judge Gregory Carro also ruled a second-degree murder charge against Mangione could stand during a hearing on Tuesday."
-    },
-    {
-      "title": "Malawians await presidential poll result in vote dominated by economic woes",
-      "link": "https://www.bbc.com/news/articles/c5y56req0g1o?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T15:39:55.000Z",
-      "summary": "If no candidate wins more than half the votes, the top two contenders will head to a run-off.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: If no candidate wins more than half the votes, the top two contenders will head to a run-off."
-    },
-    {
-      "title": "Coup plot charges for former Romanian presidential candidate",
-      "link": "https://www.bbc.com/news/articles/c4g5ky0vex8o?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T17:47:19.000Z",
-      "summary": "Prosecutors say the right-wing former presidential candidate conspired to overthrow constitutional order in the country.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: Prosecutors say the right-wing former presidential candidate conspired to overthrow constitutional order in the country."
-    },
-    {
-      "title": "Chinese-linked mining firms sued over 'ecological catastrophe' in Zambia",
-      "link": "https://www.bbc.com/news/articles/cy7p51l60rro?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T17:36:09.000Z",
-      "summary": "Million of litres of highly acidic waste spilled into rivers in a copper-mining area, farmers say.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: Million of litres of highly acidic waste spilled into rivers in a copper-mining area, farmers say."
-    },
-    {
-      "title": "Kenya issues arrest warrant for British national over young mother's murder",
-      "link": "https://www.bbc.com/news/articles/cwywng4jp08o?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T10:56:53.000Z",
-      "summary": "The 21-year-old was killed in 2012 and her body found in a septic tank in the garrison town of Nanyuki.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: The 21-year-old was killed in 2012 and her body found in a septic tank in the garrison town of Nanyuki."
-    },
-    {
-      "title": "Kirk shooting suspect appeared to confess on Discord",
-      "link": "https://www.bbc.com/news/articles/cm2zkxy2xmno?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T18:27:39.000Z",
-      "summary": "Tyler Robinson is thought to have discussed the killing on the online platform before his arrest.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: Tyler Robinson is thought to have discussed the killing on the online platform before his arrest."
-    },
-    {
-      "title": "Fears balloon of a return to civil war in South Sudan over treason trial",
-      "link": "https://www.bbc.com/news/articles/c7933p4xe7po?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T16:33:16.000Z",
-      "summary": "The political rift that could spiral into conflict again after the vice-president was accused of treason.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: The political rift that could spiral into conflict again after the vice-president was accused of treason."
-    },
-    {
-      "title": "US designates Colombia as country 'failing to cooperate in drug war'",
-      "link": "https://www.bbc.com/news/articles/c78n0jmplmro?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T15:43:06.000Z",
-      "summary": "For the first time in almost three decades Colombia loses its certification as a US ally in the war on drugs.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: For the first time in almost three decades Colombia loses its certification as a US ally in the war on drugs."
-    },
-    {
-      "title": "TikTokers arrested for insulting Somalia's president in a dance video",
-      "link": "https://www.bbc.com/news/articles/crmek8wgjdgo?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-16T14:06:12.000Z",
-      "summary": "The young men are seen dancing to a remix of a campaign song, with altered lyrics.",
-      "source": "BBC World",
-      "why_it_matters": "En claro: The young men are seen dancing to a remix of a campaign song, with altered lyrics."
+      "title": "Muere a los 89 años Robert Redford, la estrella que deslumbró a Hollywood con su carisma",
+      "link": "https://www.bbc.com/mundo/articles/cvg9n49eg0ro?at_medium=RSS&amp;at_campaign=rss",
+      "published": "2025-09-16T12:37:48.000Z",
+      "summary": "Fue un ícono de Hollywood convertido en director y activista que participó en más de medio centenar películas de Hollywood.",
+      "impact": "Afecta a tu bolsillo y decisiones: valora precios, contratos y plazos antes de comprar, vender o invertir.",
+      "glossary": [],
+      "source": "BBC Mundo"
     }
   ],
   "espana": [
@@ -104,96 +54,46 @@
       "link": "https://elpais.com/sociedad/2020/02/27/actualidad/1582795523_075914.html#?ref=rss&format=simple&link=link",
       "published": "2020-02-27T15:13:44.000Z",
       "summary": "Se trata del segundo caso confirmado en la comunidad y el decimoquinto en España desde el lunes",
-      "source": "El País",
-      "why_it_matters": "En claro: Se trata del segundo caso confirmado en la comunidad y el decimoquinto en España desde el lunes"
+      "impact": "Cambios en el trabajo: algunas tareas se automatizan; conviene formarse en habilidades digitales.",
+      "glossary": [
+        {
+          "term": "ia",
+          "def": "Inteligencia Artificial: software que automatiza tareas."
+        }
+      ],
+      "source": "El País (Portada)"
     },
     {
       "title": "Mapa de la expansión y claves para entender el coronavirus de Wuhan",
       "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582712658_011286.html#?ref=rss&format=simple&link=link",
       "published": "2020-03-01T13:16:43.000Z",
       "summary": "Qué es, cómo se transmite, cuál es la población más vulnerable y dimensiones del contagio en el mundo",
-      "source": "El País",
-      "why_it_matters": "En claro: Qué es, cómo se transmite, cuál es la población más vulnerable y dimensiones del contagio en el mundo"
+      "impact": "Afecta a tu bolsillo y decisiones: valora precios, contratos y plazos antes de comprar, vender o invertir.",
+      "glossary": [],
+      "source": "El País (Portada)"
     },
     {
       "title": "El turismo italiano se resiente; España mira expectante",
       "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582751511_964259.html#?ref=rss&format=simple&link=link",
       "published": "2020-02-27T13:26:25.000Z",
       "summary": "La patronal hotelera del área de Venecia describe un sector “al borde del colapso”",
-      "source": "El País",
-      "why_it_matters": "En claro: La patronal hotelera del área de Venecia describe un sector “al borde del colapso”"
+      "impact": "Cambios en el trabajo: algunas tareas se automatizan; conviene formarse en habilidades digitales.",
+      "glossary": [
+        {
+          "term": "ia",
+          "def": "Inteligencia Artificial: software que automatiza tareas."
+        }
+      ],
+      "source": "El País (Portada)"
     },
     {
       "title": "“La magnitud del problema del coronavirus no será diferente a una gripe”",
       "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582744701_468958.html#?ref=rss&format=simple&link=link",
       "published": "2020-02-27T17:26:43.000Z",
       "summary": "Ángel Gil de Miguel, catedrático de Medicina Preventiva y Salud Pública de la Universidad Rey Juan Carlos, lanza un mensaje de tranquilidad",
-      "source": "El País",
-      "why_it_matters": "En claro: Ángel Gil de Miguel, catedrático de Medicina Preventiva y Salud Pública de la Universidad Rey Juan Carlos, lanza un mensaje de tranquilidad"
-    },
-    {
-      "title": "Seis italianos encerrados por partida doble",
-      "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582745125_354016.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T11:36:34.000Z",
-      "summary": "Los compañeros de viaje de los cuatro positivos en Canarias están aislados del resto en el hotel en cuarentena",
-      "source": "El País",
-      "why_it_matters": "En claro: Los compañeros de viaje de los cuatro positivos en Canarias están aislados del resto en el hotel en cuarentena"
-    },
-    {
-      "title": "Trump nombra al vicepresidente Pence a cargo de la crisis del coronavirus",
-      "link": "https://elpais.com/sociedad/2020/02/27/actualidad/1582762594_400436.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T17:26:58.000Z",
-      "summary": "El CDC confirma el primer caso de origen desconocido en Northern California. El infectado no ha viajado recientemente al extranjero ni ha tenido contacto con un caso confirmado",
-      "source": "El País",
-      "why_it_matters": "En claro: El CDC confirma el primer caso de origen desconocido en Northern California. El infectado no ha viajado recientemente al extranjero ni ha tenido contacto con un caso confirmado"
-    },
-    {
-      "title": "El coronavirus de Wuhan | Japón cerrará todos sus centros escolares hasta fin de marzo",
-      "link": "https://elpais.com/sociedad/2020/02/27/actualidad/1582772469_101682.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T13:08:21.000Z",
-      "summary": "Corea del Sur, con casi 1.600 casos, y EE UU posponen sus ejercicios militares conjuntos",
-      "source": "El País",
-      "why_it_matters": "En claro: Corea del Sur, con casi 1.600 casos, y EE UU posponen sus ejercicios militares conjuntos"
-    },
-    {
-      "title": "El Gobierno salva el primer escollo de los Presupuestos gracias a ERC",
-      "link": "https://elpais.com/politica/2020/02/27/actualidad/1582790343_062149.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-28T06:19:36.000Z",
-      "summary": "El voto en contra de Junts per Catalunya indigna a los republicanos",
-      "source": "El País",
-      "why_it_matters": "En claro: El voto en contra de Junts per Catalunya indigna a los republicanos"
-    },
-    {
-      "title": "La mesa de diálogo se reunirá mensualmente y los acuerdos serán “en el marco de la seguridad jurídica”",
-      "link": "https://elpais.com/politica/2020/02/26/actualidad/1582729437_069559.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T09:31:31.000Z",
-      "summary": "El Gobierno y la Generalitat pactan un comunicado conjunto tras tres horas de reunión",
-      "source": "El País",
-      "why_it_matters": "En claro: El Gobierno y la Generalitat pactan un comunicado conjunto tras tres horas de reunión"
-    },
-    {
-      "title": "Así avanzan las encuestas en Galicia y País Vasco",
-      "link": "https://elpais.com/politica/2020/02/26/actualidad/1582705222_037590.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T09:00:21.000Z",
-      "summary": "Los últimos sondeos y los datos básicos sobre el coronavirus, en la 'newsletter' de Kiko Llaneras de este miércoles",
-      "source": "El País",
-      "why_it_matters": "En claro: Los últimos sondeos y los datos básicos sobre el coronavirus, en la 'newsletter' de Kiko Llaneras de este miércoles"
-    },
-    {
-      "title": "Ciudadanos pagaba un sueldo a un vocal de la Junta Electoral Central que resolvió recursos del partido",
-      "link": "https://elpais.com/politica/2020/02/27/actualidad/1582796971_717381.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T15:13:35.000Z",
-      "summary": "Andrés Betancor ejerció como asesor de la formación en el Congreso mientras era miembro de la máxima autoridad electoral",
-      "source": "El País",
-      "why_it_matters": "En claro: Andrés Betancor ejerció como asesor de la formación en el Congreso mientras era miembro de la máxima autoridad electoral"
-    },
-    {
-      "title": "50 antiguos ministros y dirigentes europeos se pronuncian contra el plan de Trump para Palestina",
-      "link": "https://elpais.com/internacional/2020/02/26/actualidad/1582750435_447092.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T11:42:56.000Z",
-      "summary": "El proyecto de paz de la Casa Blanca acumula rechazos en la comunidad internacional",
-      "source": "El País",
-      "why_it_matters": "En claro: El proyecto de paz de la Casa Blanca acumula rechazos en la comunidad internacional"
+      "impact": "Podrías pagar más impuestos o tener menos deducciones: revisa gastos deducibles y planifica compras grandes.",
+      "glossary": [],
+      "source": "El País (Portada)"
     }
   ],
   "local": [
@@ -202,96 +102,41 @@
       "link": "https://www.lavanguardia.com/politica/20250916/11062841/expresident-aragones-aparca-politica-dirigir-cadena-hoteles-familia.html",
       "published": "2025-09-16T06:18:15.000Z",
       "summary": "El político, de 42 años, defiende cerrar bien las etapas, “ni aferrarse a los cargos, ni convertirlos en un medio de subsistencia, ni acabar reducido a una figura de vitrina”",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: El político, de 42 años, defiende cerrar bien las etapas, “ni aferrarse a los cargos, ni convertirlos en un medio de subsistencia, ni acabar reducido a una figura de vitrina”"
+      "impact": "Cambios en el trabajo: algunas tareas se automatizan; conviene formarse en habilidades digitales.",
+      "glossary": [
+        {
+          "term": "ia",
+          "def": "Inteligencia Artificial: software que automatiza tareas."
+        }
+      ],
+      "source": "La Vanguardia – Cataluña"
     },
     {
       "title": "Los miembros de la Manada de Castelldefels pactan penas máximas de ochos años y piden salir en libertad",
       "link": "https://www.lavanguardia.com/sucesos/20250916/11064456/manada-castelldefels-logra-rebaja-penas-pactar-victimas-piden-salir-libertad.html",
       "published": "2025-09-16T10:41:57.000Z",
       "summary": "Los acusados alcanzan un acuerdo con la Fiscalía y las víctimas y aceptan penas que van de los ocho a los tres años de prisión tras mostrar su arrepentimiento e indemnizar a las mujeres a las que violaron con 30.000 euros",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: Los acusados alcanzan un acuerdo con la Fiscalía y las víctimas y aceptan penas que van de los ocho a los tres años de prisión tras mostrar su arrepentimiento e indemnizar a las…"
+      "impact": "Podrías pagar más impuestos o tener menos deducciones: revisa gastos deducibles y planifica compras grandes.",
+      "glossary": [],
+      "source": "La Vanguardia – Cataluña"
     },
     {
       "title": "El diputado de ERC Ruben Wagensberg deja el acta y abandona la primera línea política",
       "link": "https://www.lavanguardia.com/politica/20250916/11064333/diputado-erc-ruben-wagensberg-deja-acta-abandon-primera-linea-politica.html",
       "published": "2025-09-16T10:08:53.000Z",
       "summary": "El parlamentario fue crítico con Junqueras y se integró en la lista de Nova Esquerra Nacional en el último congreso republicano",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: El parlamentario fue crítico con Junqueras y se integró en la lista de Nova Esquerra Nacional en el último congreso republicano"
+      "impact": "Afecta a tu bolsillo y decisiones: valora precios, contratos y plazos antes de comprar, vender o invertir.",
+      "glossary": [],
+      "source": "La Vanguardia – Cataluña"
     },
     {
       "title": "El Govern replica a Junts que las políticas sobre Catalunya se deciden en el Parlament",
       "link": "https://www.lavanguardia.com/politica/20250916/11065128/govern-replica-junts-politicas-sobre-catalunya-deciden-parlament.html",
       "published": "2025-09-16T12:06:22.000Z",
       "summary": "El Ejecutivo recuerda a los posconvergentes que&amp;nbsp;“las decisiones políticas sobre Catalunya se tienen que tomar en el Parlament”",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: El Ejecutivo recuerda a los posconvergentes que&amp;nbsp;“las decisiones políticas sobre Catalunya se tienen que tomar en el Parlament”"
-    },
-    {
-      "title": "Podemos tumbará la transferencia de competencias de inmigración a Catalunya",
-      "link": "https://www.lavanguardia.com/politica/20250916/11066046/podemos-tumbara-transferencia-competencias-inmigracion-catalunya.html",
-      "published": "2025-09-16T14:39:52.000Z",
-      "summary": "La formación morada anuncia que unirá sus votos a los de PP, Vox y UPN al estimar que la iniciativa pactada por PSOE y Junts “es racista”",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: La formación morada anuncia que unirá sus votos a los de PP, Vox y UPN al estimar que la iniciativa pactada por PSOE y Junts “es racista”"
-    },
-    {
-      "title": "Govern, sindicatos y empresarios suscriben por escrito la financiación singular pactada con ERC",
-      "link": "https://www.lavanguardia.com/politica/20250916/11066001/govern-sindicatos-empresarios-suscriben-escrito-financiacion-singular-pactada-erc.html",
-      "published": "2025-09-16T15:43:01.000Z",
-      "summary": "El Ejecutivo de Illa firma una declaración conjunta con UGT, CC.OO., Pimec y Foment en favor del despliegue de la hacienda catalana con el objetivo de gestionar de forma progresiva los impuestos&lt;br&gt;",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: El Ejecutivo de Illa firma una declaración conjunta con UGT, CC.OO., Pimec y Foment en favor del despliegue de la hacienda catalana con el objetivo de gestionar de forma progres…"
-    },
-    {
-      "title": "32 detenidos por vender empadronamientos fraudulentos a extranjeros en Tarragona",
-      "link": "https://www.lavanguardia.com/local/lleida/20250916/11064362/desarticulada-trama-vendia-empadronamientos-falsos-inmigrantes-tarragona-agenciaslv20250916.html",
-      "published": "2025-09-16T10:21:44.000Z",
-      "summary": "La Policía Nacional ha detectado 17 domicilios en los que miembros de la red empadronaban",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: La Policía Nacional ha detectado 17 domicilios en los que miembros de la red empadronaban"
-    },
-    {
-      "title": "Las emergencias sanitarias de Catalunya y Francia se coordinan para actuar a ambos lados de la frontera",
-      "link": "https://www.lavanguardia.com/vida/20250916/11065216/emergencias-sanitarias-catalunya-francia-coordinan-actuar-lados-frontera.html",
-      "published": "2025-09-16T12:21:09.000Z",
-      "summary": "Un acuerdo internacional persigue mejorar la respuesta sanitaria urgente en la franja fronteriza",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: Un acuerdo internacional persigue mejorar la respuesta sanitaria urgente en la franja fronteriza"
-    },
-    {
-      "title": "La oposición a Collboni reclama sin fisuras recuperar el Tramvia Blau",
-      "link": "https://www.lavanguardia.com/local/barcelona/20250916/11062851/oposicion-collboni-reclama-fisuras-recuperar-tramvia-blau.html",
-      "published": "2025-09-16T04:00:00.000Z",
-      "summary": "Los grupos municipales piden desligar la restauración ferroviaria de la reforma de la avenida Tibidabo, ya que el coste total del proyecto asciende a 46 millones de euros",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: Los grupos municipales piden desligar la restauración ferroviaria de la reforma de la avenida Tibidabo, ya que el coste total del proyecto asciende a 46 millones de euros"
-    },
-    {
-      "title": "Barcelona planea ya el desmantelamiento del poblado de chatarreros del parque Joan Miró",
-      "link": "https://www.lavanguardia.com/local/barcelona/20250912/11051266/barcelona-planea-desalojo-asentamiento-parque-joan-miro.html",
-      "published": "2025-09-12T04:00:00.000Z",
-      "summary": "El gobierno de alcalde Collboni prepara la transformación de esta zona verde, donde viven unos 30 chatarreros",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: El gobierno de alcalde Collboni prepara la transformación de esta zona verde, donde viven unos 30 chatarreros"
-    },
-    {
-      "title": "Las grandes arterias comerciales de Barcelona piden más libertad para abrir los días festivos",
-      "link": "https://www.lavanguardia.com/local/barcelona/20250915/11058924/grandes-ejes-piden-mas-libertad-abrir-festivo.html",
-      "published": "2025-09-15T04:00:00.000Z",
-      "summary": "Los ejes de los barrios, sin embargo, entienden que la medida apenas les comportaría beneficios",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: Los ejes de los barrios, sin embargo, entienden que la medida apenas les comportaría beneficios"
-    },
-    {
-      "title": "Apartur denuncia que Barcelona suma más de 3.000 habitaciones ilegales",
-      "link": "https://www.lavanguardia.com/local/barcelona/20250915/11062650/apartur-dice-barcelona-suma-mas-3-000-habitaciones-ilegales.html",
-      "published": "2025-09-15T17:10:04.000Z",
-      "summary": "La patronal de los pisos turísticos con licencia facilitará las denuncias anónimas vecinales",
-      "source": "La Vanguardia – Cataluña",
-      "why_it_matters": "En claro: La patronal de los pisos turísticos con licencia facilitará las denuncias anónimas vecinales"
+      "impact": "Afecta a tu bolsillo y decisiones: valora precios, contratos y plazos antes de comprar, vender o invertir.",
+      "glossary": [],
+      "source": "La Vanguardia – Cataluña"
     }
   ]
 }
