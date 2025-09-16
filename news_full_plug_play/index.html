@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Noticias</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header container">
+    <div class="row">
+      <h1 class="app-title">Noticias</h1>
+      <div class="header-actions">
+        <button id="refreshBtn" class="btn">Actualizar</button>
+        <select id="modeSelect" class="select">
+          <option value="adult">Adulto</option>
+          <option value="teen">Teen</option>
+        </select>
+      </div>
+    </div>
+    <p class="generated" id="generatedAt">—</p>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2 class="section-title">Global</h2>
+      <div id="global" class="list"></div>
+    </section>
+    <section>
+      <h2 class="section-title">España</h2>
+      <div id="espana" class="list"></div>
+    </section>
+    <section>
+      <h2 class="section-title">Tu zona</h2>
+      <div id="local" class="list"></div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>Fuentes varias. <a href="/data/latest.json" target="_blank" rel="noopener">Ver JSON</a></small>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>
