@@ -1,0 +1,34 @@
+{
+  "cataluna": [
+    {
+      "name": "El Periódico Catalunya",
+      "rss": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
+    },
+    {
+      "name": "La Vanguardia - Vida",
+      "rss": "https://www.lavanguardia.com/rss/vida.xml"
+    }
+  ],
+  "espana": [
+    {
+      "name": "RTVE - Última Hora",
+      "rss": "https://www.rtve.es/api/rss/ultimas-noticias/"
+    },
+    {
+      "name": "El País - España",
+      "rss": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada"
+    }
+  ],
+  "rioja": [
+    {
+      "name": "NueveCuatroUno (La Rioja)",
+      "rss": "https://nuevecuatrouno.com/feed/"
+    }
+  ],
+  "background": [
+    {
+      "name": "Reuters World",
+      "rss": "https://www.reuters.com/world/rss"
+    }
+  ]
+}

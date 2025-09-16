@@ -1,0 +1,12 @@
+{
+  "name": "news-auto",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "build:news": "node scripts/build_latest.js"
+  },
+  "dependencies": {
+    "rss-parser": "^3.12.0"
+  }
+}
