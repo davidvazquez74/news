@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>News • v3.17.6-lite</title>
+  <meta name="theme-color" content="#111111">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="News v3.17.6-lite">
+
+  <!-- 🔌 Set this to your hosted latest.json (e.g. GitHub raw): -->
+  <!-- Example: https://raw.githubusercontent.com/USER/REPO/branch/latest.json -->
+  <meta name="news-remote-json" content="">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/favicon.ico">
+  <link rel="preload" href="data/latest.json" as="fetch" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🗞️</span>
+      <div class="titles">
+        <h1>Briefing Diario</h1>
+        <p class="version">v3.17.6-lite</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="teenToggle" aria-pressed="false" aria-label="Alternar modo Teens">Teens</button>
+      <button id="refreshBtn" aria-label="Forzar actualización">Forzar actualización</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="meta">
+      <div id="updatedAt" class="muted">Actualizando…</div>
+      <div id="geoNote" class="muted"></div>
+    </section>
+
+    <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
+    <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
+    <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
+    <section><h2 id="local-title">Local</h2><ul id="list-local" class="news-list"></ul></section>
+    <section><h2>Claves de fondo (6 meses)</h2><ul id="list-background" class="news-list"></ul></section>
+
+    <section id="teens-quiz" hidden>
+      <h2>Quiz Teens 🎯</h2>
+      <div id="quiz-container" class="quiz"></div>
+      <div class="quiz-footer"><button id="quizReset">Reiniciar</button><div id="quizScore" class="muted"></div></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Fuentes verificadas, resumen + impacto. • <a href="#" id="forceCacheClear">Limpiar caché</a></small>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
