@@ -1,7 +1,59 @@
 {
-  "updated_at": "2025-09-16T17:54:36.911043",
-  "cataluna": [],
-  "espana": [],
-  "rioja": [],
-  "background": []
+  "updated_at": "2025-09-17T08:10:00+02:00",
+  "cataluna": [
+    {
+      "title": "Barcelona aprueba un plan de prevención del alzhéimer por seis millones",
+      "summary": "Estrategia municipal 2025–2030 para detección precoz y apoyo comunitario.",
+      "impact": "Más recursos en centros de barrio y posibles cribados para familias.",
+      "source": "El País",
+      "url": "https://elpais.com/espana/catalunya/2025-09-16/barcelona-invertira-seis-millones-en-un-plan-de-prevencion-del-alzheimer.html",
+      "published_at": "2025-09-16T17:10:00+02:00"
+    }
+  ],
+  "espana": [
+    {
+      "title": "Podemos amenaza con tumbar la delegación de inmigración a Cataluña",
+      "summary": "Belarra avisa a PSOE y Junts de que votarán en contra por considerar la norma “racista”.",
+      "impact": "Si cae la iniciativa, no habrá cambios inmediatos en permisos y gestión autonómica.",
+      "source": "La Vanguardia",
+      "url": "https://www.lavanguardia.com/politica/20250916/11066046/podemos-tumbara-transferencia-competencias-inmigracion-catalunya.html",
+      "published_at": "2025-09-16T16:39:00+02:00"
+    },
+    {
+      "title": "CC.OO. y UGT acuerdan coordinarse para reforzar su agenda social (SMI, vivienda, jornada)",
+      "summary": "Los sindicatos se coordinan para aumentar el impacto de sus propuestas antes de fin de año.",
+      "impact": "Posible subida del SMI y cambios laborales que afecten nóminas y horarios.",
+      "source": "RTVE",
+      "url": "https://www.rtve.es/noticias/20250916/ccoo-ugt-acuerdan-coordinarse-aumentar-impacto-propuestas/16731208.shtml",
+      "published_at": "2025-09-16T19:00:00+02:00"
+    }
+  ],
+  "rioja": [
+    {
+      "title": "Logroño: agenda y avisos locales hoy",
+      "summary": "Cultura y movilidad del día en la capital riojana (fuente regional).",
+      "impact": "Si te mueves por el centro, revisa actividades y cortes puntuales.",
+      "source": "NueveCuatroUno",
+      "url": "https://nuevecuatrouno.com/tema/logrono/",
+      "published_at": "2025-09-16T09:00:00+02:00"
+    }
+  ],
+  "background": [
+    {
+      "title": "Israel inicia nueva ofensiva terrestre en Gaza City",
+      "summary": "Operación para desarticular la infraestructura restante de Hamas; miles de desplazados.",
+      "impact": "Tensión regional y posible efecto en rutas aéreas y mercados.",
+      "source": "AP News",
+      "url": "https://apnews.com/article/israel-hamas-wars-09-16-2025-bfd8d7c9f75a9da3e101fb3c8cf6c518",
+      "published_at": "2025-09-16T12:00:00+02:00"
+    },
+    {
+      "title": "Petróleo: el mercado sopesa riesgo por ataques a refinerías rusas",
+      "summary": "Los precios se mantienen al alza por posibles interrupciones de suministro.",
+      "impact": "Gasolina y transporte pueden encarecerse a corto plazo.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/energy/oil-edges-up-market-weighs-supply-risk-attacks-russian-refineries-2025-09-16/",
+      "published_at": "2025-09-16T08:30:00+02:00"
+    }
+  ]
 }
