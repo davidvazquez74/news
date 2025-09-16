@@ -1,0 +1,22 @@
+{
+  "cataluna": [
+    { "name": "El Periódico Catalunya", "rss": "https://www.elperiodico.com/es/rss/catalunya/rss.xml" },
+    { "name": "La Vanguardia - Vida",  "rss": "https://www.lavanguardia.com/rss/vida.xml" },
+    { "name": "El Punt Avui",          "rss": "https://www.elpuntavui.cat/rss" }
+  ],
+  "espana": [
+    { "name": "RTVE - Última Hora",    "rss": "https://www.rtve.es/api/rss/ultimas-noticias/" },
+    { "name": "El País - España",      "rss": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada" },
+    { "name": "elDiario.es",           "rss": "https://www.eldiario.es/rss/" }
+  ],
+  "rioja": [
+    { "name": "NueveCuatroUno",        "rss": "https://nuevecuatrouno.com/feed/" },
+    { "name": "La Rioja (diario)",     "rss": "https://www.larioja.com/rss/2.0/portada/" },
+    { "name": "Rioja2",                "rss": "https://rioja2.com/rss" }
+  ],
+  "background": [
+    { "name": "Reuters World",         "rss": "https://www.reuters.com/world/rss" },
+    { "name": "BBC World",             "rss": "http://feeds.bbci.co.uk/news/world/rss.xml" },
+    { "name": "The Guardian World",    "rss": "https://www.theguardian.com/world/rss" }
+  ]
+}
