@@ -1,98 +1,89 @@
 const $ = s => document.querySelector(s);
 
-function toTeen(text=""){
-  if(!text) return "";
-  return text
-    .replace(/\bEn claro:\s*/i, "")
-    .replace(/\bPor qué importa:\s*/i, "")
-    .replace(/\bQué significa:\s*/i, "")
-    .replace(/\bcontexto\b/gi,"idea clave")
-    .replace(/\bimpacta\b/gi,"te afecta");
-}
-
 function fmtDate(iso){
   if(!iso) return "";
   try{ return new Date(iso).toLocaleString(undefined,{hour12:false}); }catch{ return ""; }
 }
 
-function ensureImpact(item){
-  const base = item.why_it_matters || item.summary || "";
-  if (base) return base.startsWith("En claro:") ? base : "En claro: " + base;
-  if (item.title) return "En claro: " + item.title;
-  return "En claro: Información clave aún no disponible.";
+// Teens: MISMA estructura, tono juvenil y emojis
+function toTeen(text=""){
+  if(!text) return "";
+  // muy leve, sin cambiar significado
+  let t = text
+    .replace(/\busted(es)?\b/gi,"tú")
+    .replace(/\bvalor\b/gi,"precio")
+    .replace(/\bconsumo\b/gi,"compras")
+    .replace(/\bfinanzas\b/gi,"dinero");
+  // añade un toque
+  if (t.length < 140) t += " ⚡🙂";
+  return t;
 }
 
-function card(item, mode){
-  const art = document.createElement("article");
-  art.className = "news-card";
-  const title = item.title || "Sin título";
-  const href = item.link || "#";
-  const published = fmtDate(item.published);
-  const summary = item.summary || "";
-  const impact = ensureImpact(item);
+function renderABC(item, mode){
+  const wrap = document.createElement("article");
+  wrap.className = "news-card";
 
-  const showSummary = mode==="teen" ? (toTeen(summary)) : summary;
-  const showImpact  = mode==="teen" ? (toTeen(impact))  : impact;
+  // A. Noticia (clickable)
+  const a = document.createElement("a");
+  a.className = "news-title";
+  a.target = "_blank"; a.rel = "noopener noreferrer";
+  a.textContent = item.title || "Sin título";
+  a.href = item.link || "#";
+  wrap.appendChild(a);
 
-  art.innerHTML = `
-    <a class="news-title" target="_blank" rel="noopener noreferrer"></a>
-    <p class="meta">${published ? published : ""}</p>
-    <p class="news-summary"></p>
-    <p class="news-impact"></p>
-  `;
-  const a = art.querySelector(".news-title");
-  a.textContent = title;
-  a.href = href;
+  const meta = document.createElement("p");
+  meta.className = "meta";
+  meta.textContent = item.published ? fmtDate(item.published) : "";
+  wrap.appendChild(meta);
 
-  art.querySelector(".news-summary").textContent = showSummary;
-  art.querySelector(".news-impact").textContent  = showImpact;
-  return art;
+  // B. Impacto (cómo te afecta)
+  const impactText = item.impact || "";
+  const impact = document.createElement("div");
+  impact.className = "block";
+  impact.innerHTML = `<h4>B. Impacto</h4><p>${ mode==="teen" ? toTeen(impactText) : impactText }</p>`;
+  wrap.appendChild(impact);
+
+  // C. Glosario (si hay)
+  const gl = document.createElement("div");
+  gl.className = "block gloss";
+  gl.innerHTML = `<h4>C. Glosario</h4>${
+    (item.glossary && item.glossary.length)
+      ? item.glossary.map(g=>`<div class="gloss-item"><strong>${g.term}:</strong> ${g.def}</div>`).join("")
+      : "<div class='gloss-item'>—</div>"
+  }`;
+  wrap.appendChild(gl);
+
+  return wrap;
 }
 
 function renderSection(sel, items, mode){
   const el = $(sel);
   if(!el) return;
   el.innerHTML = "";
-  if(!items || !items.length){
-    const p = document.createElement("p");
-    p.className = "news-impact";
-    p.textContent = "En claro: Sin contenidos (todavía).";
-    el.appendChild(p);
-    return;
-  }
-  for(const it of items){
-    el.appendChild(card(it, mode));
-  }
+  (items||[]).slice(0,4).forEach(it => el.appendChild(renderABC(it, mode)));
 }
 
 async function load(mode){
-  try{
-    const res = await fetch(`/data/latest.json?t=${Date.now()}`);
-    const data = await res.json();
-    $("#generatedAt").textContent = data.generated_at
-      ? "Actualizado: " + fmtDate(data.generated_at) : "";
-    renderSection("#global", data.global, mode);
-    renderSection("#espana", data.espana, mode);
-    renderSection("#local",  data.local,  mode);
-  }catch(e){
-    const main = document.querySelector("main");
-    const div = document.createElement("div");
-    div.className = "news-impact";
-    div.textContent = "En claro: No se pudo cargar /data/latest.json";
-    main.prepend(div);
-  }
+  const res = await fetch(`/data/latest.json?t=${Date.now()}`);
+  const data = await res.json();
+  $("#generatedAt").textContent = data.generated_at ? "Actualizado: " + fmtDate(data.generated_at) : "";
+  renderSection("#global", data.global, mode);
+  renderSection("#espana", data.espana, mode);
+  renderSection("#local",  data.local,  mode);
 }
 
-function currentMode(){
-  const sel = $("#modeSelect");
-  const urlMode = new URLSearchParams(location.search).get("mode");
-  if(urlMode==="teen") sel.value="teen";
-  return sel.value;
+function setMode(mode){
+  document.getElementById("tabAdult").classList.toggle("active", mode==="adult");
+  document.getElementById("tabTeen").classList.toggle("active",  mode==="teen");
+  load(mode);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const sel = $("#modeSelect");
-  $("#refreshBtn").addEventListener("click", () => load(currentMode()));
-  sel.addEventListener("change", () => load(currentMode()));
-  load(currentMode());
+  document.getElementById("refreshBtn").addEventListener("click", ()=> load(document.body.dataset.mode||"adult"));
+  document.getElementById("tabAdult").addEventListener("click", ()=> { document.body.dataset.mode="adult"; setMode("adult"); });
+  document.getElementById("tabTeen").addEventListener("click",  ()=> { document.body.dataset.mode="teen";  setMode("teen");  });
+  // modo por query opcional ?mode=teen
+  const urlMode = new URLSearchParams(location.search).get("mode");
+  document.body.dataset.mode = (urlMode==="teen") ? "teen" : "adult";
+  setMode(document.body.dataset.mode);
 });
