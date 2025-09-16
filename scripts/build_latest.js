@@ -1,4 +1,5 @@
-// Node 20, sin deps
+// scripts/build_latest.js
+// Node 20, sin dependencias externas
 import fs from "fs";
 
 const FEEDS = {
@@ -12,7 +13,9 @@ const FEEDS = {
   ],
   local: [
     { name: "La Vanguardia – Cataluña", url: "https://www.lavanguardia.com/rss/local/catalunya.xml" },
-    { name: "El Periódico – Cataluña",  url: "https://www.elperiodico.com/es/rss/catalunya/rss.xml" }
+    { name: "El Periódico – Cataluña",  url: "https://www.elperiodico.com/es/rss/catalunya/rss.xml" },
+    { name: "324.cat",                  url: "https://www.ccma.cat/324/rss/324.xml" },
+    { name: "Ara.cat",                  url: "https://www.ara.cat/rss/" }
   ]
 };
 
@@ -39,7 +42,7 @@ function pickLink(block){
   return b ? b[1] : "";
 }
 
-// Heurística de “explicación aterrizada”
+// Genera explicación simplificada
 function why(title, summary){
   if (!summary) return `Qué significa: ${title}. Por qué importa: contexto rápido y práctico.`;
   const s = summary.length>180? summary.slice(0,177)+"…" : summary;
