@@ -5,25 +5,23 @@ function fmtDate(iso){
   try{ return new Date(iso).toLocaleString(undefined,{hour12:false}); }catch{ return ""; }
 }
 
-// Teens: MISMA estructura, tono juvenil y emojis
+// Teens: MISMA estructura, tono juvenil + emojis, sin cambiar contenido
 function toTeen(text=""){
   if(!text) return "";
-  // muy leve, sin cambiar significado
   let t = text
     .replace(/\busted(es)?\b/gi,"tú")
     .replace(/\bvalor\b/gi,"precio")
     .replace(/\bconsumo\b/gi,"compras")
     .replace(/\bfinanzas\b/gi,"dinero");
-  // añade un toque
   if (t.length < 140) t += " ⚡🙂";
   return t;
 }
 
-function renderABC(item, mode){
+function renderCard(item, mode){
   const wrap = document.createElement("article");
   wrap.className = "news-card";
 
-  // A. Noticia (clickable)
+  // Noticia (clickable)
   const a = document.createElement("a");
   a.className = "news-title";
   a.target = "_blank"; a.rel = "noopener noreferrer";
@@ -36,17 +34,17 @@ function renderABC(item, mode){
   meta.textContent = item.published ? fmtDate(item.published) : "";
   wrap.appendChild(meta);
 
-  // B. Impacto (cómo te afecta)
+  // Impacto (cómo te afecta) — SIN prefijo
   const impactText = item.impact || "";
   const impact = document.createElement("div");
   impact.className = "block";
-  impact.innerHTML = `<h4>B. Impacto</h4><p>${ mode==="teen" ? toTeen(impactText) : impactText }</p>`;
+  impact.innerHTML = `<h4>Impacto</h4><p>${ mode==="teen" ? toTeen(impactText) : impactText }</p>`;
   wrap.appendChild(impact);
 
-  // C. Glosario (si hay)
+  // Glosario — SIN prefijo
   const gl = document.createElement("div");
   gl.className = "block gloss";
-  gl.innerHTML = `<h4>C. Glosario</h4>${
+  gl.innerHTML = `<h4>Glosario</h4>${
     (item.glossary && item.glossary.length)
       ? item.glossary.map(g=>`<div class="gloss-item"><strong>${g.term}:</strong> ${g.def}</div>`).join("")
       : "<div class='gloss-item'>—</div>"
@@ -60,7 +58,7 @@ function renderSection(sel, items, mode){
   const el = $(sel);
   if(!el) return;
   el.innerHTML = "";
-  (items||[]).slice(0,4).forEach(it => el.appendChild(renderABC(it, mode)));
+  (items||[]).slice(0,4).forEach(it => el.appendChild(renderCard(it, mode)));
 }
 
 async function load(mode){
@@ -82,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("refreshBtn").addEventListener("click", ()=> load(document.body.dataset.mode||"adult"));
   document.getElementById("tabAdult").addEventListener("click", ()=> { document.body.dataset.mode="adult"; setMode("adult"); });
   document.getElementById("tabTeen").addEventListener("click",  ()=> { document.body.dataset.mode="teen";  setMode("teen");  });
-  // modo por query opcional ?mode=teen
   const urlMode = new URLSearchParams(location.search).get("mode");
   document.body.dataset.mode = (urlMode==="teen") ? "teen" : "adult";
   setMode(document.body.dataset.mode);
