@@ -1,59 +1,189 @@
 {
-  "updated_at": "2025-09-17T08:10:00+02:00",
-  "cataluna": [
+  "generated_at": "2025-09-16T19:26:55.866Z",
+  "global": [
     {
-      "title": "Barcelona aprueba un plan de prevención del alzhéimer por seis millones",
-      "summary": "Estrategia municipal 2025–2030 para detección precoz y apoyo comunitario.",
-      "impact": "Más recursos en centros de barrio y posibles cribados para familias.",
-      "source": "El País",
-      "url": "https://elpais.com/espana/catalunya/2025-09-16/barcelona-invertira-seis-millones-en-un-plan-de-prevencion-del-alzheimer.html",
-      "published_at": "2025-09-16T17:10:00+02:00"
+      "title": "Acting legend Robert Redford dies aged 89",
+      "link": "https://www.bbc.com/news/articles/c1dqe9ey0kgo?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 18:25:25 GMT"
+    },
+    {
+      "title": "Israel launches ground offensive on Gaza City",
+      "link": "https://www.bbc.com/news/articles/c749q1245pwo?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 16:08:26 GMT"
+    },
+    {
+      "title": "Israel has committed genocide in Gaza, UN commission of inquiry says",
+      "link": "https://www.bbc.com/news/articles/c8641wv0n4go?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 13:43:59 GMT"
+    },
+    {
+      "title": "Judge dismisses terrorism charges against Luigi Mangione",
+      "link": "https://www.bbc.com/news/articles/cj4y2p8qq5qo?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 14:27:27 GMT"
+    },
+    {
+      "title": "Malawians await presidential poll result in vote dominated by economic woes",
+      "link": "https://www.bbc.com/news/articles/c5y56req0g1o?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 15:39:55 GMT"
+    },
+    {
+      "title": "Coup plot charges for former Romanian presidential candidate",
+      "link": "https://www.bbc.com/news/articles/c4g5ky0vex8o?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 17:47:19 GMT"
+    },
+    {
+      "title": "Chinese-linked mining firms sued over 'ecological catastrophe' in Zambia",
+      "link": "https://www.bbc.com/news/articles/cy7p51l60rro?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 17:36:09 GMT"
+    },
+    {
+      "title": "Kenya issues arrest warrant for British national over young mother's murder",
+      "link": "https://www.bbc.com/news/articles/cwywng4jp08o?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 10:56:53 GMT"
+    },
+    {
+      "title": "Kirk shooting suspect appeared to confess on Discord",
+      "link": "https://www.bbc.com/news/articles/cm2zkxy2xmno?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 18:27:39 GMT"
+    },
+    {
+      "title": "Fears balloon of a return to civil war in South Sudan over treason trial",
+      "link": "https://www.bbc.com/news/articles/c7933p4xe7po?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 16:33:16 GMT"
+    },
+    {
+      "title": "US designates Colombia as country 'failing to cooperate in drug war'",
+      "link": "https://www.bbc.com/news/articles/c78n0jmplmro?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 15:43:06 GMT"
+    },
+    {
+      "title": "TikTokers arrested for insulting Somalia's president in a dance video",
+      "link": "https://www.bbc.com/news/articles/crmek8wgjdgo?at_medium=RSS&amp;at_campaign=rss",
+      "pubDate": "Tue, 16 Sep 2025 14:06:12 GMT"
     }
   ],
   "espana": [
     {
-      "title": "Podemos amenaza con tumbar la delegación de inmigración a Cataluña",
-      "summary": "Belarra avisa a PSOE y Junts de que votarán en contra por considerar la norma “racista”.",
-      "impact": "Si cae la iniciativa, no habrá cambios inmediatos en permisos y gestión autonómica.",
-      "source": "La Vanguardia",
-      "url": "https://www.lavanguardia.com/politica/20250916/11066046/podemos-tumbara-transferencia-competencias-inmigracion-catalunya.html",
-      "published_at": "2025-09-16T16:39:00+02:00"
+      "title": "Un periodista que viajó a Milán para cubrir el Valencia-Atalanta, positivo por coronavirus",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/27/actualidad/1582795523_075914.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 17:13:44 +0200"
     },
     {
-      "title": "CC.OO. y UGT acuerdan coordinarse para reforzar su agenda social (SMI, vivienda, jornada)",
-      "summary": "Los sindicatos se coordinan para aumentar el impacto de sus propuestas antes de fin de año.",
-      "impact": "Posible subida del SMI y cambios laborales que afecten nóminas y horarios.",
-      "source": "RTVE",
-      "url": "https://www.rtve.es/noticias/20250916/ccoo-ugt-acuerdan-coordinarse-aumentar-impacto-propuestas/16731208.shtml",
-      "published_at": "2025-09-16T19:00:00+02:00"
-    }
-  ],
-  "rioja": [
-    {
-      "title": "Logroño: agenda y avisos locales hoy",
-      "summary": "Cultura y movilidad del día en la capital riojana (fuente regional).",
-      "impact": "Si te mueves por el centro, revisa actividades y cortes puntuales.",
-      "source": "NueveCuatroUno",
-      "url": "https://nuevecuatrouno.com/tema/logrono/",
-      "published_at": "2025-09-16T09:00:00+02:00"
-    }
-  ],
-  "background": [
-    {
-      "title": "Israel inicia nueva ofensiva terrestre en Gaza City",
-      "summary": "Operación para desarticular la infraestructura restante de Hamas; miles de desplazados.",
-      "impact": "Tensión regional y posible efecto en rutas aéreas y mercados.",
-      "source": "AP News",
-      "url": "https://apnews.com/article/israel-hamas-wars-09-16-2025-bfd8d7c9f75a9da3e101fb3c8cf6c518",
-      "published_at": "2025-09-16T12:00:00+02:00"
+      "title": "Mapa de la expansión y claves para entender el coronavirus de Wuhan",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/26/actualidad/1582712658_011286.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Sun, 1 Mar 2020 15:16:43 +0200"
     },
     {
-      "title": "Petróleo: el mercado sopesa riesgo por ataques a refinerías rusas",
-      "summary": "Los precios se mantienen al alza por posibles interrupciones de suministro.",
-      "impact": "Gasolina y transporte pueden encarecerse a corto plazo.",
-      "source": "Reuters",
-      "url": "https://www.reuters.com/business/energy/oil-edges-up-market-weighs-supply-risk-attacks-russian-refineries-2025-09-16/",
-      "published_at": "2025-09-16T08:30:00+02:00"
+      "title": "El turismo italiano se resiente; España mira expectante",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/26/actualidad/1582751511_964259.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 15:26:25 +0200"
+    },
+    {
+      "title": "“La magnitud del problema del coronavirus no será diferente a una gripe”",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/26/actualidad/1582744701_468958.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 19:26:43 +0200"
+    },
+    {
+      "title": "Seis italianos encerrados por partida doble",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/26/actualidad/1582745125_354016.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 13:36:34 +0200"
+    },
+    {
+      "title": "Trump nombra al vicepresidente Pence a cargo de la crisis del coronavirus",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/27/actualidad/1582762594_400436.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 19:26:58 +0200"
+    },
+    {
+      "title": "El coronavirus de Wuhan | Japón cerrará todos sus centros escolares hasta fin de marzo",
+      "link": "<![CDATA[https://elpais.com/sociedad/2020/02/27/actualidad/1582772469_101682.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 15:08:21 +0200"
+    },
+    {
+      "title": "El Gobierno salva el primer escollo de los Presupuestos gracias a ERC",
+      "link": "<![CDATA[https://elpais.com/politica/2020/02/27/actualidad/1582790343_062149.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Fri, 28 Feb 2020 08:19:36 +0200"
+    },
+    {
+      "title": "La mesa de diálogo se reunirá mensualmente y los acuerdos serán “en el marco de la seguridad jurídica”",
+      "link": "<![CDATA[https://elpais.com/politica/2020/02/26/actualidad/1582729437_069559.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 11:31:31 +0200"
+    },
+    {
+      "title": "Así avanzan las encuestas en Galicia y País Vasco",
+      "link": "<![CDATA[https://elpais.com/politica/2020/02/26/actualidad/1582705222_037590.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 11:00:21 +0200"
+    },
+    {
+      "title": "Ciudadanos pagaba un sueldo a un vocal de la Junta Electoral Central que resolvió recursos del partido",
+      "link": "<![CDATA[https://elpais.com/politica/2020/02/27/actualidad/1582796971_717381.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 17:13:35 +0200"
+    },
+    {
+      "title": "50 antiguos ministros y dirigentes europeos se pronuncian contra el plan de Trump para Palestina",
+      "link": "<![CDATA[https://elpais.com/internacional/2020/02/26/actualidad/1582750435_447092.html#?ref=rss&format=simple&link=link]]>",
+      "pubDate": "Thu, 27 Feb 2020 13:42:56 +0200"
+    }
+  ],
+  "local": [
+    {
+      "title": "El fondo de armario del Arsenal desnuda al Athletic",
+      "link": "https://www.larioja.com/deportes/futbol/liga-campeones/cronica-athletic-arsenal-champions-jornada1-20250916170633-ntrc.html",
+      "pubDate": "Tue, 16 Sep 2025 21:17:11 +0200"
+    },
+    {
+      "title": "Real Madrid - Olympique de Marsella, en directo",
+      "link": "https://www.larioja.com/deportes/futbol/liga-campeones/directo-real-madrid-olympique-marsella-20250916203903-dirc.html",
+      "pubDate": "Tue, 16 Sep 2025 21:15:49 +0200"
+    },
+    {
+      "title": "«Es mi lucha. No voy a quitarme el velo islámico por voluntad propia»",
+      "link": "https://www.larioja.com/la-rioja/alumna-velo-islamico-sagasta-prohibicion-velo-20250916173023-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 21:02:34 +0200"
+    },
+    {
+      "title": "Junts pacta con el PSOE la obligación de que las empresas de más de 250 empleados atiendan en catalán incluso fuera de Cataluña",
+      "link": "https://www.larioja.com/nacional/junts-pacta-gobierno-catalan-obligatorio-atencion-cliente-20250916193001-ntrc.html",
+      "pubDate": "Tue, 16 Sep 2025 20:51:31 +0200"
+    },
+    {
+      "title": "Tensión en Madrid: altercados entre ultras del Marsella y la policía antes del partido contra el Real Madrid",
+      "link": "https://www.larioja.com/deportes/futbol/liga-campeones/tension-madrid-altercados-ultras-marsella-policia-partido-20250916202953-ntrc.html",
+      "pubDate": "Tue, 16 Sep 2025 20:48:00 +0200"
+    },
+    {
+      "title": "La ampliación del permiso parental beneficiará a 3.000 riojanos, según estima el PSOE",
+      "link": "https://www.larioja.com/la-rioja/beneficiarios-ampliacion-permiso-parental-rioja-20250917204452-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 20:45:59 +0200"
+    },
+    {
+      "title": "El 'stock' de pisos en venta cae un 48% en La Rioja desde su máximo en 2019",
+      "link": "https://www.larioja.com/la-rioja/stock-venta-pisos-cae-rioja-20250916172003-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 20:43:57 +0200"
+    },
+    {
+      "title": "El Consejo Regulador cierra la vendimia en seis localidades de La Rioja Oriental",
+      "link": "https://www.larioja.com/lomejordelvinoderioja/consejo-regulador-cierra-vendimia-seis-localidades-rioja-20250916203550-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 20:35:50 +0200"
+    },
+    {
+      "title": "El PSOE acusa al gobierno local de «olvidar los barrios de la ciudad»",
+      "link": "https://www.larioja.com/logrono/psoe-acusa-gobierno-local-olvidar-barrios-logrono-20250917201754-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 20:18:39 +0200"
+    },
+    {
+      "title": "El 'Parrilla' regresa a la plaza del Parlamento del 20 al 23 de septiembre",
+      "link": "https://www.larioja.com/logrono/san-mateo/parrilla-regresa-plaza-parlamento-septiembre-20250916134815-nt.html",
+      "pubDate": "Tue, 16 Sep 2025 19:50:10 +0200"
+    },
+    {
+      "title": "El juez niega a Aldama viajar a Miami para reunirse con un directivo del equipo de Messi",
+      "link": "https://www.larioja.com/nacional/juez-niega-aldama-viajar-miami-reunirse-directivo-20250916144803-ntrc.html",
+      "pubDate": "Tue, 16 Sep 2025 19:33:25 +0200"
+    },
+    {
+      "title": "La operación militar israelí convierte Gaza City en un infierno de encarnizados combates mientras la población huye aterrorizada",
+      "link": "https://www.larioja.com/internacional/oriente-proximo/israel-bombardea-piedad-capital-franja-gaza-ardiendo-20250916070655-ntrc.html",
+      "pubDate": "Tue, 16 Sep 2025 19:06:03 +0200"
     }
   ]
 }
