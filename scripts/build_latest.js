@@ -1,7 +1,5 @@
-// scripts/build_latest.js  — Node 20, sin dependencias
+// Node 20, sin deps
 import fs from "fs";
-
-const REGION = (process.env.NEWS_REGION || "rioja").toLowerCase(); // cataluna | rioja | madrid...
 
 const FEEDS = {
   global: [
@@ -12,116 +10,88 @@ const FEEDS = {
     { name: "El País",       url: "https://elpais.com/rss/elpais/portada.xml" },
     { name: "Europa Press",  url: "https://www.europapress.es/rss/rss.aspx?ch=00066" }
   ],
-  // Ajusta aquí si quieres otra región. Ahora por defecto Rioja.
-  local_by_region: {
-    rioja: [
-      { name: "La Rioja",      url: "https://www.larioja.com/rss/2.0/portada" },
-      { name: "EP La Rioja",   url: "https://www.europapress.es/rss/rss.aspx?ch=279" }
-    ],
-    cataluna: [
-      // Propón las fuentes locales que prefieras y ponlas aquí.
-      // Ejemplos típicos: La Vanguardia Cataluña, 324.cat, etc.
-      // { name: "La Vanguardia - Cataluña", url: "URL_RSS" },
-      // { name: "324.cat", url: "URL_RSS" }
-    ]
-  }
+  local: [
+    { name: "La Vanguardia – Cataluña", url: "https://www.lavanguardia.com/rss/local/catalunya.xml" },
+    { name: "El Periódico – Cataluña",  url: "https://www.elperiodico.com/es/rss/catalunya/rss.xml" }
+  ]
 };
 
-function parseISO(d) {
-  const t = Date.parse(d);
-  return Number.isFinite(t) ? new Date(t).toISOString() : null;
+const UA = { headers: { "user-agent": "gh-actions-news-bot" } };
+const clean = s => (s||"")
+  .replace(/<!\[CDATA\[(.*?)\]\]>/gs,"$1")
+  .replace(/<[^>]+>/g," ")
+  .replace(/\s+/g," ").trim();
+
+async function fetchXML(url){
+  try{ const r=await fetch(url,UA); if(!r.ok) throw new Error(r.status); return await r.text(); }
+  catch(e){ console.error("fetch fail",url,e.message); return ""; }
 }
 
-async function fetchXML(url) {
-  try {
-    const r = await fetch(url, { headers: { "user-agent": "gh-actions-news-bot" } });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.text();
-  } catch (e) {
-    console.error("❌ Fetch:", url, e.message);
-    return "";
-  }
+function pick(block, tag){
+  const m = block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`,"i"));
+  return m ? clean(m[1]) : "";
 }
 
-function clean(text = "") {
-  return text
-    .replace(/<!\[CDATA\[(.*?)\]\]>/gs, "$1")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function pickLink(block){
+  const a = block.match(/<link[^>]*>([\s\S]*?)<\/link>/i);
+  if (a) return clean(a[1]);
+  const b = block.match(/<link[^>]*?href="([^"]+)"/i);
+  return b ? b[1] : "";
 }
 
-function mkWhyMatters(title, source, section) {
-  // Explicación corta, sin florituras
-  const s = section === "global" ? "Mundo" : section === "espana" ? "España" : "Tu zona";
-  return `Qué significa: ${title.split(":")[0].trim()}. Por qué importa (${s}): contexto rápido para entender el titular sin jerga. Fuente: ${source}.`;
+// Heurística de “explicación aterrizada”
+function why(title, summary){
+  if (!summary) return `Qué significa: ${title}. Por qué importa: contexto rápido y práctico.`;
+  const s = summary.length>180? summary.slice(0,177)+"…" : summary;
+  return `En claro: ${s}`;
 }
 
-// RSS básico: title / link / pubDate / description
-function parseItems(xml, source) {
-  if (!xml) return [];
-  const items = [];
-  const blockRe = /<item[\s\S]*?<\/item>/gi;
-  let m;
-  while ((m = blockRe.exec(xml))) {
-    const it = m[0];
-    const title = clean((it.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [,""])[1]) || "Sin título";
-    // link o atom:link
-    let link = clean((it.match(/<link[^>]*>([\s\S]*?)<\/link>/i) || [,""])[1]);
-    if (!link) {
-      const atom = it.match(/<link[^>]*?href="([^"]+)"/i);
-      link = atom ? atom[1] : "";
-    }
-    const pub = (it.match(/<pubDate[^>]*>([\s\S]*?)<\/pubDate>/i) || it.match(/<updated[^>]*>([\s\S]*?)<\/updated>/i) || [,""])[1];
-    const published = parseISO(pub);
-    const desc = clean((it.match(/<description[^>]*>([\s\S]*?)<\/description>/i) || [,""])[1]);
-    const summary = desc ? (desc.length > 260 ? desc.slice(0, 257) + "…" : desc) : "";
+function parseRSS(xml, source){
+  if(!xml) return [];
+  const out = [];
+  const items = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
+  for(const it of items.slice(0,15)){
+    const title = pick(it,"title") || "Sin título";
+    const link  = pickLink(it);
+    const desc  = pick(it,"description") || pick(it,"summary");
+    const pub   = pick(it,"pubDate") || pick(it,"updated") || "";
+    const published = Number.isFinite(Date.parse(pub)) ? new Date(pub).toISOString() : null;
 
-    items.push({
-      title, link, published,
-      summary,
-      source
+    const summary = desc ? (desc.length>260? desc.slice(0,257)+"…" : desc) : "";
+    out.push({
+      title, link, published, summary, source,
+      why_it_matters: why(title, summary)
     });
   }
-  return items.slice(0, 15);
+  return out;
 }
 
-function dedupe(arr) {
-  const seen = new Set();
-  return arr.filter(x => {
-    const k = (x.title || "").toLowerCase();
-    if (seen.has(k)) return false;
-    seen.add(k); return true;
+function dedupe(arr){
+  const seen=new Set();
+  return arr.filter(x=>{
+    const k=(x.title||"").toLowerCase();
+    if(seen.has(k)) return false; seen.add(k); return true;
   });
 }
 
-async function buildSection(key) {
-  const feeds = key === "local"
-    ? (FEEDS.local_by_region[REGION] || [])
-    : (FEEDS[key] || []);
-  const xmls = await Promise.allSettled(feeds.map(f => fetchXML(f.url).then(x => ({x, f}))));
-  const items = xmls.flatMap(r => r.status === "fulfilled" ? parseItems(r.value.x, r.value.f.name) : []);
-  const uniq = dedupe(items).slice(0, 12);
-  // Añade why_it_matters
-  return uniq.map(i => ({
-    ...i,
-    why_it_matters: mkWhyMatters(i.title, i.source, key)
-  }));
+async function buildSection(key){
+  const feeds = FEEDS[key] || [];
+  const xmls  = await Promise.all(feeds.map(f=>fetchXML(f.url)));
+  const items = xmls.flatMap((x,i)=>parseRSS(x, feeds[i].name));
+  const uniq  = dedupe(items).slice(0,12);
+  return uniq.length? uniq : [{
+    title:"Sin contenidos (todavía).", link:"", published:null, summary:"",
+    source:"system", why_it_matters:"Se llenará automáticamente en el siguiente ciclo."
+  }];
 }
 
-async function main() {
-  const local = await buildSection("local");
-  const out = {
-    generated_at: new Date().toISOString(),
-    region: REGION,
-    global: await buildSection("global"),
-    espana: await buildSection("espana"),
-    local: local.length ? local : [{ title: "Sin contenidos (todavía).", link: "", published: null, summary: "", source: "system", why_it_matters: "Añade feeds locales en scripts/build_latest.js (FEEDS.local_by_region)." }]
-  };
+const out = {
+  generated_at: new Date().toISOString(),
+  global: await buildSection("global"),
+  espana: await buildSection("espana"),
+  local:  await buildSection("local")
+};
 
-  if (!fs.existsSync("data")) fs.mkdirSync("data");
-  fs.writeFileSync("data/latest.json", JSON.stringify(out, null, 2));
-  console.log("✅ data/latest.json generado");
-}
-
-main().catch(e => { console.error("Fatal:", e); process.exit(1); });
+if(!fs.existsSync("data")) fs.mkdirSync("data");
+fs.writeFileSync("data/latest.json", JSON.stringify(out,null,2));
+console.log("✅ data/latest.json generado");
