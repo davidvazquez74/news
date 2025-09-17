@@ -26,6 +26,6 @@ jobs:
       - name: Commit & push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(news): auto-update latest.json (workflow only v3.20.6)"
+          commit_message: "chore(news): auto-update latest.json (workflow)"
           branch: main
           file_pattern: data/latest.json
