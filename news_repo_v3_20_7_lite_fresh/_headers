@@ -1,0 +1,11 @@
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/data/latest.json
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/main.v3207.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/styles.v3207.css
+  Cache-Control: no-cache, no-store, must-revalidate
