@@ -1,155 +1,162 @@
-// scripts/build_latest.js — Node 20, sin dependencias
-import fs from "fs";
+// scripts/build_latest.js
+import fs from 'fs';
+import path from 'path';
+import Parser from 'rss-parser';
 
-/* Feeds SOLO en español */
-const FEEDS = {
-  global: [
-    { name: "BBC Mundo", url: "https://feeds.bbci.co.uk/mundo/rss.xml" },
-    { name: "El País (Portada)", url: "https://elpais.com/rss/elpais/portada.xml" }
-  ],
-  espana: [
-    { name: "El País (Portada)", url: "https://elpais.com/rss/elpais/portada.xml" },
-    { name: "Europa Press España", url: "https://www.europapress.es/rss/rss.aspx?ch=00066" }
-  ],
-  local: [
-    { name: "La Vanguardia – Cataluña", url: "https://www.lavanguardia.com/rss/local/catalunya.xml" },
-    { name: "El Periódico – Cataluña",  url: "https://www.elperiodico.com/es/rss/catalunya/rss.xml" },
-    { name: "324.cat",                  url: "https://www.ccma.cat/324/rss/324.xml" }
-  ]
+const parser = new Parser({ timeout: 15000 });
+const ROOT = process.cwd();
+const SOURCES_PATH = path.join(ROOT, 'data', 'sources.json');
+const OUT_PATH = path.join(ROOT, 'data', 'latest.json');
+
+/** ==== CONFIGURACIÓN DE FRESCURA ==== */
+const MAX_DAYS = 7;            // Solo noticias de los últimos 7 días
+const MIN_YEAR = 2024;         // Blindaje anti-históricas
+const PER_SECTION_LIMIT = 6;   // Máximo por sección
+
+const now = Date.now();
+const cutoff = now - MAX_DAYS * 24 * 60 * 60 * 1000;
+
+/** ==== UTILIDADES ==== */
+const iso = (d) => {
+  try { return new Date(d).toISOString(); }
+  catch { return null; }
 };
 
-const UA = { headers: { "user-agent": "gh-actions-news-bot" } };
-const clean = s => (s||"").replace(/<!\[CDATA\[(.*?)\]\]>/gs,"$1").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+const validDate = (d) => {
+  if (!d) return false;
+  const ts = new Date(d).getTime();
+  if (Number.isNaN(ts)) return false;
+  const year = new Date(d).getUTCFullYear();
+  return (year >= MIN_YEAR) && (ts >= cutoff) && (ts <= now + 60 * 1000); // no futuro
+};
 
-/* ———— Descarga & parse RSS ———— */
-async function fetchXML(url){ try{ const r=await fetch(url,UA); if(!r.ok) throw new Error(r.status); return await r.text(); } catch{ return ""; } }
-function pick(block, tag){ const m=block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`,"i")); return m?clean(m[1]):""; }
-function pickLink(block){ const a=block.match(/<link[^>]*>([\s\S]*?)<\/link>/i); if(a) return clean(a[1]); const b=block.match(/<link[^>]*?href="([^"]+)"/i); return b?b[1]:""; }
+const cleanText = (s) => (s || '').replace(/\s+/g, ' ').trim();
 
-/* ———— Detección de tema con racional (causa → efecto práctico) ———— */
-const THEMES = [
-  { id:"war",
-    kw:["guerra","conflicto","bombardeo","ataque","militar","ofensiva","invasión","misil","frente"],
-    impact:"Posible subida de energía y transporte; vigila gasolina, costes logísticos y precios de alimentos." },
-  { id:"tariffs",
-    kw:["arancel","aranceles","aduana","tarifa","exportación","importación","proteccionismo"],
-    impact:"Exportar/importar puede salir más caro y lento; revisa precios, márgenes y plazos con clientes/proveedores." },
-  { id:"rates",
-    kw:["tipos de interés","euríbor","bce","fed","subida de tipos","bajada de tipos"],
-    impact:"Créditos e hipotecas cambian de coste; si es variable, tu cuota puede moverse. Revisa financiación." },
-  { id:"inflation",
-    kw:["inflación","ipc","subida de precios","carestía"],
-    impact:"La compra habitual se encarece; ajusta presupuesto y compara precios." },
-  { id:"tax",
-    kw:["impuesto","iva","irpf","tasas","fiscal"],
-    impact:"Podrías pagar más/menos impuestos; revisa recibos y planifica compras o deducciones." },
-  { id:"energy",
-    kw:["energía","electricidad","gas","petróleo","opep","opec","gasolina","luz"],
-    impact:"Facturas de energía y transporte pueden subir/bajar; ajusta consumos y evalúa alternativas." },
-  { id:"cyber",
-    kw:["ciberataque","ransomware","brecha","hackeo","phishing"],
-    impact:"Refuerza seguridad digital: 2FA, contraseñas y cuidado con correos sospechosos." },
-  { id:"climate",
-    kw:["sequía","ola de calor","incendio","inundación","clima","temporal","DANA"],
-    impact:"Puede afectar suministro de agua y alimentos; podrían subir precios o haber restricciones puntuales." },
-  { id:"publichealth",
-    kw:["brote","virus","covid","gripe","sanidad","alerta sanitaria"],
-    impact:"Medidas sanitarias o demoras en servicios; revisa viajes y eventos." },
-  { id:"labor",
-    kw:["huelga","paro","despidos","empleo","convenio"],
-    impact:"Servicios pueden verse interrumpidos; planifica desplazamientos y posibles retrasos." },
-  { id:"obituary",
-    kw:["muere","fallece","obituario","ha muerto","defunción","pierde la vida"],
-    impact:"Sin impacto económico directo; es un hecho cultural/emocional. No requiere decisiones prácticas." },
-  { id:"politics",
-    kw:["elecciones","gobierno","congreso","parlamento","decreto","ley"],
-    impact:"Cambios normativos a la vista; atento a nuevas reglas que afecten a tu actividad." }
-];
-
-function detectTheme(text){
-  const t = text.toLowerCase();
-  let best = { id:"none", score:0 };
-  for(const th of THEMES){
-    const score = th.kw.reduce((s,k)=> s + (t.includes(k)?1:0), 0);
-    if(score > best.score) best = { id: th.id, score, impact: th.impact };
+function detectGlossary(text = '') {
+  const GLOSSARY = [
+    ['BCE', 'Banco Central Europeo. Decide tipos de interés: afecta a hipotecas.'],
+    ['Euríbor', 'Índice para hipotecas variables.'],
+    ['inflación', 'Subida general de precios.'],
+    ['AI Act', 'Ley europea que regula la IA por niveles de riesgo.'],
+    ['OTAN', 'Alianza militar euroatlántica.'],
+    ['DANA', 'Depresión Aislada: lluvias muy intensas.'],
+    ['déficit', 'Cuando el Estado gasta más de lo que ingresa.'],
+    ['arancel', 'Impuesto a productos importados.'],
+    ['bono social', 'Descuento en energía para hogares vulnerables.'],
+  ];
+  const lc = text.toLowerCase();
+  const hits = [];
+  for (const [term, expl] of GLOSSARY) {
+    if (lc.includes(term.toLowerCase())) hits.push({ term, expl });
   }
-  return best;
-}
-function makeImpact(title, summary){
-  const all = (title+" "+summary).toLowerCase();
-  const th = detectTheme(all);
-  if (th.score > 0) return th.impact;
-  // Fallback sensato (no inventa impacto económico)
-  return "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.";
+  return hits;
 }
 
-/* ———— Glosario mínimo ———— */
-const GLOSS = {
-  "arancel":"Impuesto a productos que entran/salen de un país.",
-  "euríbor":"Tipo de interés de referencia de muchas hipotecas.",
-  "bce":"Banco Central Europeo, decide los tipos en la eurozona.",
-  "inflación":"Subida general de precios con el tiempo.",
-  "opep":"Países que coordinan la oferta de petróleo."
-};
-function makeGlossary(text){
-  const t = text.toLowerCase();
+function naturalImpact({ title = '', summary = '' }) {
+  const blob = `${title} ${summary}`.toLowerCase();
+  if (/\bhuelga|par(o|os)\b/.test(blob) && /\bmetro|tren|rodalies|renfe|bus|aeropuerto|vuelo/.test(blob))
+    return 'Si usas transporte público, revisa horarios: posibles retrasos o servicios mínimos.';
+  if (/\bdana|lluvia(s)? torrencial(es)?|alerta (amarilla|naranja|roja)|temporal\b/.test(blob))
+    return 'Planifica desplazamientos y comprueba alertas: puede haber cortes y retrasos.';
+  if (/\bcrudo|petróleo|gasolina|di[eé]sel|refiner(í|i)a|oleoducto\b/.test(blob))
+    return 'Puede encarecer el combustible y el transporte en las próximas semanas.';
+  if (/\btipos de inter[eé]s|bce|eur[íi]bor\b/.test(blob))
+    return 'Si tu hipoteca es variable, tu cuota puede moverse en próximas revisiones.';
+  if (/\balquiler|hipoteca|vivienda|smi\b/.test(blob))
+    return 'Impacto en bolsillo: alquiler/hipoteca o nómina pueden cambiar.';
+  if (/\binteligencia artificial|ai act|algoritmo|modelo\b/.test(blob))
+    return 'Apps y servicios pueden cambiar: más controles y transparencia.';
+  if (/\bgaza|israel|ucrania|rusia|iran|yemen|mar rojo|otan\b/.test(blob))
+    return 'Si viajas, atento a seguridad/vuelos; posible impacto en energía.';
+  if (/\beleccion(es)?|presupuesto(s)?|decreto|impuesto(s)?\b/.test(blob))
+    return 'Cambios normativos que pueden tocar trámites, ayudas o impuestos.';
+  return 'Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.';
+}
+
+function normalizeItem(it, sourceName) {
+  const title = cleanText(it.title);
+  const url = cleanText(it.link || it.guid || '');
+  const published_at = iso(it.isoDate || it.pubDate || null);
+  const summary = cleanText(it.contentSnippet || it.content || it.summary || '');
+
+  return {
+    title,
+    url,
+    source: sourceName,
+    published_at,
+    summary,
+    impact: naturalImpact({ title, summary }),
+    glossary: detectGlossary(`${title} ${summary}`),
+  };
+}
+
+async function fetchFeed(url) {
+  try {
+    const feed = await parser.parseURL(url);
+    return feed.items || [];
+  } catch (e) {
+    console.error('Feed error:', url, e.message);
+    return [];
+  }
+}
+
+async function gatherSection(sources) {
+  const rows = [];
+  let total = 0, droppedOld = 0, droppedNoDate = 0, kept = 0;
+
+  for (const src of (sources || [])) {
+    const items = await fetchFeed(src.rss);
+    for (const it of items) {
+      total++;
+      const n = normalizeItem(it, src.name);
+      if (!n.published_at) { droppedNoDate++; continue; }
+      if (!validDate(n.published_at)) { droppedOld++; continue; }
+      rows.push(n);
+    }
+    // evitar ban por crawl agresivo
+    await new Promise(r => setTimeout(r, 700));
+  }
+
+  // ordenar por fecha desc
+  rows.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+  // deduplicado por URL y por título (por si hay mirrors)
+  const seenUrl = new Set();
+  const seenTitle = new Set();
   const out = [];
-  for(const [term,def] of Object.entries(GLOSS)){
-    if (t.includes(term)) out.push({term, def});
+  for (const r of rows) {
+    const keyU = r.url || '';
+    const keyT = r.title.toLowerCase();
+    if ((keyU && seenUrl.has(keyU)) || seenTitle.has(keyT)) continue;
+    seenUrl.add(keyU);
+    seenTitle.add(keyT);
+    out.push(r);
+    if (out.length >= PER_SECTION_LIMIT) break;
   }
-  return out.slice(0,3);
+
+  kept = out.length;
+  console.log(`[section] total=${total} kept=${kept} old=${droppedOld} nodate=${droppedNoDate}`);
+  return out;
 }
 
-/* ———— Español + parseo + 4 por bloque ———— */
-function isSpanish(title, desc){
-  const sample = (" "+title+" "+desc+" ").toLowerCase();
-  const hits = [" el "," la "," los "," las "," de "," y "," en "," por "," para "," con "," que "," una "]
-    .filter(w=> sample.includes(w)).length;
-  return hits >= 3;
+async function main() {
+  const sources = JSON.parse(fs.readFileSync(SOURCES_PATH, 'utf-8'));
+  const data = {
+    updated_at: new Date().toISOString(),
+    cataluna: [],
+    espana: [],
+    rioja: [],
+    background: []
+  };
+
+  data.cataluna   = await gatherSection(sources.cataluna);
+  data.espana     = await gatherSection(sources.espana);
+  data.rioja      = await gatherSection(sources.rioja);
+  data.background = await gatherSection(sources.background);
+
+  // si algo se quedó vacío, lo dejamos vacío (mejor que rellenar con antiguas)
+  fs.writeFileSync(OUT_PATH, JSON.stringify(data, null, 2), 'utf-8');
+  console.log('latest.json written →', OUT_PATH);
 }
 
-function parseRSS(xml, source){
-  if(!xml) return [];
-  const out = [];
-  const items = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
-  for(const it of items){
-    const title = pick(it,"title") || "Sin título";
-    const link  = pickLink(it);
-    const desc  = pick(it,"description") || pick(it,"summary");
-    const pub   = pick(it,"pubDate") || pick(it,"updated") || "";
-    const published = Number.isFinite(Date.parse(pub)) ? new Date(pub).toISOString() : null;
-
-    if (!isSpanish(title, desc)) continue;
-
-    const summary = desc ? (desc.length>260? desc.slice(0,257)+"…" : desc) : "";
-    const impact  = makeImpact(title, summary);
-    const glossary = makeGlossary(title+" "+summary);
-
-    out.push({ title, link, published, summary, impact, glossary, source });
-  }
-  return out.slice(0,50);
-}
-
-function dedupe(arr){
-  const seen=new Set();
-  return arr.filter(x=>{ const k=(x.title||"").toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; });
-}
-
-async function buildSection(list){
-  const xmls  = await Promise.all(list.map(f=>fetchXML(f.url)));
-  const items = xmls.flatMap((x,i)=>parseRSS(x, list[i].name));
-  const uniq  = dedupe(items);
-  return uniq.slice(0,4); // 4 por bloque, como pides
-}
-
-/* ———— Ejecutar ———— */
-const out = {
-  generated_at: new Date().toISOString(),
-  global: await buildSection(FEEDS.global),
-  espana: await buildSection(FEEDS.espana),
-  local:  await buildSection(FEEDS.local)
-};
-
-if(!fs.existsSync("data")) fs.mkdirSync("data");
-fs.writeFileSync("data/latest.json", JSON.stringify(out,null,2));
-console.log("✅ data/latest.json generado");
+main().catch(e => { console.error(e); process.exit(1); });
