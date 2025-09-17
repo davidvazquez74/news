@@ -1,45 +1,16 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Noticias</title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <header class="site-header container">
-    <div class="row">
-      <h1 class="app-title">Noticias</h1>
-      <div class="header-actions">
-        <button id="refreshBtn" class="btn">Actualizar</button>
-        <div class="tabs">
-          <button id="tabAdult" class="tab active">Adulto</button>
-          <button id="tabTeen" class="tab">Teens</button>
-        </div>
-      </div>
-    </div>
-    <p class="generated" id="generatedAt">—</p>
-  </header>
-
-  <main class="container">
-    <section>
-      <h2 class="section-title">Global</h2>
-      <div id="global" class="list"></div>
-    </section>
-    <section>
-      <h2 class="section-title">España</h2>
-      <div id="espana" class="list"></div>
-    </section>
-    <section>
-      <h2 class="section-title">Tu zona</h2>
-      <div id="local" class="list"></div>
-    </section>
-  </main>
-
-  <footer class="container footer">
-    <small>Fuentes varias. <a href="/data/latest.json" target="_blank" rel="noopener">Ver JSON</a></small>
-  </footer>
-
-  <script src="/main.js" defer></script>
-</body>
-</html>
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>News • v3.20.4-lite</title>
+<link rel="stylesheet" href="styles.v3204.css">
+</head><body>
+<header class="app-header"><div class="brand"><h1>Noticias</h1><span class="version">v3.20.4-lite</span></div>
+<div class="segmented"><button id="refreshBtn">Forzar actualización</button><button id="adultBtn" aria-selected="true">Adulto</button><button id="teenToggle" aria-selected="false">Teens</button></div></header>
+<main><p id="updatedAt" class="muted top-note">Actualizando…</p>
+<section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
+<section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
+<section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
+<section><h2 id="local-title">Local</h2><ul id="list-local" class="news-list"></ul><p id="geoNote" class="muted small"></p></section>
+<section><h2>Global</h2><ul id="list-background" class="news-list"></ul></section></main>
+<footer class="app-footer"><small><a href="#" id="forceCacheClear">Limpiar caché</a> • Fuentes verificadas</small></footer>
+<script src="main.v3204.js" defer></script></body></html>
