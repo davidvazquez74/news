@@ -1,117 +1,232 @@
 {
-  "generated_at": "2025-09-17T19:21:24.906Z",
-  "global": [
+  "updated_at": "2025-09-17T20:03:41.800Z",
+  "cataluna": [
     {
-      "title": "Por qué los ataques militares de EE.UU. a barcos de Venezuela son vistos como una escalada \"radical\" de su guerra contra las drogas (y qué significan para México)",
-      "link": "https://www.bbc.com/mundo/articles/cr5q808e6e9o?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-17T11:28:09.000Z",
-      "summary": "El uso del descomunal poder fuego de las fuerzas armadas estadounidenses contra presuntos narcos en el Hemisferio Occidental plantea riesgos, según expertos.",
-      "impact": "Posible subida de energía y transporte; vigila gasolina, costes logísticos y precios de alimentos.",
-      "glossary": [],
-      "source": "BBC Mundo"
+      "title": "Protestas en un centro escolar de Balaguer por la agresión de un padre a un docente",
+      "url": "https://www.lavanguardia.com/local/lleida/20250917/11070661/protestas-centro-escolar-balaguer-agresion-padre-docente.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T17:03:18.000Z",
+      "summary": "El claustro lamenta la pérdida de educadores sociales y técnicos de integración social en centros educativos de “máxima complejidad”",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "De dónde viene el histórico apoyo de España a los palestinos y cómo afecta a su relación con Israel",
-      "link": "https://www.bbc.com/mundo/articles/c4g93yxv1eyo?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-17T03:58:43.000Z",
-      "summary": "La relación de los españoles con Palestina viene de muy lejos en un país donde el 82% de los ciudadanos califica de genocidio la operación de Israel en Gaza.",
-      "impact": "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.",
-      "glossary": [],
-      "source": "BBC Mundo"
+      "title": "La Diputación destaca la buena preparación de la provincia de Barcelona frente a los incendios",
+      "url": "https://www.lavanguardia.com/local/catalunya/20250917/11070594/diputacion-destaca-buena-preparacion-provincia-barcelona-frente-incendios.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T16:51:44.000Z",
+      "summary": "Los 108 fuegos forestales de este verano en la demarcación han quemado un total de 211,88 hectáreas",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "\"Mis ojos ya no están\": las decenas de personas que quedaron ciegas en Líbano hace un año por el ataque israelí con beepers",
-      "link": "https://www.bbc.com/mundo/articles/c7847yg4zp3o?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-17T19:13:44.000Z",
-      "summary": "Un año después del mortal ataque con buscapersonas\" de Israel en Líbano, la BBC habló con heridos y con miembros del gobierno sobre lo que ocurrió ese día y los efectos a largo plazo del incidente, que algunos activistas dicen que pueden constituir crímenes…",
-      "impact": "Posible subida de energía y transporte; vigila gasolina, costes logísticos y precios de alimentos.",
-      "glossary": [],
-      "source": "BBC Mundo"
+      "title": "El calor obliga a suspender las clases en Cartagena, Águilas y Alhama",
+      "url": "https://www.lavanguardia.com/local/murcia/20250917/11070353/calor-obliga-suspender-clases-cartagena-aguilas-alhama.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T15:55:43.000Z",
+      "summary": "Los padres han tenido que recoger a los alumnos después de que algunos centros registraran 29º en todas las aulas",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "\"Los políticos se enriquecen mientras sufrimos, por eso ayudé a derrocar al gobierno de Nepal en 48 horas\"",
-      "link": "https://www.bbc.com/mundo/articles/cd07v20021no?at_medium=RSS&amp;at_campaign=rss",
-      "published": "2025-09-17T16:07:40.000Z",
-      "summary": "Algunos manifestantes de la Generación Z en Nepal le cuentan a la BBC su orgullo y su angustia tras las trascendentales protestas de la semana pasada en el país asiático.",
-      "impact": "Cambios normativos a la vista; atento a nuevas reglas que afecten a tu actividad.",
-      "glossary": [],
-      "source": "BBC Mundo"
+      "title": "La UAB no puede crear titulados en ciberseguridad y chips por falta de recursos",
+      "url": "https://www.lavanguardia.com/vida/20250917/11070209/uab-crear-titulados-ciberseguridad-chips-falta-recursos.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T15:47:24.000Z",
+      "summary": "El rector del campus lamenta que no haya oferta laboral pública a la alta demanda laboral",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "Gel radiactivo: llega una nueva técnica para el tratamiento de cáncer de piel más frecuente",
+      "url": "https://www.lavanguardia.com/vida/20250917/11069720/gel-radiactivo-llega-nueva-tecnica-tratamiento-cancer-piel-mas-frecuente.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T13:31:09.000Z",
+      "summary": "Con elevadas tasas de éxito, el procedimiento se plantea como alternativa a la cirugía y a los medicamentos",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "iPhone Air, duro de doblar",
+      "url": "https://www.lavanguardia.com/vida/20250917/11069394/iphone-air-duro-doblar.html",
+      "source": "La Vanguardia - Vida",
+      "published_at": "2025-09-17T12:46:50.000Z",
+      "summary": "El modelo más fino de Apple tiene sorpresas escondidas, como su gran resistencia y una batería que dura más de lo que se podía esperar",
+      "impact": "Apps y servicios pueden cambiar: más controles y transparencia.",
+      "glossary": []
     }
   ],
   "espana": [
     {
-      "title": "Un periodista que viajó a Milán para cubrir el Valencia-Atalanta, positivo por coronavirus",
-      "link": "https://elpais.com/sociedad/2020/02/27/actualidad/1582795523_075914.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T15:13:44.000Z",
-      "summary": "Se trata del segundo caso confirmado en la comunidad y el decimoquinto en España desde el lunes",
-      "impact": "Medidas sanitarias o demoras en servicios; revisa viajes y eventos.",
-      "glossary": [],
-      "source": "El País (Portada)"
+      "title": "La selección vasca de fútbol jugará un amistoso con Palestina el 15 de noviembre en San Mamés",
+      "url": "https://www.eldiario.es/euskadi/seleccion-vasca-futbol-jugara-amistoso-palestina-15-noviembre-san-mames_1_12611502.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T19:10:57.000Z",
+      "summary": "La Cadena Ser ha adelantado el encuentro, que ya ha sido comunicado por parte de la Federación de Fútbol de Palestina a las autoridades españolas Críticas a la UEFA por su homenaje a un futbolista palestino que el ejército israelí mató: “¿Podéis decirnos cómo murió?” Desde Jerusalén, el periodista Niko Castellano ha adelantado la noticia del encuentro Euskadi-Palestina, que ha sido trabajado por las federaciones de fútbol vasca y palestina durante varias semanas y que ha confirmado hoy la Federación de Fútbol de Palestina. “Hay mucha ilusión” por parte de la selección de fútbol de Palestina, según informa la cadena de radio, por esta visita a San Mamés, donde la afición del Athletic de Bilbao se ha mostrado comprometida con la causa palestina en numerosas ocasiones e incluso pese a las trabas por parte de La Liga que preside Javier Tebas o de la misma UEFA, que ha amenazado al club con sanciones. Este mismo martes, durante el encuentro frente al Arsenal de Liga de Campeones disputado en Bilbao, los aficionados bilbaínos mostraban banderas de Palestina así como una pancarta con los colores del país mediterráneo y en la que rezaba la siguiente inscripción en euskera: “Zure alboan egongo gara gaurtik azken eguneraino” (en castellano: “Vamos a estar a vuestro lado desde hoy y hasta el final”).",
+      "impact": "Si viajas, atento a seguridad/vuelos; posible impacto en energía.",
+      "glossary": []
     },
     {
-      "title": "Mapa de la expansión y claves para entender el coronavirus de Wuhan",
-      "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582712658_011286.html#?ref=rss&format=simple&link=link",
-      "published": "2020-03-01T13:16:43.000Z",
-      "summary": "Qué es, cómo se transmite, cuál es la población más vulnerable y dimensiones del contagio en el mundo",
-      "impact": "Medidas sanitarias o demoras en servicios; revisa viajes y eventos.",
-      "glossary": [],
-      "source": "El País (Portada)"
+      "title": "Los chimpancés darían positivo en alcoholemia: consumen el equivalente a 2,6 copas de vino al día",
+      "url": "https://www.eldiario.es/sociedad/chimpances-darian-positivo-alcoholemia-consumen-equivalente-2-6-copas-vino-dia_1_12609502.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T18:02:24.000Z",
+      "summary": "El primer estudio sobre el contenido de etanol en las frutas consumidas por estos animales sugiere que están expuestos crónicamente al alcohol y que esto puede afectar a su comportamiento Hemeroteca - Miles de perros prueban ya la primera pastilla para alargar la vida: “Podrían ganar el equivalente a 24 años humanos” Science Advances. Aunque previamente se había documentado la ingesta de etanol por estos y otros animales, esta es la primera vez que se cuantifican las cantidades exactas que consumen. El trabajo ha sido liderado por Robert Dudley, investigador de la Universidad de Berkeley y creador de la hipótesis del mono borracho, que sugiere que la atracción de los humanos por el alcohol tiene sus raíces en comportamientos ancestrales de los homínidos y tiene su reflejo en otros primates. Los autores cuantificaron las concentraciones de etanol en la pulpa de fruta caída de 20 especies de árboles en el entorno de dos poblaciones de chimpancés en Ngogo (Uganda) y Taï (Costa de Marfil). En la primera, la fruta con alcohol más consumida es un higo, Ficus musuco, mientras que en Taï es un fruto parecido a la ciruela del árbol Parinari excelsa. Para analizar el contenido de alcohol, los científicos utilizaron un dispositivo similar a un alcoholímetro, un cromatógrafo de gases portátil y una prueba química. Y todos registraron porcentajes de alcohol similares. En promedio, las frutas tenían 0,32% y 0,31% de etanol en las dos poblaciones y, dado que los chimpancés normalmente comen alrededor de 4,5 kilogramos de fruta por día, los investigadores calculan que están ingiriendo lo que en un humano de 70 kg sería el equivalente a 2,6 bebidas estándar por día. Esto lleva a Dudley y su equipo a concluir que “la exposición alimentaria de los chimpancés al etanol puede ser crónica y considerable”. Parte de la dieta Los científicos no tienen claro si los chimpancés buscan activamente frutas con altos niveles de etanol, que suelen ser frutas más maduras con más azúcares para fermentar, o si la ingesta es más casual. Sin embargo, argumentan, la presencia de etanol en muchas especies de frutas que consumen habitualmente sugiere que el alcohol forma parte de su dieta habitual y probablemente formaba parte de la dieta de nuestros ancestros humanos. Los chimpancés consumen entre el 5 y el 10% de su peso corporal al día en fruta madura, por lo que incluso concentraciones bajas producen una dosis sustancial de alcohol Robert Dudley — Investigador de la Universidad de Berkeley y líder del estudio “Los chimpancés consumen entre el 5 y el 10% de su peso corporal al día en fruta madura, por lo que incluso concentraciones bajas producen una ingesta diaria elevada: una dosis sustancial de alcohol”, afirma Dudley. “Si los chimpancés toman muestras de fruta madura al azar, esa será su tasa de consumo promedio, independientemente de su preferencia por el etanol. Pero si prefieren frutas más maduras o con mayor contenido de azúcar, este es un límite inferior conservador para la tasa probable de ingestión de etanol”. En otras palabras, el consumo podría estar subestimado. Según los autores, el consumo de fruta ocurre a lo largo del día y los chimpancés no muestran signos evidentes de intoxicación. Sin embargo, la ingesta de alcohol podría estar implicada en algunos de sus comportamientos. “La búsqueda de alimento y el comportamiento social de los chimpancés pueden verse influenciados por la presencia de cultivos de frutas maduras y por implicación de etanol”, escriben los autores. “Los cultivos de higo F. mucuso en Ngogo atraen a grandes grupos de chimpancés, lo que a su vez resulta en mayores interacciones sociales para ambos sexos y en actividades sociales como patrullajes de límites territoriales y cacerías”. Además, el inicio de patrullas territoriales en Ngogo ocurre durante períodos de alta disponibilidad y consumo de fruta. La atracción humana por el alcohol probablemente surgió de esta herencia dietética de nuestro ancestro común con los chimpancés Aleksey Maro — Estudiante de posgrado de UC Berkeley y primer autor del artículo Las tasas de consumo de fruta de los chimpancés pueden variar a lo largo del día y pueden incluir atracones. Por lo tanto, la exposición al etanol puede ser correspondientemente alta: la ingestión de unos 75 higos maduros en una sola sesión de alimentación produciría 10 gramos de etanol, aunque se desconocen las consecuencias conductuales de esta dosis. “Los chimpancés consumen una cantidad de alcohol similar a la que consumiríamos si comiéramos alimentos fermentados a diario”, dice Aleksey Maro, estudiante de posgrado de UC Berkeley y primer autor del artículo. “La atracción humana por el alcohol probablemente surgió de esta herencia dietética de nuestro ancestro común con los chimpancés”. La atracción del alcohol Aunque la hipótesis del mono borracho lanzada por Dudley hace 20 años generó escepticismo entre los científicos, con el tiempo va ganando adeptos y se recogen más pruebas del consumo habitual de alcohol en primates y otras especies. “Los grupos de chimpancés machos a menudo se reúnen en el dosel de los árboles F. musuco para consumir fruta antes de ir a patrullar los límites de su comunidad”, comenta Maro. “Y el fruto de P. excelsa también es muy popular entre los elefantes, que se sabe que se sienten atraídos por el alcohol”. A principios de este año, se registró por primera vez en vídeo el consumo de alcohol entre chimpancés de Guinea-Bisáu. Antes, investigadores de la Universidad de Dartmouth documentaron en pruebas de laboratorio que aye-ayes y loris perezosos cautivos prefieren el néctar con mayor graduación alcohólica e incluso chupetean los envases con esta sustancia cuando se vacían. Y en 2022, el propio Dudley colaboró con investigadores en Panamá para documentar que los monos araña consumen fruta fermentada cargada de alcohol en la naturaleza y expresan metabolitos de alcohol en la orina. window.marfeel.cmd.push(['multimedia', function(multimedia) { multimedia.initializeItem('yt-NemgGJIwmQI-2999', 'youtube', 'NemgGJIwmQI', document.getElementById('yt-NemgGJIwmQI-2999')); }]); Positivo en alcoholemia Antonio José Osuna Mascaró, doctor en Biología y especialista en comportamiento animal, cree que el estudio es interesante, no solo por la estimación de la sorprendente cantidad de alcohol consumida a diario por los chimpancés de Ngogo y Taï, sino por cómo parece relacionarse con comportamientos muy concretos, como las patrullas de vigilancia territorial, la caza en grupo, y la cohesión general entre machos. Creo que, pese a la cantidad de fruta, podrían dar positivo en una prueba de alcoholemia. Especialmente después de una sesión intensa de fruta fermentada Antonio José Osuna Mascaró — Doctor en Biología y especialista en comportamiento animal En su opinión, dado que su metabolismo para el alcohol no es muy diferente al nuestro, “se hace tentador especular con que estos comportamientos verdaderamente se vean afectados por la embriaguez”. Lo que parece claro, admite el experto, es que, con las cantidades que se documentan en este estudio, darían positivo si soplarán por el alcoholímetro. “Hay que tener en cuenta que consumen el equivalente a unas dos copas y media con 70 kg de peso”, comenta. “Creo que, pese a la cantidad de fruta, podrían dar positivo en una prueba de alcoholemia. Especialmente después de una sesión intensa de fruta fermentada”. Sobre la hipótesis del mono borracho, Osuna asegura que es innegable que el alcohol ha formado parte de la vida de nuestros antepasados lejanos y hay cada vez más ejemplos de animales buscando activamente esta sustancia en la naturaleza. “Pero otra cosa diferente es el papel del alcohol para explicar nuestro comportamiento actual”, advierte. Esto entronca con otra hipótesis llamada la “teoría del mono dopado”, recuerda el experto. “Aparentemente, alterar de forma voluntaria la consciencia, ya sea con alcohol o con otras sustancias, parece ser algo relativamente común”, resume. “Pero sobre la posibilidad de que tomar alcohol o psicodélicos haya tenido un papel en nuestra evolución y explicar aspectos de nuestro comportamiento moderno, tengo mis dudas”.",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "El turismo italiano se resiente; España mira expectante",
-      "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582751511_964259.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T13:26:25.000Z",
-      "summary": "La patronal hotelera del área de Venecia describe un sector “al borde del colapso”",
-      "impact": "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.",
-      "glossary": [],
-      "source": "El País (Portada)"
+      "title": "La Fed recorta los tipos de interés un cuarto de punto, frente a las presiones de Trump que exigía una rebaja mucho mayor",
+      "url": "https://www.eldiario.es/economia/fed-recorta-tipos-interes-cuarto-punto-pesar-presiones-trump-exigia-rebaja-mayor_1_12611179.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T18:02:22.000Z",
+      "summary": "La Fed \"ha decidido reducir el rango objetivo para la tasa de los fondos federales en 0,25 puntos porcentuales, en la horquilla entre el 4% y el 4,25%\", dice el comunicado de la Reserva Federal, en el primer recorte de tipos desde diciembre de 2024 Incertidumbre, subida de precios y frenazo en el empleo: ¿hasta dónde llegará la desaceleración económica por las políticas de Trump? La Reserva Federal ha tomado una decisión este miércoles sobre los tipos de interés, después de aguantar nueve meses de presiones diarias del presidente de EEUU, Donald Trump. Así, ha decidido una bajada de un cuarto de puntos, y dejarlos en la horquilla del 4%-4,25%. Es su primer recorte del precio del dinero desde diciembre de 2024. Trump ha atacado repetidamente a Powell y a los demás miembros del comité de fijación de tipos de interés de la Fed por no recortar con mayor rapidez el tipo de interés a corto plazo que controlan. Trump ha afirmado que deberían bajarse tres puntos, hasta el 1,3%, un nivel que ningún funcionario de la Fed y pocos economistas apoyan. “Los indicadores recientes sugieren que el crecimiento de la actividad económica se moderó en el primer semestre del año. La creación de empleo se ha desacelerado y la tasa de desempleo ha aumentado ligeramente, pero se mantiene baja. La inflación ha aumentado y se mantiene algo elevada”, dice la Reserva Federal en su comunicado, que dce que su objetivo es “alcanzar el máximo empleo e inflación a una tasa del 2% a largo plazo. La incertidumbre sobre las perspectivas económicas sigue siendo elevada. El Comité [Federal de Mercado Abierto] está atento a los riesgos de su doble mandato [empleo e inflación] y considera que los riesgos para el empleo han aumentado”. En todo caso, la Reserva Federal prevé otros dos recortes de 0,25 puntos de aquí a que acabe el año. “Para respaldar sus objetivos”, prosigue la Fed, “el Comité ha decidido reducir el rango objetivo para la tasa de los fondos federales en 0,25 puntos porcentuales, en la horquilla del 4% y el 4,25%. Al considerar ajustes adicionales al rango objetivo para la tasa de los fondos federales, el Comité evaluará cuidadosamente los datos, la evolución de las perspectivas y el balance de riesgos. El Comité está firmemente comprometido a apoyar el máximo empleo y a que la inflación vuelva a su objetivo del 2%. El Comité estará preparado para ajustar la orientación de la política monetaria según corresponda si surgen riesgos que puedan impedir el logro de sus objetivos. Las evaluaciones del Comité considerarán una amplia gama de información, incluyendo datos sobre las condiciones del mercado laboral, las presiones inflacionarias y las expectativas de inflación, así como la evolución financiera e internacional”. La decisión llega despùés de que un tribunal de apelaciones rechazara este lunes el recurso de la Administración Trump contra la orden judicial que consideraba ilegal el intento de la Casa Blanca de despedir a Lisa Cook, miembro de la junta de gobierno de la Reserva Federal. El mismo lunes, la mayoría republicana del Senado validaba el nombramiento de un economista la Casa Blanca, Stephen Miran, para cubrir una vacante en la cúpula de la Fed hasta enero. La campaña de la Casa Blanca para destituir a Cook supone un intento sin precedentes por remodelar la junta directiva de siete miembros de la Fed, diseñada para ser en gran medida independiente de la política diaria. Ningún presidente ha destituido a un gobernador de la Fed en los 112 años de historia de la institución. El presidente de la Fed, Jerome Powell, indicó en un discurso el mes pasado que la Reserva Federal probablemente reduciría ligeramente los tipos. Otros costes de financiación, como los tipos hipotecarios y los préstamos para automóviles, ya han disminuido en previsión del recorte y podrían seguir bajando. Trump intentó destituir a Cook el 25 de agosto, pero un juez federal dictaminó la semana pasada que la destitución era ilegal y la reincorporó a la junta directiva de la Reserva Federal, decisión reforzada este lunes por el tribunal de apelaciones. Muchos juristas consideran que el intento de despedir a Cook amenaza con erosionar la histórica independencia política de la Reserva Federal, y a muchos economistas les preocupa que, si la Reserva Federal cae bajo el control de la Casa Blanca, mantenga su tasa de interés clave por debajo de lo justificado por los fundamentos económicos para satisfacer las demandas de Trump de préstamos más baratos. Esto podría acelerar la inflación y también impulsar al alza las tasas de interés a largo plazo, como las de hipotecas y préstamos para automóviles. Los inversores podrían exigir un mayor rendimiento de los bonos para compensar una mayor inflación en el futuro, lo que elevaría los costes de financiación para el gobierno federal y para toda la economía.",
+      "impact": "Si tu hipoteca es variable, tu cuota puede moverse en próximas revisiones.",
+      "glossary": [
+        {
+          "term": "inflación",
+          "expl": "Subida general de precios."
+        }
+      ]
     },
     {
-      "title": "“La magnitud del problema del coronavirus no será diferente a una gripe”",
-      "link": "https://elpais.com/sociedad/2020/02/26/actualidad/1582744701_468958.html#?ref=rss&format=simple&link=link",
-      "published": "2020-02-27T17:26:43.000Z",
-      "summary": "Ángel Gil de Miguel, catedrático de Medicina Preventiva y Salud Pública de la Universidad Rey Juan Carlos, lanza un mensaje de tranquilidad",
-      "impact": "Medidas sanitarias o demoras en servicios; revisa viajes y eventos.",
-      "glossary": [],
-      "source": "El País (Portada)"
+      "title": "La Audiencia Nacional da luz verde a la venta de los coches de lujo embargados a Aldama antes de que se deprecien",
+      "url": "https://www.eldiario.es/politica/audiencia-nacional-da-luz-verde-venta-coches-lujo-embargados-aldama-deprecien_1_12611364.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T17:55:12.000Z",
+      "summary": "La Sala de lo Penal considera que si el empresario es exculpado la Administración le devolverá el dinero y rechaza la oferta del investigado de conservarlos en depósito sin que perdieran valor Pedraz rechaza la petición del PSOE de devolver a Aldama a prisión por el fraude de los hidrocarburos En un auto, al que ha tenido acceso Europa Press, la Sala de lo Penal entiende que una medida de ese tipo “no atenta ni vulnera el derecho a la presunción de inocencia del investigado”, que alegó que la subasta vulneraría ese derecho. “Y dado que, muy previsiblemente el valor de los bienes se vaya depreciando con el tiempo, para el caso de que se dictara, en cualquier momento del procedimiento, una resolución favorable para el investigado, siempre podría reclamar de la Administración el valor que se ha obtenido con la realización anticipada”, replica. El empresario y varios de sus colaboradores fueron enviados a prisión provisional por el denominado 'caso hidrocarburos', un supuesto fraude fiscal de más de 182 millones de euros a través de entramados empresariales de este sector. En esa causa se investigan delitos que no solo acarrean la cárcel sino potenciales multas de cientos de millones de euros. La petición de De Aldama tuvo lugar después de que la Oficina de Recuperación y Gestión de Bienes (ORGA), dependiente del Ministerio de Justicia, aconsejara a la Audiencia Nacional vender todos los vehículos incautados en el marco del 'caso hidrocarburos', en el que el empresario está imputado. Según el servicio online de valoraciones de la Consejería de Hacienda y Administraciones Públicas de Castilla-La Mancha, los 13 coches incautados a los investigados de la presunta trama tendrían un valor aproximado de 635.700 euros. En su solicitud, la oficina dependiente de Justicia recalcó que dado que los vehículos “son efectos que, aún sin sufrir deterioro material, se deprecian sustancialmente por el paso del tiempo y el desuso”, y dado que su depósito conlleva gastos, insistió en que lo conveniente era vender o subastar nueve de ellos, entre los que se encuentra un Jaguar, un Ferrari y varios Land Rover. Los magistrados responden al recurso del empresario que los bienes que “se someten a la adjudicación o realización anticipada y a la entrega a determinadas entidades financieras” son vehículos y ciclomotores que “fueron objeto de embargo y prohibición de disponer” por orden del Juzgado Central de Instrucción Número 5, que investiga el denominado 'caso hidrocarburos'. Mencionan que De Aldama se ofreció a tenerlos en depósito y se comprometió a que no se depreciara su valor con el tiempo, añadiendo que en algunos casos incluso aumentaría. Pero la Sala de lo Penal considera que los argumentos del empresario “no pueden ser atendidos” porque “se ha acreditado que los gastos de custodia y de depósito que generan estos bienes son cuantiosos para la Administración Pública”. Y además porque, añade, “los mismos son depreciables con el tiempo, pues es obvio que los vehículos y ciclomotores, se utilicen o no, pierden su valor de tal manera que el valor actual de realización anticipada va a ser mayor que en un momento posterior, lo cual disminuye el valor de los bienes embargados, y en definitiva, disminuye la cuantía o el importe con lo que se puede hacer frente, en su caso y si así procede, a la responsabilidad civil que se pudiera derivar de una posible sentencia de carácter condenatoria”. A su juicio, es “aconsejable su realización anticipada con la finalidad de mantener en la medida de lo posible el valor actual que pudiera tener, o la entrega de varios de ellos a las entidades financieras que ostentan un derecho de reserva de dominio sobre los mismos al estar en régimen de 'renting'”.",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "La Fiscalía denuncia al dueño de Desokupa, Daniel Esteve, por “incitar al odio contra el colectivo migrante”",
+      "url": "https://www.eldiario.es/politica/fiscalia-denuncia-dueno-desokupa-daniel-esteve-incitar-odio-colectivo-migrante_1_12611379.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T17:54:05.000Z",
+      "summary": "El Ministerio Público lleva a los tribunales al agitador ultra por los mensajes “claramente discriminatorios” que publica en sus redes sociales Universo Desokupa: la empresa ultra que quiere enseñar a España a defenderse de lo que sea La Fiscalía Provincial de Valencia ha presentado una denuncia en los tribunales por incitación al odio y delito contra la integridad moral contra Daniel Esteve, dueño de la empresa dedicada a desalojos extrajudiciales 'Desokupa'. El Ministerio Público considera que este agitador ultra difundió a través de sus redes sociales “expresiones vejatorias y que pueden incitar al odio contra el colectivo migrante” que son “son claramente discriminatorias” y “difunden noticias falsas”, según el decreto que ha adelantado La Sexta y al que ha tenido acceso elDiario.es. “Debilitamos a la Policía, dejamos entrar a los que dejamos entrar y se están cargando a nuestros críos (...) Os vais a cagar (....) Anchoa que se cruce en nuestro camino, anchoa a la plancha” o “Barcelona, carretera de Sants, un árabe afilando su herramienta de trabajo para salir a trabajar. A ver, tiene que hacer su trabajo: pinchar, rajar”, son algunos de los mensajes que recoge la Fiscalía en el citado decreto. La fiscal Susana Gisbert, especializada en delitos de odio, acordó el pasado marzo abrir diligencias preprocesales contra Esteve tras recibir una denuncia de 'Acción Contra el Odio'. La entidad denunció la “sistemática incitación al odio por parte del ultraderechista dueño de la empresa Desokupa contra el colectivo de personas migrantes basada en bulos y mentiras que, en muchas ocasiones, él mismo fabrica”. Entonces, la fiscal reclamó a la Policía que identificara al titular de la cuenta en la red social X @daniesdsk, donde se vertieron “mensajes claramente discriminatorios”, y tras la que se ha identificado a Esteve. La fiscal estima que lo procedente es “la remisión al órgano judicial competente”, al que le reclama que lleve a cabo una serie de diligencias. Así, la Fiscalía reclama que la Brigada de información de la Policía Nacional averigüe el lugar de emisión de los mensajes y lo haga investigando la naturaleza y la fuerza del lenguaje utilizado y si es frecuente que sea degradante, ofensivo o violento. También pide comprobar si el autor de estos mensajes ha creado o está vinculado a grupos o comunidades dedicadas a la promoción del odio y la discriminación contra un colectivo en particular. En una nota de prensa, el equipo jurídico de 'Acción Contra el Odio' ha celebrado la decisión de la Fiscalía y ha puesto el foco en la necesidad de que “los tribunales persigan los discursos de odio de aquellos perfiles públicos que tienen mayor repercusión pública y capacidad de incidencia, y no únicamente a los perfiles anónimos poco influyentes”. La asociación insiste, además, en la urgencia de generar una jurisprudencia que “condene la hostilidad y la discriminación hacia la población migrante y no reserve únicamente las condenas a los llamamientos explícitos a la violencia”.",
+      "impact": "Cambios normativos que pueden tocar trámites, ayudas o impuestos.",
+      "glossary": []
+    },
+    {
+      "title": "Este es el calendario de Carlos Alcaraz para defender su número uno tras ganar el US Open en 2025",
+      "url": "https://www.eldiario.es/spin/deportes/calendario-carlos-alcaraz-defender-numero-ganar-us-open-2025-pm_1_12611363.html",
+      "source": "elDiario.es",
+      "published_at": "2025-09-17T17:50:58.000Z",
+      "summary": "Tras recuperar el número 1 en el ranking ATP, Alcaraz tiene un calendario en el que podría mantenerse en lo más alto en su rivalidad con Sinner Esto es lo que hace Alcaraz, antes de jugar un partido, para mantenerse concentrado Carlos Alcaraz consiguió tras ganar el US Open, último Grand Slam de la temporada de tenis, lograr uno de sus objetivos del 2025 al recuperar su número 1 en el ranking ATP al vencer en la final al italiano Jannik Sinner en la tercera final disputada entre ambos en la rivalidad del momento en el deporte de la raqueta. Al recuperar el número 1, Alcaraz tiene el objetivo de mantenerse en lo más alto en lo que resta de calendario en este 2025 en el que destacan los Masters 1000 de Shangai, Paris-Bercy o las ATP Finals, así como la final de la Copa Davis. El calendario más inmediato de Carlos Alcaraz tras el US Open Tras tomarse un descanso en la eliminatoria de cuartos de final de la Copa Davis entre España y Dinamarca en la que iba a participar en un principio, el primer reto de Alcaraz después de ganar el US Open es la Laver Cup, que se disputa del 19 al 21 de septiembre de 2025, torneo que organiza Roger Federer y que reúne a los mejores jugadores de Europa en su 8ª edición que se juega en San Francisco. Carlos Alcaraz dispute primero el torneo de Tokio, del 22 al 30 de septiembre, a pesar de que defiende 500 puntos en Pekín, y el Masters 1000 de Shanghái, que tiene lugar del 1 al 12 de octubre. Después de Asia es el turno de Paris-Bercy ya a finales del mes, del 27 de octubre al 2 de noviembre antes de enfrentarse a los que serán sus dos grandes retos de final de temporada y que van más allá de su número 1 de la ATP. Las ATP Finals y la final de la Copa Davis para terminar la temporada Uno de los puntos álgidos del final de la temporada 2025 de Carlos Alcaraz serán las ATP Finals, que se disputan del 9 al 16 de noviembre en Turín, Italia, y donde tiene la misión de lograr por primera vez el título de maestro. Tras el final del calendario ATP, el murciano podría participar con el equipo español en la final de la Copa Davis en la que España se consiguió clasificar tras vencer a Dinamarca en eliminatoria en Marbella, una final a ocho que tiene lugar este 2025 en Bolonia y donde se podría dar otro partido Sinner vs Alcaraz. Los títulos de Carlos Alcaraz este 2025 ATP 500 Rotterdam Masters 1000 Montecarlo Masters 1000 Roma Roland Garros Queen’s Masters 1000 Cincinnati US Open",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     }
   ],
-  "local": [
+  "rioja": [
     {
-      "title": "Barcelona, la tercera ciudad europea con más muertes a causa del cambio climático",
-      "link": "https://www.lavanguardia.com/natural/20250917/11066331/barcelona-tercera-ciudad-europea-mas-muertes-atribuidas-cambio-climatico.html",
-      "published": "2025-09-17T04:00:00.000Z",
-      "summary": "Entre junio y agosto el calentamiento debido a las actividades humanas ocasionó 630 fallecimientos en la capital catalana, el 80% de total por calor",
-      "impact": "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.",
-      "glossary": [],
-      "source": "La Vanguardia – Cataluña"
+      "title": "«Tuve la oportunidad de eliminar a Charlie Kirk y la he aprovechado»",
+      "url": "https://www.larioja.com/internacional/eeuu/oportunidad-eliminar-charlie-kirk-aprovechado-20250917215850-ntrc.html",
+      "source": "La Rioja (diario)",
+      "published_at": "2025-09-17T19:58:54.000Z",
+      "summary": "El fiscal difunde los mensajes que Tyler Robinson intercambió con su amante y compañero de piso tras matar de un tiro al dirigente conservador",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "Sánchez buscará equilibrios con Merz por la oficialidad del catalán y por Gaza",
-      "link": "https://www.lavanguardia.com/politica/20250917/11067054/sanchez-buscara-equilibrios-merz-oficialidad-catalan-gaza.html",
-      "published": "2025-09-17T04:00:00.000Z",
-      "summary": "El jefe del Ejecutivo español recibe mañana en la Moncloa al canciller alemán",
-      "impact": "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.",
-      "glossary": [],
-      "source": "La Vanguardia – Cataluña"
+      "title": "El Varea se despide de la Copa",
+      "url": "https://www.larioja.com/deportes/futbol/varea-despide-copa-derrota-sanse-20250917215713-nt.html",
+      "source": "La Rioja (diario)",
+      "published_at": "2025-09-17T19:58:01.000Z",
+      "summary": "El Sanse remonta la eliminatoria en el segundo tiempo, en el que fue superior, y acaba con el sueño logroñés de jugar el torneo del KO",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "El expresident Aragonès aparca la política para dirigir la cadena de hoteles de su familia",
-      "link": "https://www.lavanguardia.com/politica/20250916/11062841/expresident-aragones-aparca-politica-dirigir-cadena-hoteles-familia.html",
-      "published": "2025-09-16T06:18:15.000Z",
-      "summary": "El político, de 42 años, defiende cerrar bien las etapas, “ni aferrarse a los cargos, ni convertirlos en un medio de subsistencia, ni acabar reducido a una figura de vitrina”",
-      "impact": "Impacto directo bajo para la mayoría; mantente informado por si deriva en cambios de precios o normas.",
-      "glossary": [],
-      "source": "La Vanguardia – Cataluña"
+      "title": "El humo del cohete de las fiestas de Santo Domingo trae el aroma a patatas y a tradición",
+      "url": "https://www.larioja.com/comarcas/santo-domingo/fiestas-santo-domingo-calzada-rioja-20250918215433-nt.html",
+      "source": "La Rioja (diario)",
+      "published_at": "2025-09-17T19:55:34.000Z",
+      "summary": "El chupinazo celebrado en la plaza de España abrió este miércoles la celebración de las fiestas de Gracias y Hermosilla",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
     },
     {
-      "title": "El Govern ultima su gran estocada a los competidores de los taxistas de Barcelona",
-      "link": "https://www.lavanguardia.com/local/barcelona/20250916/11066821/govern-ultima-gran-estocada-competidores-taxistas-barcelona.html",
-      "published": "2025-09-16T17:33:08.000Z",
-      "summary": "Arrancan los trámites de una ley que pretende acabar con los VTC por todo el área metropolitana",
-      "impact": "Cambios normativos a la vista; atento a nuevas reglas que afecten a tu actividad.",
-      "glossary": [],
-      "source": "La Vanguardia – Cataluña"
+      "title": "Calor veraniego: la sartén riojana recae en Haro con sus 35 grados",
+      "url": "https://nuevecuatrouno.com/2025/09/17/calor-veraniego-la-sarten-riojana-recae-en-haro-con-sus-35-grados/",
+      "source": "NueveCuatroUno",
+      "published_at": "2025-09-17T19:55:06.000Z",
+      "summary": "Que a nadie le sorprenda ver tirantes, pantalonetas y sandalias en esta tercera semana de septiembre. Parece que el mes tiene complejo de agosto y sigue sorprendiendo con un calor que calienta La Rioja con valores superiores a lo habitual para estas fechas. Tanto es así que Haro ha llegado este miércoles a los 35 […] Calor veraniego: la sartén riojana recae en Haro con sus 35 grados",
+      "impact": "Si viajas, atento a seguridad/vuelos; posible impacto en energía.",
+      "glossary": []
+    },
+    {
+      "title": "Llorente recorta distancias para el Atlético antes del descanso",
+      "url": "https://www.larioja.com/deportes/futbol/liga-campeones/directo-liverpool-atletico-20250917203739-dirc.html",
+      "source": "La Rioja (diario)",
+      "published_at": "2025-09-17T19:51:35.000Z",
+      "summary": "",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "Fallece a los 48 años el doctor Sabrás, miembro de una larga saga de odontólogos",
+      "url": "https://www.larioja.com/la-rioja/fallece-odontologo-bosco-sabras-20250917213003-nt.html",
+      "source": "La Rioja (diario)",
+      "published_at": "2025-09-17T19:36:36.000Z",
+      "summary": "El profesional, que tenía una clínica en Vara de Rey y Lardero, también formaba parte del cuadro médico de la Asociación de la Prensa de La Rioja",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    }
+  ],
+  "background": [
+    {
+      "title": "Ex-US health official warns of RFK Jr’s risk to public health: ‘We’re going to see kids dying of vaccine-preventable diseases’ – live",
+      "url": "https://www.theguardian.com/us-news/live/2025/sep/17/donald-trump-charlie-kirk-free-speech-nyt-cdc-rfk-epstein-us-politics-live-news-updates",
+      "source": "The Guardian World",
+      "published_at": "2025-09-17T19:39:12.000Z",
+      "summary": "Dr Debra Houry and Susan Monarez say US unprepared to prevent chronic disease or fight next pandemic RFK Jr’s actions have greatly diminished US ability to respond to outbreaks, ousted CDC officials say Donald Trump has claimed his administration has reached a deal with China to keep TikTok operating in the US, amid uncertainty over what shape the final agreement will take, with suggestions from the Chinese side that Beijing would retain control of the algorithm that powers the site’s video feed. “We have a deal on TikTok ... We have a group of very big companies that want to buy it,” Trump said on Tuesday, without providing further details. Continue reading...",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "Thousands of anti-Trump protesters march in London as king and senior royals host US president in Windsor – UK politics live",
+      "url": "https://www.theguardian.com/politics/live/2025/sep/17/donald-trump-uk-state-visit-king-charles-windsor-politics-latest-news-updates-labour-keir-starmer",
+      "source": "The Guardian World",
+      "published_at": "2025-09-17T19:34:50.000Z",
+      "summary": "Anti-Trump protesters march in London as US president attend events in Windsor before a state banquet Lucy Powell has hit out at the “sexist” framing of her deputy Labour leadership campaign, with people claiming she and her rival, Bridget Phillipson, are standing as “proxies” for two men, Aletha Adu reports. Most of Donald Trump’s policies horrify progressives and leftwingers in Britain, including Labour party members and supporters, but Keir Starmer has said almost nothing critical about the Trump administration because he has taken a view that maintaining good relations with the White House is in the national interest. I understand the UK government’s position of being pragmatic on the international stage and wanting to maintain a good relationship with the leader of the most powerful country in the world. Faced with a revanchist Russia, Europe’s security feels less certain now than at any time since the second world war. And the threat of even higher US tariffs is ever present. But it’s also important to ensure our special relationship includes being open and honest with each other. At times, this means being a critical friend and speaking truth to power – and being clear that we reject the politics of fear and division. Showing President Trump why he must back Ukraine, not Putin. Making the case for taking the climate emergency seriously. Urging the president to stop the tariff wars that are tearing global trade apart. And putting pressure on him to do much more to end Israel’s horrific onslaught on Gaza, as only he has the power to bring Israel’s brazen and repeated violations of international law to an end. Continue reading...",
+      "impact": "Si viajas, atento a seguridad/vuelos; posible impacto en energía.",
+      "glossary": []
+    },
+    {
+      "title": "Spain arrests 19 on suspicion of torture and murder after 50 disappear from migrant boat",
+      "url": "https://www.bbc.com/news/articles/c8jm11lmx71o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC World",
+      "published_at": "2025-09-17T19:27:19.000Z",
+      "summary": "Police suspect some of the victims were accused of witchcraft by others on the boat that had travelled from Senegal.",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "Federal Reserve cuts interest rates by a quarter point, for first time in nearly a year – live updates",
+      "url": "https://www.theguardian.com/business/live/2025/sep/17/federal-reserve-interest-rate-decision-jerome-powell-trump",
+      "source": "The Guardian World",
+      "published_at": "2025-09-17T19:25:28.000Z",
+      "summary": "Rates now stand at a range of 4% to 4.25% as reduction comes amid concern of political pressure on independent central bank from Trump A reporter asked Jerome Powell about Stephen Miran’s appointment, specifically on the fact that Miran is the first Fed governor to also have a role in the executive branch while also serving on the Fed board. Miran is the chair of the Council of Economic Advisors. “The committee remains united in pursuing our dual mandate goals,” Powell said in response. “We’re strongly committed to maintaining our independence and beyond that, I really don’t have anything to share.” Continue reading...",
+      "impact": "Si viajas, atento a seguridad/vuelos; posible impacto en energía.",
+      "glossary": []
+    },
+    {
+      "title": "San Francisco supervisor recalled after voting to close highway for car-free park",
+      "url": "https://www.theguardian.com/us-news/2025/sep/17/san-francisco-joel-engardio-coastal-park",
+      "source": "The Guardian World",
+      "published_at": "2025-09-17T19:13:30.000Z",
+      "summary": "Joel Engardio, who becomes fifth elected city official to be ousted in four years, says he stands by his decision A San Francisco supervisor was recalled Tuesday after he successfully pushed to turn a stretch of coastal highway used heavily by neighborhood motorists into a car-free park despite strong objections by some of his constituents. Joel Engardio became the fifth elected official in San Francisco to be ousted in a recall vote in four years. He conceded, saying in a statement that he accepted the outcome and still stood by his decision to help create a park called Sunset Dunes. Continue reading...",
+      "impact": "Seguimiento recomendado: puede afectar a precios, servicios o movilidad si escala.",
+      "glossary": []
+    },
+    {
+      "title": "Israeli tanks push into major Gaza City residential area",
+      "url": "https://www.bbc.com/news/articles/c4gv881exj2o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC World",
+      "published_at": "2025-09-17T18:52:53.000Z",
+      "summary": "The sight of tanks in Sheikh Radwan has caused widespread alarm among residents, with thousands fleeing south.",
+      "impact": "Si viajas, atento a seguridad/vuelos; posible impacto en energía.",
+      "glossary": []
     }
   ]
 }
