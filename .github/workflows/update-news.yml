@@ -1,0 +1,31 @@
+name: Update latest.json (news)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */3 * * *'  # cada 3 horas
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm ci || npm i
+
+      - name: Build latest.json from RSS
+        run: npm run build:news
+
+      - name: Commit & push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(news): auto-update latest.json (workflow only v3.20.6)"
+          branch: main
+          file_pattern: data/latest.json
