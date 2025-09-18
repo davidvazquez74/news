@@ -1,13 +1,14 @@
 name: Update latest.json (news)
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:           # puedes lanzarlo a mano desde Actions
   schedule:
-    - cron: '0 * * * *'   # cada hora (UTC)
+    - cron: '0 * * * *'        # se ejecuta cada hora en punto (UTC)
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -17,13 +18,13 @@ jobs:
         with:
           node-version: '20'
 
+      # Asegura deps y modo ESM para usar "import"
       - name: Ensure deps
         run: |
           if [ ! -f package.json ]; then
             echo '{"name":"news","private":true,"type":"module","dependencies":{"rss-parser":"^3.13.0"}}' > package.json
           else
-            # Garantiza "type":"module" para usar import/export
-            node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json')); if(p.type!=='module'){p.type='module'; fs.writeFileSync('package.json', JSON.stringify(p,null,2)); console.log('set type: module')} else console.log('type ok');"
+            node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json')); if(p.type!=='module'){p.type='module'; fs.writeFileSync('package.json', JSON.stringify(p,null,2));}"
             npm pkg set dependencies.rss-parser='^3.13.0'
           fi
           npm i --no-audit --no-fund
@@ -32,25 +33,53 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=512"
         run: |
-          set -e
-          node scripts/build_latest.js || (echo "build_latest.js failed" && exit 1)
-          test -f data/latest.json || (echo "latest.json not found" && exit 1)
+          test -f scripts/build_latest.js || (echo "scripts/build_latest.js not found" && exit 1)
+          node scripts/build_latest.js
+          test -f data/latest.json || (echo "data/latest.json not created" && exit 1)
 
+      # Normaliza claves (cataluna/espana/rioja/background) y asegura arrays.
+      - name: Normalize latest.json keys
+        run: |
+          jq -r '
+            def down: with_entries(.key |= ascii_downcase);
+            def arr(x): if (x|type)=="array" then x else [] end;
+            . as $orig | (down) as $o |
+            {
+              updated_at: ($orig.updated_at // (now | todate)),
+              cataluna:   arr($o.cataluna // $o."cataluña" // $o.catalunya),
+              espana:     arr($o.espana   // $o."españa"   // $o.spain),
+              rioja:      arr($o.rioja    // $o."la rioja"),
+              background: arr($o.background // $o.global // $o.mundo)
+            }
+          ' data/latest.json > data/latest.json.tmp
+          mv data/latest.json.tmp data/latest.json
+          echo "Normalized latest.json"
+
+      # Valida estructura y contenido mínimo antes de commitear
       - name: Validate latest.json (size & shape)
         run: |
           SIZE=$(wc -c < data/latest.json || echo 0)
           echo "latest.json size: $SIZE bytes"
-          node -e "const f=require('fs');const j=JSON.parse(f.readFileSync('data/latest.json','utf8'));
-                   const keys=['cataluna','espana','rioja','background'];
-                   if(!j.updated_at||!keys.every(k=>Array.isArray(j[k]))){console.error('Invalid structure');process.exit(1)}
-                   const total=keys.reduce((a,k)=>a+(j[k]?.length||0),0);
-                   console.log('total items:', total);
-                   if(total<4){console.error('Too few items (<4). Abort.');process.exit(2)}"
-      
+          node --input-type=module -e "
+            import fs from 'fs';
+            const j=JSON.parse(fs.readFileSync('data/latest.json','utf8'));
+            const keys=['cataluna','espana','rioja','background'];
+            if(!j.updated_at || !keys.every(k=>Array.isArray(j[k]))){
+              console.error('Invalid structure'); process.exit(1);
+            }
+            const total = keys.reduce((a,k)=>a+(j[k]?.length||0),0);
+            console.log('total items:', total);
+            if(total < 4){ console.error('Too few items (<4). Abort.'); process.exit(2); }
+          "
+
       - name: Commit & push changes (only if file changed)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/latest.json || true
-          git diff --cached --quiet && echo "No changes to commit" || git commit -m "chore(news): auto-update latest.json"
-          git rev-parse --verify HEAD && git push || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(news): auto-update latest.json"
+            git push
+          fi
