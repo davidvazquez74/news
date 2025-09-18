@@ -4,34 +4,30 @@ import fs from 'fs';
 import path from 'path';
 import Parser from 'rss-parser';
 
-// ------------------ Config ------------------
+// ---------- Paths ----------
 const ROOT = process.cwd();
-const DATA_DIR = path.join(ROOT, 'data');
-const SOURCES_PATH = path.join(DATA_DIR, 'sources.json');
-const OUT_PATH = path.join(DATA_DIR, 'latest.json');
+const DATA = path.join(ROOT, 'data');
+const SOURCES = path.join(DATA, 'sources.json');
+const OUT = path.join(DATA, 'latest.json');
 
-// Frescura: acepta noticias de los últimos 10 días (algunos RSS retrasan fechas)
-const MAX_DAYS = 10;
+// ---------- Frescura ----------
+const MAX_DAYS = 10;                          // admite hasta 10 días
 const MIN_YEAR = 2023;
 const NOW = Date.now();
 const CUTOFF = NOW - MAX_DAYS * 24 * 60 * 60 * 1000;
 
 const parser = new Parser({ timeout: 15000, maxRedirects: 3 });
 
-// ------------------ Utilidades ------------------
-const iso = (d) => {
-  try { return new Date(d).toISOString(); } catch { return null; }
-};
-
+// ---------- Utils ----------
+const iso = (d) => { try { return new Date(d).toISOString(); } catch { return null; } };
 const okDate = (d) => {
   if (!d) return false;
   const ts = new Date(d).getTime();
   if (Number.isNaN(ts)) return false;
   const y = new Date(d).getUTCFullYear();
-  // tolerancia +3h por TZ/servidores
-  return y >= MIN_YEAR && ts >= CUTOFF && ts <= (NOW + 3 * 60 * 60 * 1000);
+  // tolerancia +3h (TZs / servidores)
+  return y >= MIN_YEAR && ts >= CUTOFF && ts <= NOW + 3 * 60 * 60 * 1000;
 };
-
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const lc = (s) => (s || '').toLowerCase();
 
@@ -50,7 +46,7 @@ const dedupe = (rows, limit) => {
   return out;
 };
 
-// ------------------ Glosario (opcional, breve) ------------------
+// ---------- Glosario (breve) ----------
 function glossaryText(text='') {
   const pairs = [
     ['Euríbor', 'Índice que mueve hipotecas variables.'],
@@ -62,13 +58,11 @@ function glossaryText(text='') {
   ];
   const low = lc(text);
   const hits = [];
-  for (const [term, expl] of pairs) {
-    if (low.includes(lc(term))) hits.push({ term, expl });
-  }
+  for (const [term, expl] of pairs) if (low.includes(lc(term))) hits.push({ term, expl });
   return hits;
 }
 
-// ------------------ Impacto (sin plantillas genéricas) ------------------
+// ---------- Impacto (sin plantillas genéricas) ----------
 const BANNED = [
   'seguimiento recomendado',
   'pendiente de evolución',
@@ -76,67 +70,58 @@ const BANNED = [
   'apps y servicios pueden cambiar reglas y permisos',
 ];
 
-const notGeneric = (s='') => {
-  const t = lc(s);
-  return s && s.length > 12 && !BANNED.some(b => t.includes(b));
-};
+const notGeneric = (s='') => s && s.length > 12 && !BANNED.some(b => lc(s).includes(b));
 
 function impactAdultFrom(title='', summary='') {
-  const blob = lc(`${title} ${summary}`);
+  const text = lc(`${title} ${summary}`);
 
-  if (/(eur[íi]bor|bce|tipos de inter[eé]s)/.test(blob))
+  if (/(eur[íi]bor|bce|tipos de inter[eé]s)/.test(text))
     return 'Si tu hipoteca es variable, la cuota puede moverse en próximas revisiones.';
-
-  if (/(gasolina|di[eé]sel|petr[óo]leo|combustible|carburante)/.test(blob))
-    return 'Repostar puede salir algo más caro; compara gasolineras o ajusta trayectos.';
-
-  if (/(huelga|paro)/.test(blob) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo)/.test(blob))
-    return 'Revisa horarios y alternativas: podrían aparecer retrasos o servicios mínimos.';
-
-  if (/(alquiler|vivienda|hipoteca|vpo|smi)/.test(blob))
+  if (/(gasolina|di[eé]sel|petr[óo]leo|combustible|carburante)/.test(text))
+    return 'Repostar puede encarecerse; compara gasolineras o ajusta trayectos.';
+  if (/(huelga|paro)/.test(text) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo)/.test(text))
+    return 'Revisa horarios y alternativas: pueden aparecer retrasos o servicios mínimos.';
+  if (/(alquiler|vivienda|hipoteca|vpo|smi)/.test(text))
     return 'Posible efecto en vivienda o nómina: revisa condiciones, ayudas y fechas.';
+  if (/(impuesto|iva|tasas?|subsidio|bono)/.test(text))
+    return 'Puede variar lo que pagas o recibes; revisa facturas y requisitos.';
+  if (/(inteligencia artificial|ia|algoritmo|ai act|modelo)/.test(text))
+    return 'Servicios con IA pueden mostrar más avisos y controles por nuevas normas.';
+  if (/(israel|gaza|ucrania|rusia|iran|yemen|otan|mar rojo)/.test(text))
+    return 'Si viajas, consulta alertas y vuelos; energía y logística pueden moverse.';
 
-  if (/(impuesto|iva|tasas?|subsidio|bono)/.test(blob))
-    return 'Puede cambiar lo que pagas o recibes; revisa facturas y requisitos.';
-
-  if (/(inteligencia artificial|ia|algoritmo|ai act|modelo)/.test(blob))
-    return 'Apps y servicios pueden mostrar más avisos y controles por normas de IA.';
-
-  if (/(israel|gaza|ucrania|rusia|iran|yemen|otan|mar rojo)/.test(blob))
-    return 'Si viajas, consulta alertas y vuelos; la energía y la logística pueden moverse.';
-
-  // Sucesos sin efecto general -> no inventamos impacto
-  if (/(suceso|cad[aá]ver|homicidio|accidente|incendio|tribunal|juzgado|detenci[oó]n|agresi[oó]n)/.test(blob))
+  // Sucesos/tribunales/accidentes: sin impacto cotidiano global
+  if (/(cad[aá]ver|homicidio|accidente|incendio|tribunal|juzgado|detenci[oó]n|agresi[oó]n)/.test(text))
     return '';
 
-  return ''; // sin genéricos
+  return ''; // mejor vacío que frase robot
 }
 
 function impactTeenFrom(title='', summary='') {
-  const blob = lc(`${title} ${summary}`);
+  const text = lc(`${title} ${summary}`);
 
-  if (/(eur[íi]bor|bce|tipos)/.test(blob))
+  if (/(eur[íi]bor|bce|tipos)/.test(text))
     return 'Si en casa hay hipoteca variable, la letra puede cambiar. 💶';
-  if (/(gasolina|di[eé]sel|petr[óo]leo|combustible|carburante)/.test(blob))
+  if (/(gasolina|di[eé]sel|petr[óo]leo|combustible|carburante)/.test(text))
     return 'Depósito algo más caro → finde y viajes suben un poco. ⛽';
-  if (/(huelga|paro)/.test(blob) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo)/.test(blob))
+  if (/(huelga|paro)/.test(text) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo)/.test(text))
     return 'Ojito con metro/tren: retrasos y tocar madrugar. 🚌';
-  if (/(alquiler|vivienda|hipoteca|vpo|smi)/.test(blob))
-    return 'Pisos y curros: pueden cambiar precios o condiciones. 🏠';
-  if (/(impuesto|iva|tasas?|subsidio|bono)/.test(blob))
-    return 'Cosas algo más caras o cambios en ayudas; pregunta en casa. 🧾';
-  if (/(inteligencia artificial|ia|algoritmo|ai act|modelo)/.test(blob))
+  if (/(alquiler|vivienda|hipoteca|vpo|smi)/.test(text))
+    return 'Pisos o curros pueden cambiar de precio/condiciones. 🏠';
+  if (/(impuesto|iva|tasas?|subsidio|bono)/.test(text))
+    return 'Cosas un poco más caras o cambios en ayudas; pregunta en casa. 🧾';
+  if (/(inteligencia artificial|ia|algoritmo|ai act|modelo)/.test(text))
     return 'Más normas en apps con IA; alguna función puede cambiar. 📱';
-  if (/(israel|gaza|ucrania|rusia|iran|yemen|otan|mar rojo)/.test(blob))
-    return 'Si viajas, mira alertas y vuelos; la gasolina puede subir. ✈️';
+  if (/(israel|gaza|ucrania|rusia|iran|yemen|otan|mar rojo)/.test(text))
+    return 'Si viajas, mira alertas y vuelos; gasolina puede subir. ✈️';
 
-  if (/(suceso|cad[aá]ver|homicidio|accidente|incendio|tribunal|juzgado|detenci[oó]n|agresi[oó]n)/.test(blob))
+  if (/(cad[aá]ver|homicidio|accidente|incendio|tribunal|juzgado|detenci[oó]n|agresi[oó]n)/.test(text))
     return '';
 
   return '';
 }
 
-// ------------------ Normalización de ítems ------------------
+// ---------- Normalización ----------
 function normalize(it, srcName) {
   const title = clean(it.title);
   const url = clean(it.link || it.guid || '');
@@ -145,8 +130,7 @@ function normalize(it, srcName) {
 
   const impact_adult = impactAdultFrom(title, summary);
   const impact_teen  = impactTeenFrom(title, summary);
-
-  const impact = notGeneric(impact_adult) ? impact_adult : ''; // compat: campo "impact"
+  const impact = notGeneric(impact_adult) ? impact_adult : ''; // compat con frontend
 
   return {
     title, url, source: srcName, published_at, summary,
@@ -157,7 +141,7 @@ function normalize(it, srcName) {
   };
 }
 
-// ------------------ Fetch & Build ------------------
+// ---------- Fetch ----------
 async function fetchFeed(url) {
   try {
     const feed = await parser.parseURL(url);
@@ -178,22 +162,20 @@ async function buildSection(sources = [], limit = 6) {
       if (!okDate(n.published_at)) continue;
       rows.push(n);
     }
-    // pequeño respiro para no saturar servidores
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 300)); // respiro para no saturar
   }
   const out = dedupe(rows, limit);
-  console.log(`section "${(sources[0]?.region||'') || sources.map(x=>x.name).join(' | ')}" => ${out.length} items`);
+  console.log(`section: ${sources.map(s=>s.name).join(' | ') || '(sin fuentes)'} => ${out.length} items`);
   return out;
 }
 
-// ------------------ Main ------------------
+// ---------- Main ----------
 async function main() {
-  if (!fs.existsSync(SOURCES_PATH)) {
-    throw new Error(`No existe ${SOURCES_PATH}. Crea data/sources.json con tus feeds.`);
+  if (!fs.existsSync(SOURCES)) {
+    throw new Error(`No existe ${SOURCES}. Crea data/sources.json con tus feeds.`);
   }
-
-  const sources = JSON.parse(fs.readFileSync(SOURCES_PATH, 'utf-8'));
-  const PREV = fs.existsSync(OUT_PATH) ? JSON.parse(fs.readFileSync(OUT_PATH, 'utf-8')) : null;
+  const sources = JSON.parse(fs.readFileSync(SOURCES, 'utf-8'));
+  const prev = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf-8')) : null;
 
   const built = {
     updated_at: new Date().toISOString(),
@@ -203,19 +185,17 @@ async function main() {
     background: await buildSection(sources.background || [])
   };
 
-  // Si alguna sección vino vacía, conserva la anterior (mejor que dejar en blanco)
+  // Si alguna sección sale vacía, conservar la anterior (mejor que dejar en blanco)
   ['cataluna','espana','rioja','background'].forEach(k => {
-    if ((!built[k] || built[k].length === 0) && PREV && Array.isArray(PREV[k]) && PREV[k].length) {
-      built[k] = PREV[k];
+    if ((!built[k] || built[k].length === 0) && prev && Array.isArray(prev[k]) && prev[k].length) {
+      built[k] = prev[k];
       console.log(`⚠️ keep previous for section: ${k} (no fresh items)`);
     }
   });
 
-  fs.writeFileSync(OUT_PATH, JSON.stringify(built, null, 2), 'utf-8');
-
+  fs.writeFileSync(OUT, JSON.stringify(built, null, 2), 'utf-8');
   const counts = Object.fromEntries(['cataluna','espana','rioja','background'].map(k => [k, built[k]?.length || 0]));
-  console.log('latest.json actualizado →', OUT_PATH, '\ncounts:', counts);
+  console.log('latest.json actualizado →', OUT, '\ncounts:', counts);
 }
 
-// Execute
 main().catch(e => { console.error(e); process.exit(1); });
