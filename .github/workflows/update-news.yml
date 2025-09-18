@@ -29,13 +29,20 @@ jobs:
           fi
           npm i --no-audit --no-fund
 
+      # Calcular versión de build
+      - name: Compute build version
+        run: echo "BUILD_VERSION=v$(date -u +%Y.%m.%d).${GITHUB_RUN_NUMBER}+${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build latest.json
         env:
           NODE_OPTIONS: "--max-old-space-size=512"
+          BUILD_VERSION: ${{ env.BUILD_VERSION }}
+          GIT_SHA: ${{ github.sha }}
         run: |
           test -f scripts/build_latest.js || (echo "scripts/build_latest.js not found" && exit 1)
           node scripts/build_latest.js
           test -f data/latest.json || (echo "data/latest.json not created" && exit 1)
+          test -f data/meta.json || (echo "data/meta.json not created" && exit 1)
 
       # Inspecciona y normaliza el JSON
       - name: Inspect & normalize latest.json (Node)
@@ -88,6 +95,8 @@ jobs:
 
           const out = {
             updated_at: typeof j.updated_at === 'string' ? j.updated_at : new Date().toISOString(),
+            version: typeof j.version === 'string' ? j.version : process.env.BUILD_VERSION || '',
+            commit: typeof j.commit === 'string' ? j.commit : process.env.GIT_SHA || '',
             cataluna:   toArr(pick('cataluna','cataluña','catalunya')),
             espana:     toArr(pick('espana','españa','spain')),
             rioja:      toArr(pick('rioja','la rioja')),
@@ -124,11 +133,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/latest.json || true
+          git add data/latest.json data/meta.json || true
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore(news): auto-update latest.json"
+            git commit -m "chore(news): auto-update latest.json ($BUILD_VERSION)"
             git push
           fi
 
