@@ -3,7 +3,7 @@ name: Update latest.json (news)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'  # cada 3 horas
+    - cron: '0 * * * *'  # cada 3 horas
 
 jobs:
   build:
