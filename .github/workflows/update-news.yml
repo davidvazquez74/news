@@ -1,27 +1,56 @@
 name: Update latest.json (news)
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # cada hora
   workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'   # cada hora (UTC)
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install deps
-        run: npm install rss-parser
-      - name: Build latest.json
-        run: node scripts/build_latest.js
-      - name: Commit changes
+
+      - name: Ensure deps
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "github-actions"
-          git add data/latest.json
-          git commit -m "chore(news): auto-update latest.json (workflow)" || echo "No changes"
-          git push
+          if [ ! -f package.json ]; then
+            echo '{"name":"news","private":true,"type":"module","dependencies":{"rss-parser":"^3.13.0"}}' > package.json
+          else
+            # Garantiza "type":"module" para usar import/export
+            node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json')); if(p.type!=='module'){p.type='module'; fs.writeFileSync('package.json', JSON.stringify(p,null,2)); console.log('set type: module')} else console.log('type ok');"
+            npm pkg set dependencies.rss-parser='^3.13.0'
+          fi
+          npm i --no-audit --no-fund
+
+      - name: Build latest.json
+        env:
+          NODE_OPTIONS: "--max-old-space-size=512"
+        run: |
+          set -e
+          node scripts/build_latest.js || (echo "build_latest.js failed" && exit 1)
+          test -f data/latest.json || (echo "latest.json not found" && exit 1)
+
+      - name: Validate latest.json (size & shape)
+        run: |
+          SIZE=$(wc -c < data/latest.json || echo 0)
+          echo "latest.json size: $SIZE bytes"
+          node -e "const f=require('fs');const j=JSON.parse(f.readFileSync('data/latest.json','utf8'));
+                   const keys=['cataluna','espana','rioja','background'];
+                   if(!j.updated_at||!keys.every(k=>Array.isArray(j[k]))){console.error('Invalid structure');process.exit(1)}
+                   const total=keys.reduce((a,k)=>a+(j[k]?.length||0),0);
+                   console.log('total items:', total);
+                   if(total<4){console.error('Too few items (<4). Abort.');process.exit(2)}"
+      
+      - name: Commit & push changes (only if file changed)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json || true
+          git diff --cached --quiet && echo "No changes to commit" || git commit -m "chore(news): auto-update latest.json"
+          git rev-parse --verify HEAD && git push || true
