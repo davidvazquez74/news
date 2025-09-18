@@ -1,8 +1,8 @@
 {
-  "name": "news-auto",
+  "name": "news-backend",
   "private": true,
   "type": "module",
-  "version": "3.20.6",
+  "version": "1.0.0",
   "scripts": {
     "build:news": "node scripts/build_latest.js"
   },
