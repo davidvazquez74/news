@@ -1,0 +1,1 @@
+// impactEngine con reglas ampliadas
