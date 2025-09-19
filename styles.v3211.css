@@ -1,0 +1,4 @@
+.app-header { display:flex; flex-direction:column; gap:0.5rem; }
+.segmented button.active { background:#06f; color:#fff; }
+.weather-widget { font-size:0.9rem; display:flex; align-items:center; gap:0.5rem; padding:0.2rem 0; }
+.weather-widget .wicon { width:20px; height:20px; }
