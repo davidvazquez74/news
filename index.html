@@ -6,22 +6,15 @@
   <meta name="color-scheme" content="dark">
   <title>Noticias</title>
   <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="icon" href="icons/favicon.ico">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dark">
   <header class="app-header">
-    <div class="brand">
-      <h1>Noticias</h1>
-    </div>
+    <div class="brand"><h1>Noticias</h1></div>
     <div class="controls">
       <button id="refreshBtn" class="seg-btn">Forzar actualización</button>
-      <!-- Toggle único: muestra Adulto por defecto; al activar => Teens -->
       <button id="teenToggle" class="seg-btn" aria-pressed="false" title="Cambiar a modo Teens">Teens</button>
     </div>
-    <!-- Weather mini-strip (opcional, se rellena si hay /data/weather.json) -->
     <div id="wx" class="wx" hidden>
       <span id="wxTemp">--°C</span>
       <span id="wxIcon" aria-hidden="true">•</span>
@@ -31,7 +24,6 @@
 
   <main>
     <p id="updatedAt" class="muted top-note">Actualizando…</p>
-
     <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
     <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
     <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
@@ -44,5 +36,6 @@
   </footer>
 
   <script src="main.js" defer></script>
+  <script src="weather_client.js" defer></script>
 </body>
 </html>

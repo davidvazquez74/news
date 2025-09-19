@@ -1,13 +1,8 @@
-// main.js — solución 5: botón Teens único + versión en footer
+// main.js — botón Teens + versión en footer + soporte weather.json
 const $ = s => document.querySelector(s);
 
 let mode = (localStorage.getItem('mode') === 'teen') ? 'teen' : 'adult';
 let appVersion = localStorage.getItem('appVersion') || '';
-
-const ICONS = {
-  Clear: '☀️', Sunny:'☀️', Clouds:'☁️', Cloudy:'☁️', Rain:'🌧️', Drizzle:'🌦️', Thunderstorm:'⛈️',
-  Snow:'❄️', Mist:'🌫️', Haze:'🌫️', Fog:'🌫️'
-};
 
 function fmtDate(iso){
   if(!iso) return '';
@@ -15,7 +10,6 @@ function fmtDate(iso){
 }
 function el(tag, cls){ const n=document.createElement(tag); if(cls) n.className=cls; return n; }
 
-// --------- Render ---------
 function renderCard(item){
   const wrap = el('article','news-card');
   const a = el('a','news-title'); a.target='_blank'; a.rel='noopener noreferrer';
@@ -40,13 +34,11 @@ function renderList(id, items){
   arr.forEach(n => c.appendChild(renderCard(n)));
 }
 
-// --------- Fetch helpers ---------
 async function fetchJSON(url){
   const r = await fetch(url + (url.includes('?')?'&':'?') + 't=' + Date.now(), {cache:'no-store'});
   if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
 }
 
-// --------- Data loaders ---------
 async function loadAll(){
   try{
     const data = await fetchJSON('/data/latest.json');
@@ -54,11 +46,9 @@ async function loadAll(){
     renderList('#list-espana',    data.espana||[]);
     renderList('#list-rioja',     data.rioja||[]);
     renderList('#list-background',data.background||[]);
-    // Local: si existe blocksOut.MolinsDeRei úsalo, si no, cataluna
     const localItems = (data.blocksOut && Array.isArray(data.blocksOut.MolinsDeRei)) ? data.blocksOut.MolinsDeRei : (data.cataluna||[]);
     renderList('#list-local', localItems);
     $('#updatedAt').textContent = data.updated_at ? 'Actualizado: ' + fmtDate(data.updated_at) : '';
-    // Footer version
     if (data.version) { appVersion = data.version; localStorage.setItem('appVersion', appVersion); }
     const $ver = $('#versionBadge'); if ($ver) $ver.textContent = appVersion || '—';
   }catch(e){
@@ -69,34 +59,6 @@ async function loadAll(){
   }
 }
 
-// Mini weather: lee /data/weather.json si existe (tempC, summary, icon)
-async function loadWeather(){
-  try{
-    const w = await fetchJSON('/data/weather.json');
-    const box = $('#wx'); if(!box) return;
-    const t = typeof w.tempC==='number' ? Math.round(w.tempC)+'°C' : (w.temp||'--°C');
-    const s = w.summary || w.desc || '';
-    const i = ICONS[w.icon] || ICONS[w.summary] || '•';
-    $('#wxTemp').textContent = t;
-    $('#wxSummary').textContent = s;
-    $('#wxIcon').textContent = i;
-    box.hidden = false;
-  }catch{ /* opcional */ }
-}
-
-// --------- Mode toggle (único botón Teens) ---------
-function applyMode(newMode){
-  mode = (newMode==='teen') ? 'teen' : 'adult';
-  localStorage.setItem('mode', mode);
-  const $tg = $('#teenToggle');
-  if ($tg) $tg.setAttribute('aria-pressed', String(mode==='teen'));
-  loadAll();
-}
-function toggleTeens(){
-  applyMode(mode==='teen' ? 'adult' : 'teen');
-}
-
-// --------- Version check (meta.json) ---------
 async function checkVersion(){
   try{
     const meta = await fetchJSON('/data/meta.json');
@@ -112,23 +74,26 @@ async function checkVersion(){
   }catch{}
 }
 
-// --------- Init ---------
+function applyMode(newMode){
+  mode = (newMode==='teen') ? 'teen' : 'adult';
+  localStorage.setItem('mode', mode);
+  const $tg = $('#teenToggle');
+  if ($tg) $tg.setAttribute('aria-pressed', String(mode==='teen'));
+  loadAll();
+}
+function toggleTeens(){ applyMode(mode==='teen' ? 'adult' : 'teen'); }
+
 window.addEventListener('DOMContentLoaded', ()=>{
-  // initial mode (query overrides)
   const urlMode = new URLSearchParams(location.search).get('mode');
   if (urlMode==='teen') mode='teen';
   localStorage.setItem('mode', mode);
-  // bind
   $('#refreshBtn')?.addEventListener('click', ()=>{
     localStorage.removeItem('appVersion');
     location.replace((location.pathname.replace(/\/+/g,'/')) + '?force=' + Date.now());
   });
   $('#teenToggle')?.addEventListener('click', toggleTeens);
-  // paint state
   $('#teenToggle')?.setAttribute('aria-pressed', String(mode==='teen'));
-  // load
   checkVersion();
-  loadWeather();
   loadAll();
   setInterval(checkVersion, 5*60*1000);
 });
