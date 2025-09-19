@@ -4,39 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <title>News</title>
+  <title>Noticias</title>
   <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest?v=3211">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3211">
-  <link rel="icon" href="icons/favicon.ico?v=3211">
-  <link rel="stylesheet" href="styles.v3211.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/favicon.ico">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dark">
   <header class="app-header">
     <div class="brand">
       <h1>Noticias</h1>
     </div>
-    <div class="segmented" role="tablist" aria-label="Controles">
-      <button id="refreshBtn" role="tab" aria-selected="false">Forzar actualización</button>
-      <button id="tabTeen" role="tab" aria-selected="false">Teens</button>
+    <div class="controls">
+      <button id="refreshBtn" class="seg-btn">Forzar actualización</button>
+      <!-- Toggle único: muestra Adulto por defecto; al activar => Teens -->
+      <button id="teenToggle" class="seg-btn" aria-pressed="false" title="Cambiar a modo Teens">Teens</button>
     </div>
-    <div id="weatherWidget" class="weather-widget"></div>
+    <!-- Weather mini-strip (opcional, se rellena si hay /data/weather.json) -->
+    <div id="wx" class="wx" hidden>
+      <span id="wxTemp">--°C</span>
+      <span id="wxIcon" aria-hidden="true">•</span>
+      <span id="wxSummary" class="wx-summary"></span>
+    </div>
   </header>
 
   <main>
     <p id="updatedAt" class="muted top-note">Actualizando…</p>
 
-    <section><h2>Cataluña</h2><ul id="cataluna" class="news-list"></ul></section>
-    <section><h2>España</h2><ul id="espana" class="news-list"></ul></section>
-    <section><h2>La Rioja</h2><ul id="rioja" class="news-list"></ul></section>
-    <section><h2 id="local-title">Local</h2><ul id="local" class="news-list"></ul><p id="geoNote" class="muted small"></p></section>
-    <section><h2>Global</h2><ul id="global" class="news-list"></ul></section>
+    <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
+    <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
+    <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
+    <section><h2 id="local-title">Local</h2><ul id="list-local" class="news-list"></ul><p id="geoNote" class="muted small"></p></section>
+    <section><h2>Global</h2><ul id="list-background" class="news-list"></ul></section>
   </main>
 
   <footer class="app-footer">
-    <small>Fuentes verificadas • <span id="versionBadge"></span></small>
+    <small id="versionBadge" class="muted">—</small>
   </footer>
 
-  <script src="main.v3211.js" defer></script>
+  <script src="main.js" defer></script>
 </body>
 </html>
