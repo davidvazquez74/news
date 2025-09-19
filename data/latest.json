@@ -1,21 +1,11 @@
 {
-  "updated_at": "2025-09-19T22:51:55.662821Z",
-  "version": "v-demo",
+  "updated_at": "2025-09-19T22:27:56.312671Z",
+  "version": "v-dev.sample",
   "commit": "local",
   "cataluna": [],
-  "espana": [
-    {
-      "title": "Demo: acuerdo sobre app en el barrio",
-      "url": "https://example.org/demo-app",
-      "source": "Demo Source",
-      "published_at": "2025-09-19T22:51:55.662834Z",
-      "summary": "Apenas cambia nada para tu día a día.",
-      "impact": "FYI: sin cambios prácticos.",
-      "impact_adult": "FYI: sin cambios prácticos.",
-      "impact_teen": "Todo chill, nada cambia 😎"
-    }
-  ],
+  "espana": [],
   "rioja": [],
   "background": [],
-  "deportes": []
+  "deportes": [],
+  "radios": []
 }
