@@ -6,20 +6,18 @@
   <meta name="color-scheme" content="dark">
   <title>News</title>
   <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest?v=3209">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3209">
-  <link rel="icon" href="icons/favicon.ico?v=3209">
-  <link rel="stylesheet" href="styles.v3209.css">
+  <link rel="manifest" href="manifest.webmanifest?v=3210">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3210">
+  <link rel="icon" href="icons/favicon.ico?v=3210">
+  <link rel="stylesheet" href="styles.v3210.css">
 </head>
 <body class="dark">
   <header class="app-header">
     <div class="brand">
       <h1>Noticias</h1>
-      <span id="versionBadge">—</span>
     </div>
     <div class="segmented" role="tablist" aria-label="Controles">
       <button id="refreshBtn" role="tab" aria-selected="false">Forzar actualización</button>
-      <button id="adultBtn" role="tab" aria-selected="true">Adulto</button>
       <button id="teenToggle" role="tab" aria-selected="false">Teens</button>
     </div>
   </header>
@@ -35,22 +33,19 @@
   </main>
 
   <footer class="app-footer">
-    <small><a href="#" id="forceCacheClear">Limpiar caché</a> • Fuentes verificadas</small>
+    <small>
+      <a href="#" id="forceCacheClear">Limpiar caché</a> •
+      <span id="versionFooter">v—</span> • Fuentes verificadas
+    </small>
   </footer>
 
-  <script src="main.v3209.js" defer></script>
+  <script src="main.v3210.js" defer></script>
   <script>
-    // Cargar versión dinámica desde meta.json
+    // Pinta la versión en el footer
     fetch("/data/meta.json?t=" + Date.now())
       .then(r => r.json())
-      .then(meta => {
-        const el = document.getElementById("versionBadge");
-        if (el) el.textContent = meta.version ? meta.version : "—";
-      })
-      .catch(() => {
-        const el = document.getElementById("versionBadge");
-        if (el) el.textContent = "—";
-      });
+      .then(meta => { document.getElementById("versionFooter").textContent = meta.version || "v—"; })
+      .catch(() => { document.getElementById("versionFooter").textContent = "v—"; });
   </script>
 </body>
 </html>

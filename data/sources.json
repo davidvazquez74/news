@@ -1,18 +1,15 @@
 {
-  "version": "1.1",
-  "language": "es",
-  "updatedAt": "2025-09-19T22:30:00Z",
   "Catalunya": {
     "maxItems": 5,
     "consensus": 2,
     "feeds": [
       {
-        "name": "El Periódico – Catalunya",
-        "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
+        "name": "La Vanguardia – Catalunya",
+        "url": "https://www.lavanguardia.com/mvc/feed/rss/catalunya"
       },
       {
-        "name": "Generalitat de Catalunya – Actualitat",
-        "url": "https://web.gencat.cat/es/actualitat/rss/"
+        "name": "El Periódico – Catalunya",
+        "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
       }
     ]
   },
@@ -25,12 +22,12 @@
         "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"
       },
       {
-        "name": "El Mundo – España",
-        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
+        "name": "RTVE Noticias",
+        "url": "https://www.rtve.es/rss/"
       },
       {
-        "name": "20 Minutos – Nacional",
-        "url": "https://www.20minutos.es/rss/nacional/"
+        "name": "El Mundo – España",
+        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
       }
     ]
   },
@@ -43,7 +40,7 @@
         "url": "https://www.molinsderei.cat/rss/8/noticies"
       },
       {
-        "name": "Viu Molins de Rei (diari local)",
+        "name": "Viu Molins de Rei",
         "url": "https://www.viumolinsderei.com/feed/"
       }
     ]
@@ -53,12 +50,12 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "El Día de La Rioja",
+        "name": "El Día de La Rioja (eldiario.es)",
         "url": "https://www.eldiario.es/rss/"
       },
       {
-        "name": "La Rioja – Noticias",
-        "url": "https://www.larioja.com/rss/portada.xml"
+        "name": "Gobierno de La Rioja – Actualidad",
+        "url": "https://actualidad.larioja.org/rss"
       }
     ]
   },
@@ -67,17 +64,20 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "Agencia EFE – Internacional",
-        "url": "https://www.efe.com/efe/espana/mundo/1006/rss"
+        "name": "Agencia EFE Internacional",
+        "url": "https://www.efe.com/efe/espana/rss/1004"
+      },
+      {
+        "name": "Reuters – Top News (español)",
+        "url": "https://www.reuters.com/rssFeed/spanishNews"
       },
       {
         "name": "BBC Mundo",
         "url": "https://feeds.bbci.co.uk/mundo/rss.xml"
-      },
-      {
-        "name": "El País – Internacional",
-        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional"
       }
     ]
-  }
+  },
+  "version": "1.0",
+  "language": "es",
+  "updatedAt": ""
 }
