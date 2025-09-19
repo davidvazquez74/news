@@ -4,48 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <title>News</title>
+  <title>News • v3.21.1-lite</title>
   <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest?v=3210">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3210">
-  <link rel="icon" href="icons/favicon.ico?v=3210">
-  <link rel="stylesheet" href="styles.v3210.css">
+  <link rel="manifest" href="manifest.webmanifest?v=3211">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3211">
+  <link rel="icon" href="icons/favicon.ico?v=3211">
+  <link rel="stylesheet" href="styles.weather.v1.css">
 </head>
 <body class="dark">
   <header class="app-header">
     <div class="brand">
       <h1>Noticias</h1>
+      <span id="versionBadge">v3.21.1-lite</span>
     </div>
     <div class="segmented" role="tablist" aria-label="Controles">
-      <button id="refreshBtn" role="tab" aria-selected="false">Forzar actualización</button>
-      <button id="teenToggle" role="tab" aria-selected="false">Teens</button>
+      <button id="refreshBtn" role="tab">Forzar actualización</button>
+      <button id="tabAdult" role="tab" class="active">Adulto</button>
+      <button id="tabTeen" role="tab">Teens</button>
     </div>
   </header>
 
+  <!-- Widget del tiempo -->
+  <section id="weatherWidget" class="weather-widget">
+    <p class="muted">Cargando el tiempo en Molins de Rei…</p>
+  </section>
+
   <main>
     <p id="updatedAt" class="muted top-note">Actualizando…</p>
-
-    <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
-    <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
-    <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
-    <section><h2 id="local-title">Local</h2><ul id="list-local" class="news-list"></ul><p id="geoNote" class="muted small"></p></section>
-    <section><h2>Global</h2><ul id="list-background" class="news-list"></ul></section>
+    <section><h2>Cataluña</h2><ul id="cataluna" class="news-list"></ul></section>
+    <section><h2>España</h2><ul id="espana" class="news-list"></ul></section>
+    <section><h2>La Rioja</h2><ul id="rioja" class="news-list"></ul></section>
+    <section><h2 id="local-title">Local</h2><ul id="local" class="news-list"></ul></section>
+    <section><h2>Global</h2><ul id="global" class="news-list"></ul></section>
   </main>
 
   <footer class="app-footer">
-    <small>
-      <a href="#" id="forceCacheClear">Limpiar caché</a> •
-      <span id="versionFooter">v—</span> • Fuentes verificadas
-    </small>
+    <small><a href="#" id="forceCacheClear">Limpiar caché</a> • Fuentes verificadas</small>
   </footer>
 
-  <script src="main.v3210.js" defer></script>
-  <script>
-    // Pinta la versión en el footer
-    fetch("/data/meta.json?t=" + Date.now())
-      .then(r => r.json())
-      .then(meta => { document.getElementById("versionFooter").textContent = meta.version || "v—"; })
-      .catch(() => { document.getElementById("versionFooter").textContent = "v—"; });
-  </script>
+  <script src="main.v3211.js" defer></script>
 </body>
 </html>
