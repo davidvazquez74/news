@@ -1,13 +1,12 @@
-// main.js
-// Frontend News App – coherente con latest.json generado por build_latest.js
-// - Lee /data/meta.json para detectar versión nueva y forzar recarga (iPhone-friendly).
-// - Carga /data/latest.json (cataluna, espana, rioja, background) y blocksOut.MolinsDeRei para "local" si existe.
-// - Modo Adulto/Teen: usa impact_adult / impact_teen (fallback a impact).
-// - Titular clicable (link a fuente), impacto debajo, glosario breve.
-// Requiere en el HTML los elementos con IDs: #cataluna, #espana, #rioja, #global, #local,
-// #tabAdult, #tabTeen, #refreshBtn, #generatedAt, #versionBadge.
+// main.v3209.js
+// App de noticias (Apple-friendly) con:
+// - Versión dinámica desde /data/meta.json (badge #versionBadge) y bust de caché en iPhone.
+// - Carga /data/latest.json con compat (cataluna, espana, rioja, background) y "local" (MolinsDeRei si existe).
+// - Modo Adulto / Teens: impact_adult / impact_teen (fallback a impact).
+// - Render en listas UL con IDs: #list-cataluna, #list-espana, #list-rioja, #list-local, #list-background.
+// - Botones por ID: #refreshBtn, #adultBtn, #teenToggle. Marca aria-selected.
 
-const $ = s => document.querySelector(s);
+const $ = (s) => document.querySelector(s);
 
 // ---------- Estado ----------
 let mode = (localStorage.getItem('mode') === 'teen') ? 'teen' : 'adult';
@@ -23,127 +22,35 @@ function el(tag, cls){
   if (cls) n.className = cls;
   return n;
 }
+function textOr(s, d=''){ return (typeof s === 'string' && s.trim().length) ? s : d; }
 
-// ---------- Render ----------
-function renderCard(item){
-  const wrap = el('article','news-card');
-
-  // Titular (link a fuente)
-  const a = el('a','news-title');
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  a.textContent = item.title || 'Sin título';
-  a.href = item.url || item.link || '#';
-  wrap.appendChild(a);
-
-  // Fecha
-  const meta = el('p','meta');
-  meta.textContent = item.published_at ? fmtDate(item.published_at) : (item.published ? fmtDate(item.published) : '');
-  if (meta.textContent) wrap.appendChild(meta);
-
-  // Impacto (debajo del titular, sin prefijos literales)
-  const impactAdult = item.impact_adult || item.impact || '';
-  const impactTeen  = item.impact_teen  || '';
-  const impactTxt   = (mode === 'teen') ? impactTeen : impactAdult;
-  if (impactTxt) {
-    const impact = el('div','block');
-    impact.innerHTML = `<p>${impactTxt}</p>`;
-    wrap.appendChild(impact);
-  }
-
-  // Glosario (si viene)
-  const gl = item.glossary || [];
-  if (Array.isArray(gl) && gl.length){
-    const box = el('div','block gloss');
-    const ul = el('ul','glossary');
-    for (const g of gl){
-      const li = el('li','gloss-item');
-      const term = g.term || '';
-      const def  = g.expl || g.def || '';
-      li.innerHTML = `<strong>${term}:</strong> ${def}`;
-      ul.appendChild(li);
-    }
-    box.appendChild(ul);
-    wrap.appendChild(box);
-  }
-
-  return wrap;
-}
-
-function renderSection(sel, items){
-  const container = $(sel);
-  if (!container) return;
-  container.innerHTML = '';
-  const arr = Array.isArray(items) ? items : [];
-  if (!arr.length){
-    container.innerHTML = '<p class="empty">Sin contenidos (todavía)</p>';
-    return;
-  }
-  arr.forEach(n => container.appendChild(renderCard(n)));
-}
-
-// ---------- Carga de datos ----------
 async function fetchJSON(url){
   const r = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' });
   if (!r.ok) throw new Error('HTTP ' + r.status + ' @ ' + url);
   return r.json();
 }
 
-async function loadAll(){
-  try {
-    const data = await fetchJSON('/data/latest.json');
-
-    // Estructura del backend:
-    // - cataluna, espana, rioja, background
-    // - blocksOut.MolinsDeRei (si existe) para "local"
-    const cataluna  = data.cataluna   || [];
-    const espana    = data.espana     || [];
-    const rioja     = data.rioja      || [];
-    const global    = data.background || [];
-
-    // "Local": prioriza MolinsDeRei si backend lo expone en blocksOut; si no, usa cataluna como fallback.
-    const localItems = (data.blocksOut && Array.isArray(data.blocksOut.MolinsDeRei)) ? data.blocksOut.MolinsDeRei : cataluna;
-
-    // Render en contenedores del HTML
-    renderSection('#cataluna', cataluna);
-    renderSection('#espana',   espana);
-    renderSection('#rioja',    rioja);
-    renderSection('#global',   global);
-    renderSection('#local',    localItems);
-
-    // Marcas de tiempo y versión
-    const updated = data.updated_at || data.generated_at || '';
-    const v = data.version || '';
-    const $upd = $('#generatedAt');
-    if ($upd) $upd.textContent = updated ? ('Actualizado: ' + fmtDate(updated)) : '';
-    const $ver = $('#versionBadge');
-    if ($ver) $ver.textContent = v ? v : '';
-  } catch (e) {
-    console.error('Error cargando latest.json', e);
-    const ids = ['#cataluna','#espana','#rioja','#global','#local'];
-    ids.forEach(id => {
-      const el = $(id);
-      if (el) el.innerHTML = '<p class="empty">No se pudieron cargar noticias.</p>';
-    });
-  }
-}
-
-// ---------- Control de versión / bust iOS ----------
+// ---------- Control de versión / badge ----------
 async function checkVersion(){
   try {
     const meta = await fetchJSON('/data/meta.json');
     const newV = meta.version || '';
+    const badge = $('#versionBadge');
+    if (badge) badge.textContent = newV || '—';
+
     if (newV && newV !== appVersion){
-      // Guarda y fuerza recarga para bustear caché en iOS
       localStorage.setItem('appVersion', newV);
       appVersion = newV;
 
-      // Intenta limpiar caches si hay SW (no rompe si no existe)
-      if (window.caches?.keys) {
-        const ks = await caches.keys();
-        await Promise.all(ks.map(k => caches.delete(k)));
-      }
-      // Recarga dura con bust en URL
+      // Limpia caches si existe SW (no falla si no hay)
+      try {
+        if (window.caches?.keys) {
+          const ks = await caches.keys();
+          await Promise.all(ks.map(k => caches.delete(k)));
+        }
+      } catch {}
+
+      // Recarga dura con parámetro bust
       const base = location.pathname.replace(/\/+$/,'') || '/';
       location.replace(base + '?b=' + encodeURIComponent(newV));
       return;
@@ -153,57 +60,167 @@ async function checkVersion(){
   }
 }
 
-// ---------- Modo Adulto/Teen ----------
+// ---------- Render ----------
+function renderItemLI(item){
+  const li = el('li','news-card');
+
+  // Título (link a fuente)
+  const a = el('a','news-title');
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.href = item.url || item.link || '#';
+  a.textContent = textOr(item.title, 'Sin título');
+  li.appendChild(a);
+
+  // Meta: fecha + fuente si viene
+  const when = item.published_at || item.published || '';
+  const metaP = el('p','meta');
+  const sourceTxt = item.source ? ` • ${item.source}` : '';
+  metaP.textContent = (when ? fmtDate(when) : '') + sourceTxt;
+  if (metaP.textContent.trim()) li.appendChild(metaP);
+
+  // Impacto (debajo del titular, sin prefijos literales)
+  const impactAdult = item.impact_adult || item.impact || '';
+  const impactTeen  = item.impact_teen  || '';
+  const impactTxt   = (mode === 'teen') ? impactTeen : impactAdult;
+  if (impactTxt){
+    const p = el('p','impact');
+    p.textContent = impactTxt;
+    li.appendChild(p);
+  }
+
+  // Glosario (si viene)
+  const gl = Array.isArray(item.glossary) ? item.glossary : [];
+  if (gl.length){
+    const box = el('div','gloss');
+    for (const g of gl){
+      const row = el('div','gloss-item');
+      const term = textOr(g.term);
+      const def  = textOr(g.expl || g.def);
+      row.innerHTML = `<strong>${term}:</strong> ${def}`;
+      box.appendChild(row);
+    }
+    li.appendChild(box);
+  }
+
+  return li;
+}
+
+function renderList(selector, items){
+  const ul = $(selector);
+  if (!ul) return;
+  ul.innerHTML = '';
+  const arr = Array.isArray(items) ? items : [];
+  if (!arr.length){
+    ul.innerHTML = `<li class="empty">Sin contenidos (todavía).</li>`;
+    return;
+  }
+  for (const it of arr) ul.appendChild(renderItemLI(it));
+}
+
+// ---------- Carga de datos ----------
+async function loadAll(){
+  try {
+    const data = await fetchJSON('/data/latest.json');
+
+    // Compat backend:
+    const cataluna  = data.cataluna   || [];
+    const espana    = data.espana     || [];
+    const rioja     = data.rioja      || [];
+    const global    = data.background || [];
+
+    // Local: usa MolinsDeRei si está, si no fallback a Cataluña
+    const localItems = (data.blocksOut && Array.isArray(data.blocksOut.MolinsDeRei))
+      ? data.blocksOut.MolinsDeRei
+      : cataluna;
+
+    renderList('#list-cataluna',   cataluna);
+    renderList('#list-espana',     espana);
+    renderList('#list-rioja',      rioja);
+    renderList('#list-background', global);
+    renderList('#list-local',      localItems);
+
+    // Marca de tiempo
+    const updated = data.updated_at || data.generated_at || '';
+    const $upd = $('#updatedAt');
+    if ($upd) $upd.textContent = updated ? ('Actualizado: ' + fmtDate(updated)) : '—';
+
+    // Badge de versión (fallback si el inline del index aún no ha pintado)
+    const v = data.version || '';
+    const $ver = $('#versionBadge');
+    if ($ver && !$ver.textContent.trim()) $ver.textContent = v || '—';
+
+  } catch (e) {
+    console.error('Error cargando latest.json', e);
+    ['#list-cataluna','#list-espana','#list-rioja','#list-local','#list-background'].forEach(sel=>{
+      const ul = $(sel);
+      if (ul) ul.innerHTML = `<li class="empty">No se pudieron cargar noticias.</li>`;
+    });
+  }
+}
+
+// ---------- Modo Adulto/Teens ----------
 function applyMode(newMode){
   mode = (newMode === 'teen') ? 'teen' : 'adult';
   localStorage.setItem('mode', mode);
 
-  // Re-render con el modo actual (sin re-descargar JSON)
-  loadAll();
+  // Actualiza aria-selected en los botones reales del HTML
+  $('#adultBtn')?.setAttribute('aria-selected', String(mode === 'adult'));
+  $('#teenToggle')?.setAttribute('aria-selected', String(mode === 'teen'));
 
-  // Estado visual de tabs (si existen)
-  const $adult = document.getElementById('tabAdult');
-  const $teen  = document.getElementById('tabTeen');
-  if ($adult) $adult.classList.toggle('active', mode==='adult');
-  if ($teen)  $teen.classList.toggle('active',  mode==='teen');
+  // Re-render (sencillo: vuelve a pintar con el modo actual)
+  loadAll();
 }
 
 // ---------- Eventos ----------
 function bindUI(){
-  const $btnRefresh = document.getElementById('refreshBtn');
-  if ($btnRefresh){
-    $btnRefresh.addEventListener('click', async ()=>{
-      // Forzar versión "nueva" para bustear en iOS
-      localStorage.removeItem('appVersion');
-      try {
-        if (window.caches?.keys) {
-          const ks = await caches.keys();
-          await Promise.all(ks.map(k => caches.delete(k)));
-        }
-      } catch {}
-      const stamp = Date.now();
-      const base = location.pathname.replace(/\/+$/,'') || '/';
-      location.replace(base + '?force=' + stamp);
-    });
-  }
+  $('#adultBtn')?.addEventListener('click', ()=> applyMode('adult'));
+  $('#teenToggle')?.addEventListener('click', ()=> applyMode('teen'));
 
-  const $adult = document.getElementById('tabAdult');
-  const $teen  = document.getElementById('tabTeen');
-  if ($adult) $adult.addEventListener('click', ()=> applyMode('adult'));
-  if ($teen)  $teen.addEventListener('click',  ()=> applyMode('teen'));
+  $('#refreshBtn')?.addEventListener('click', async ()=>{
+    // Forzar versión "nueva" para bustear en iOS
+    localStorage.removeItem('appVersion');
+    try {
+      if (window.caches?.keys) {
+        const ks = await caches.keys();
+        await Promise.all(ks.map(k => caches.delete(k)));
+      }
+    } catch {}
+    const stamp = Date.now();
+    const base = location.pathname.replace(/\/+$/,'') || '/';
+    location.replace(base + '?force=' + stamp);
+  });
+
+  $('#forceCacheClear')?.addEventListener('click', async (e)=>{
+    e.preventDefault();
+    localStorage.clear();
+    try {
+      if (window.caches?.keys) {
+        const ks = await caches.keys();
+        await Promise.all(ks.map(k => caches.delete(k)));
+      }
+    } catch {}
+    alert('Caché limpiada. Recargando…');
+    location.replace((location.pathname || '/') + '?clear=' + Date.now());
+  });
 }
 
 // ---------- Init ----------
 window.addEventListener('DOMContentLoaded', () => {
-  // Recupera modo guardado o ?mode=teen
+  // Modo por URL (?mode=teen) o guardado
   const urlMode = new URLSearchParams(location.search).get('mode');
   if (urlMode === 'teen') mode = 'teen';
   localStorage.setItem('mode', mode);
 
+  // Marca aria-selected inicial según modo
+  $('#adultBtn')?.setAttribute('aria-selected', String(mode === 'adult'));
+  $('#teenToggle')?.setAttribute('aria-selected', String(mode === 'teen'));
+
   bindUI();
-  // 1) Chequear versión (puede recargar si cambia).
+
+  // 1) Chequear versión (puede recargar si cambia)
   checkVersion();
-  // 2) Cargar noticias (usa bust ?t=).
+  // 2) Cargar noticias
   loadAll();
   // 3) Re-chequear versión cada 5 min
   setInterval(checkVersion, 5 * 60 * 1000);
