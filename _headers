@@ -1,17 +1,3 @@
-/index.html
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/main.js
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/styles.css
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/data/latest.json
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/data/meta.json
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/data/weather.json
-  Cache-Control: no-cache, no-store, must-revalidate
+/data/*
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: no-store
