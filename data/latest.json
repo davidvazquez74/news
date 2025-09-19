@@ -1,72 +1,66 @@
 {
-  "updated_at": "2025-09-19T21:55:25.006Z",
-  "version": "v2025.09.19.61+cabc8b8",
-  "commit": "cabc8b8",
+  "updated_at": "2025-09-19T22:18:09.414Z",
+  "version": "v-dev.1758320258605",
+  "commit": "local",
   "cataluna": [
     {
-      "title": "\"No descansa mai, està tota l’estona liderant\"",
-      "url": "https://www.ara.cat/esports/basquet/ricky-rubio_130_5501915.html",
-      "source": "Ara",
-      "published_at": "2025-09-19T21:13:06.000Z",
-      "summary": "\"No havíem tingut mai una llista de sol·licituds d'entrevistes tan llarga com la que tenim ara amb el Ricky\". Judit Borrull, responsable de comunicació del Joventut, resumeix perfectament la il·lusió que ha generat el retorn de Ricky Rubio a la Penya. El base de 34 anys viu el seu epíleg somiat al club que el va formar. La venda de samarretes amb el dorsal 9 s'ha disparat i el número d'abonats no para de créixer.",
-      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
-      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
-      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
-      "glossary": []
-    },
-    {
-      "title": "El prestigi a l’exili de l’Antoni Clavé il·lustrador (1946)",
-      "url": "https://www.ara.cat/opinio/prestigi-l-exili-l-antoni-clave-il-lustrador-1946_1_5497621.html",
-      "source": "Ara",
-      "published_at": "2025-09-19T21:00:56.000Z",
-      "summary": "De dues cròniques de Rafael Tasis (Barcelona, 1906 - París 1966) enviades de París estant i publicades a La Nostra Revista (Mèxic, I-II, 1946). Fa vint anys de la mort de l’artista Antoni Clavé (Barcelona, 1913 - Saint-Tropez, 2005). Fins al 16 de novembre hi ha oberta al Palau Martorell (Barcelona) una retrospectiva d’aquest pintor i dibuixant, que va excel·lir com un cartellista i il·lustrador amb projecció internacional.",
-      "impact": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
-      "impact_adult": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
-      "impact_teen": "Puede cambiar lo que cobras o pagas; pregunta en casa. 🧾",
-      "glossary": []
-    },
-    {
-      "title": "L'enigma de Lleó XIV",
-      "url": "https://www.ara.cat/internacional/europa/l-enigma-lleo-xiv_1_5502706.html",
-      "source": "Ara",
-      "published_at": "2025-09-19T20:24:22.000Z",
-      "summary": "Han passat més de quatre mesos des que el fum blanc de la Capella Sixtina va anunciar l’elecció d’un nou papa i, encara avui, són pocs els que al Vaticà s’atreveixen a traçar un perfil més o menys precís de Lleó XIV. La periodista nord-americana Elise Ann Allen, corresponsal a Roma del mitjà catòlic Crux, ho fa al llibre Lleó XIV: ciutadà del món, missioner del segle XXI, que inclou la primera entrevista a Robert Prevost des de la seva elecció a la càtedra de Sant Pere.",
-      "impact": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
-      "impact_adult": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
+      "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
+      "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
+      "source": "La Vanguardia – Portada",
+      "published_at": "2025-09-19T18:01:53.000Z",
+      "summary": "El almirante general Antonio Piñeiro señala que su misión es “ayudar y salvar” a quienes se encuentren en peligro en el mar",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
       "glossary": []
     },
     {
-      "title": "Una tarda a la caça de multireincidents pel centre de Barcelona",
-      "url": "https://www.ara.cat/societat/successos/tarda-caca-multireincidents-pel-centre-barcelona_1_5502645.html",
-      "source": "Ara",
-      "published_at": "2025-09-19T19:54:04.000Z",
-      "summary": "Sovint, res és el que sembla. Quan els agents dels Mossos d'Esquadra veuen tres persones entrant a botigues i intentant vendre primer un telèfon i després unes joies, els segueixen. El mòbil és un iPhone Pro Max 16, però que ells venen bastant més barat, per uns 300 euros. I les joies diuen que són d'or, però les cadenes les volen col·locar a 25 euros. Quan, finalment, els aturen, veuen que una d'elles té dos \"vermells\". Per l'emissora ressona diverses vegades aquest color: és el codi intern per dir que algú té una ordre de detenció pendent. Res és el que sembla perquè els venedors resulten ser fugitius, l'iPhone és fals –els agents han anat fins a la botiga Apple a corroborar-ho– i l'or no era or –també han anat a una botiga especialitzada a comprovar-ho.",
-      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
-      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
-      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
-      "glossary": []
+      "title": "España ofrece a la OTAN tres cazas, un avión A-400 y un radar para reforzar el flanco este de Europa",
+      "url": "https://www.lavanguardia.com/politica/20250919/11078292/espana-ofrece-otan-tres-cazas-avion-400-radar-reforzar-flanco-europa.html",
+      "source": "La Vanguardia – Portada",
+      "published_at": "2025-09-19T14:31:17.000Z",
+      "summary": "La operación Centinela Oriental responde a la incursión de drones rusos en el espacio aéreo polaco y rumano",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": [
+        {
+          "term": "OTAN",
+          "expl": "Alianza militar euroatlántica."
+        }
+      ]
     },
     {
-      "title": "Catalunya sense llei electoral",
-      "url": "https://naciodigital.cat/opinio/catalunya-sense-llei-electoral.html",
-      "source": "NacióDigital",
-      "published_at": "2025-09-19T19:50:08.000Z",
-      "summary": "«Que els catalans de l’exterior hagin de presentar una ILP perquè el Parlament quedi retratat no és només una anècdota»",
-      "impact": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
-      "impact_adult": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
+      "title": "Los Reyes se maravillan con los descubrimientos de los arqueólogos españoles en Luxor",
+      "url": "https://www.lavanguardia.com/gente/20250919/11077427/reyes-maravillan-descubrimientos-arqueologos-espanoles-luxor.html",
+      "source": "La Vanguardia – Portada",
+      "published_at": "2025-09-19T12:18:38.000Z",
+      "summary": "Felipe y Letizia recorren las tumbas de Ramsés V y VI y Seti I en la antigua necrópolis de Tebas",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
       "glossary": []
     },
     {
-      "title": "La Setmana del Llibre en Català 2025 obre les portes: «Venim per fomentar la llengua i la cultura catalana»",
-      "url": "https://naciodigital.cat/cultura-i-mitjans/la-setmana-del-llibre-en-catala-2025-obre-les-portes-venim-per-fomentar-la-llengua-i-la-cultura-catalana.html",
-      "source": "NacióDigital",
-      "published_at": "2025-09-19T19:24:59.000Z",
-      "summary": "La 43a edició de la fira busca repetir l'èxit de l'edició anterior que va aplegar uns 100.000 visitants i ofereix \"llibres de quilòmetre zero\" i tres-centes activitats per menuts i grans",
-      "impact": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
-      "impact_adult": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
-      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "title": "Salvador Illa: “Si el catalán no es oficial en la UE es porque el PP hizo llamadas”",
+      "url": "https://www.lavanguardia.com/politica/20250919/11077489/salvador-illa-catalan-oficial-ue-pp-hizo-llamadas.html",
+      "source": "La Vanguardia – Portada",
+      "published_at": "2025-09-19T12:03:33.000Z",
+      "summary": "El president de la Generalitat defiende en el País Vasco “una España plural y diversa” frente a “la España que solo piensa en Madrid DF”",
+      "impact": "Cambios normativos: revisa si afectan a tus trámites.",
+      "impact_adult": "Cambios normativos: revisa si afectan a tus trámites.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": []
+    },
+    {
+      "title": "ERC registra en el Congreso la reforma legislativa para que Catalunya recaude el IRPF",
+      "url": "https://www.lavanguardia.com/politica/20250919/11076801/erc-registra-congreso-reforma-legislativa-catalunya-recaude-irpf.html",
+      "source": "La Vanguardia – Portada",
+      "published_at": "2025-09-19T10:29:31.000Z",
+      "summary": "La proposición de ley de los republicanos incluye la reforma de tres leyes, entre ellas la Lofca",
+      "impact": "Comprueba facturas y plazos: puede variar lo que pagas o recibes.",
+      "impact_adult": "Comprueba facturas y plazos: puede variar lo que pagas o recibes.",
+      "impact_teen": "Cosas más caras o ayudas distintas: pregunta en casa. 🧾",
       "glossary": []
     }
   ],
@@ -133,5 +127,75 @@
       "glossary": []
     }
   ],
-  "background": []
+  "background": [],
+  "deportes": [],
+  "radios": [],
+  "blocksOut": {
+    "Catalunya": [
+      {
+        "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
+        "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
+        "source": "La Vanguardia – Portada",
+        "published_at": "2025-09-19T18:01:53.000Z",
+        "summary": "El almirante general Antonio Piñeiro señala que su misión es “ayudar y salvar” a quienes se encuentren en peligro en el mar",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "glossary": []
+      },
+      {
+        "title": "España ofrece a la OTAN tres cazas, un avión A-400 y un radar para reforzar el flanco este de Europa",
+        "url": "https://www.lavanguardia.com/politica/20250919/11078292/espana-ofrece-otan-tres-cazas-avion-400-radar-reforzar-flanco-europa.html",
+        "source": "La Vanguardia – Portada",
+        "published_at": "2025-09-19T14:31:17.000Z",
+        "summary": "La operación Centinela Oriental responde a la incursión de drones rusos en el espacio aéreo polaco y rumano",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "glossary": [
+          {
+            "term": "OTAN",
+            "expl": "Alianza militar euroatlántica."
+          }
+        ]
+      },
+      {
+        "title": "Los Reyes se maravillan con los descubrimientos de los arqueólogos españoles en Luxor",
+        "url": "https://www.lavanguardia.com/gente/20250919/11077427/reyes-maravillan-descubrimientos-arqueologos-espanoles-luxor.html",
+        "source": "La Vanguardia – Portada",
+        "published_at": "2025-09-19T12:18:38.000Z",
+        "summary": "Felipe y Letizia recorren las tumbas de Ramsés V y VI y Seti I en la antigua necrópolis de Tebas",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "glossary": []
+      },
+      {
+        "title": "Salvador Illa: “Si el catalán no es oficial en la UE es porque el PP hizo llamadas”",
+        "url": "https://www.lavanguardia.com/politica/20250919/11077489/salvador-illa-catalan-oficial-ue-pp-hizo-llamadas.html",
+        "source": "La Vanguardia – Portada",
+        "published_at": "2025-09-19T12:03:33.000Z",
+        "summary": "El president de la Generalitat defiende en el País Vasco “una España plural y diversa” frente a “la España que solo piensa en Madrid DF”",
+        "impact": "Cambios normativos: revisa si afectan a tus trámites.",
+        "impact_adult": "Cambios normativos: revisa si afectan a tus trámites.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "glossary": []
+      },
+      {
+        "title": "ERC registra en el Congreso la reforma legislativa para que Catalunya recaude el IRPF",
+        "url": "https://www.lavanguardia.com/politica/20250919/11076801/erc-registra-congreso-reforma-legislativa-catalunya-recaude-irpf.html",
+        "source": "La Vanguardia – Portada",
+        "published_at": "2025-09-19T10:29:31.000Z",
+        "summary": "La proposición de ley de los republicanos incluye la reforma de tres leyes, entre ellas la Lofca",
+        "impact": "Comprueba facturas y plazos: puede variar lo que pagas o recibes.",
+        "impact_adult": "Comprueba facturas y plazos: puede variar lo que pagas o recibes.",
+        "impact_teen": "Cosas más caras o ayudas distintas: pregunta en casa. 🧾",
+        "glossary": []
+      }
+    ],
+    "España": [],
+    "MolinsDeRei": [],
+    "LaRioja": [],
+    "Global": []
+  }
 }
