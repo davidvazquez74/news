@@ -1,27 +1,24 @@
 {
-  "version": "1.0",
-  "language": "es",
-  "updatedAt": "2025-09-19T00:00:00.000Z",
   "Catalunya": {
     "maxItems": 5,
     "consensus": 2,
     "feeds": [
       {
-        "name": "La Vanguardia \u2013 Catalunya",
+        "name": "La Vanguardia – Catalunya",
         "url": "https://www.lavanguardia.com/mvc/feed/rss/catalunya"
       },
       {
-        "name": "El Peri\u00f3dico \u2013 Catalunya",
+        "name": "El Periódico – Catalunya",
         "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
       }
     ]
   },
-  "Espa\u00f1a": {
+  "España": {
     "maxItems": 3,
     "consensus": 2,
     "feeds": [
       {
-        "name": "El Pa\u00eds \u2013 Portada",
+        "name": "El País – Portada",
         "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"
       },
       {
@@ -29,7 +26,7 @@
         "url": "https://www.rtve.es/rss/"
       },
       {
-        "name": "El Mundo \u2013 Espa\u00f1a",
+        "name": "El Mundo – España",
         "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
       }
     ]
@@ -39,7 +36,7 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "Ajuntament de Molins de Rei \u2013 Not\u00edcies",
+        "name": "Ajuntament de Molins de Rei – Notícies",
         "url": "https://www.molinsderei.cat/rss/8/noticies"
       },
       {
@@ -53,11 +50,11 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "ElDiario.es (La Rioja)",
+        "name": "El Día de La Rioja (eldiario.es)",
         "url": "https://www.eldiario.es/rss/"
       },
       {
-        "name": "Gobierno de La Rioja \u2013 Actualidad",
+        "name": "Gobierno de La Rioja – Actualidad",
         "url": "https://actualidad.larioja.org/rss"
       }
     ]
@@ -71,7 +68,7 @@
         "url": "https://www.efe.com/efe/espana/rss/1004"
       },
       {
-        "name": "Reuters \u2013 Top News (ES)",
+        "name": "Reuters – Top News (español)",
         "url": "https://www.reuters.com/rssFeed/spanishNews"
       },
       {

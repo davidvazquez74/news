@@ -1,12 +1,8 @@
 {
-  "name": "news",
+  "name": "news-impact-lite",
   "private": true,
   "type": "module",
   "dependencies": {
     "rss-parser": "^3.13.0"
-  },
-  "scripts": {
-    "build:latest": "node scripts/build_latest.js",
-    "check:impacts": "node impact-check/scripts/check_impacts.js"
   }
 }
