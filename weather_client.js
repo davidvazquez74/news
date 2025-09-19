@@ -1,16 +1,55 @@
-// weather_client.js — geolocalización en cliente + Open-Meteo
+// weather_client.js — geolocalización + Open-Meteo con textos en español
 (() => {
-  const ICONS = { Clear:'☀️', Sunny:'☀️', Clouds:'☁️', Rain:'🌧️', Drizzle:'🌦️', Thunderstorm:'⛈️', Snow:'❄️', Mist:'🌫️', Haze:'🌫️', Fog:'🌫️' };
-  const WMO = {0:'Sunny',1:'Clear',2:'Clouds',3:'Clouds',45:'Fog',48:'Fog',51:'Drizzle',53:'Drizzle',55:'Drizzle',61:'Rain',63:'Rain',65:'Rain',66:'Rain',67:'Rain',71:'Snow',73:'Snow',75:'Snow',77:'Snow',80:'Rain',81:'Rain',82:'Rain',85:'Snow',86:'Snow',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
+  // Map de códigos WMO -> texto ES + clave de icono
+  const WMO_ES = {
+    0:  { summary: 'Soleado',     iconKey: 'Soleado' },
+    1:  { summary: 'Despejado',   iconKey: 'Despejado' },
+    2:  { summary: 'Nubes',       iconKey: 'Nubes' },
+    3:  { summary: 'Nubes',       iconKey: 'Nubes' },
+    45: { summary: 'Niebla',      iconKey: 'Niebla' },
+    48: { summary: 'Niebla',      iconKey: 'Niebla' },
+    51: { summary: 'Llovizna',    iconKey: 'Llovizna' },
+    53: { summary: 'Llovizna',    iconKey: 'Llovizna' },
+    55: { summary: 'Llovizna',    iconKey: 'Llovizna' },
+    61: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    63: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    65: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    66: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    67: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    71: { summary: 'Nieve',       iconKey: 'Nieve' },
+    73: { summary: 'Nieve',       iconKey: 'Nieve' },
+    75: { summary: 'Nieve',       iconKey: 'Nieve' },
+    77: { summary: 'Nieve',       iconKey: 'Nieve' },
+    80: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    81: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    82: { summary: 'Lluvia',      iconKey: 'Lluvia' },
+    85: { summary: 'Nieve',       iconKey: 'Nieve' },
+    86: { summary: 'Nieve',       iconKey: 'Nieve' },
+    95: { summary: 'Tormenta',    iconKey: 'Tormenta' },
+    96: { summary: 'Tormenta',    iconKey: 'Tormenta' },
+    99: { summary: 'Tormenta',    iconKey: 'Tormenta' }
+  };
 
-  function paint(tempC, summary){
+  // Iconos por clave ES
+  const ICONS = {
+    'Soleado':    '☀️',
+    'Despejado':  '☀️',
+    'Nubes':      '☁️',
+    'Lluvia':     '🌧️',
+    'Llovizna':   '🌦️',
+    'Tormenta':   '⛈️',
+    'Nieve':      '❄️',
+    'Niebla':     '🌫️',
+    'Calima':     '🌫️'
+  };
+
+  function paint(tempC, summaryES, iconKey){
     const box = document.getElementById('wx'); if (!box) return;
-    const icon = ICONS[summary] || '•';
     const t = (typeof tempC === 'number' ? Math.round(tempC) : '--') + '°C';
-    const sum = summary || '';
+    const icon = ICONS[iconKey] || '•';
     const tEl = document.getElementById('wxTemp'); if (tEl) tEl.textContent = t;
     const iEl = document.getElementById('wxIcon'); if (iEl) iEl.textContent = icon;
-    const sEl = document.getElementById('wxSummary'); if (sEl) sEl.textContent = sum;
+    const sEl = document.getElementById('wxSummary'); if (sEl) sEl.textContent = summaryES || '';
     box.hidden = false;
   }
 
@@ -24,8 +63,8 @@
     const tempC = typeof curr.temperature_2m === 'number' ? curr.temperature_2m :
                   typeof curr.temperature === 'number' ? curr.temperature : null;
     const code  = typeof curr.weather_code === 'number' ? curr.weather_code : null;
-    const summary = (code!=null && WMO[code]) ? WMO[code] : 'Clear';
-    paint(tempC, summary);
+    const map   = (code!=null && WMO_ES[code]) ? WMO_ES[code] : { summary:'Despejado', iconKey:'Despejado' };
+    paint(tempC, map.summary, map.iconKey);
   }
 
   function geoloc(timeoutMs=10000){
@@ -58,7 +97,7 @@
       let coords = null;
       try { coords = await geoloc(10000); } catch {}
       if (!coords) coords = await ipFallback();
-      if (!coords) return; // usa weather.json del servidor
+      if (!coords) return;
       await meteo(coords.lat, coords.lon);
     } catch {}
   })();
