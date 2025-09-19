@@ -1,24 +1,27 @@
 {
+  "version": "1.0",
+  "language": "es",
+  "updatedAt": "2025-09-19T00:00:00.000Z",
   "Catalunya": {
     "maxItems": 5,
     "consensus": 2,
     "feeds": [
       {
-        "name": "La Vanguardia – Catalunya",
+        "name": "La Vanguardia \u2013 Catalunya",
         "url": "https://www.lavanguardia.com/mvc/feed/rss/catalunya"
       },
       {
-        "name": "El Periódico – Catalunya",
+        "name": "El Peri\u00f3dico \u2013 Catalunya",
         "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
       }
     ]
   },
-  "España": {
+  "Espa\u00f1a": {
     "maxItems": 3,
     "consensus": 2,
     "feeds": [
       {
-        "name": "El País – Portada",
+        "name": "El Pa\u00eds \u2013 Portada",
         "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"
       },
       {
@@ -26,7 +29,7 @@
         "url": "https://www.rtve.es/rss/"
       },
       {
-        "name": "El Mundo – España",
+        "name": "El Mundo \u2013 Espa\u00f1a",
         "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
       }
     ]
@@ -36,7 +39,7 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "Ajuntament de Molins de Rei – Notícies",
+        "name": "Ajuntament de Molins de Rei \u2013 Not\u00edcies",
         "url": "https://www.molinsderei.cat/rss/8/noticies"
       },
       {
@@ -50,11 +53,11 @@
     "consensus": 2,
     "feeds": [
       {
-        "name": "El Día de La Rioja (eldiario.es)",
+        "name": "ElDiario.es (La Rioja)",
         "url": "https://www.eldiario.es/rss/"
       },
       {
-        "name": "Gobierno de La Rioja – Actualidad",
+        "name": "Gobierno de La Rioja \u2013 Actualidad",
         "url": "https://actualidad.larioja.org/rss"
       }
     ]
@@ -68,7 +71,7 @@
         "url": "https://www.efe.com/efe/espana/rss/1004"
       },
       {
-        "name": "Reuters – Top News (español)",
+        "name": "Reuters \u2013 Top News (ES)",
         "url": "https://www.reuters.com/rssFeed/spanishNews"
       },
       {
@@ -76,8 +79,5 @@
         "url": "https://feeds.bbci.co.uk/mundo/rss.xml"
       }
     ]
-  },
-  "version": "1.0",
-  "language": "es",
-  "updatedAt": ""
+  }
 }
