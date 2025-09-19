@@ -1,18 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>News App</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>News App</h1>
-  <div id="controls">
-    <button id="btn-adult">Adult</button>
-    <button id="btn-teen">Teen</button>
-  </div>
-  <div id="news-container"></div>
-  <script src="main.js"></script>
+  <header class="topbar">
+    <h1>Noticias</h1>
+    <div class="mode">
+      <button id="toggleTeen" aria-pressed="false" title="Ver impactos Teen">Teens</button>
+    </div>
+  </header>
+
+  <main id="app" class="container" aria-live="polite">
+    <div class="loading">Cargando…</div>
+  </main>
+
+  <footer class="footer">
+    <span id="version"></span>
+  </footer>
+
+  <script src="main.js" defer></script>
 </body>
 </html>
