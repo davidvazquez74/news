@@ -1,4 +1,4 @@
-// scripts/build_latest.js (HOTFIX)
+// scripts/build_latest.js
 // Node ESM. Requiere "rss-parser" y "type":"module" en package.json
 import fs from 'fs';
 import path from 'path';
@@ -21,6 +21,7 @@ const MIN_YEAR = 2023;
 const NOW = Date.now();
 const CUTOFF = NOW - MAX_DAYS * 24 * 60 * 60 * 1000;
 
+// Parser RSS
 const parser = new Parser({ timeout: 15000, maxRedirects: 3 });
 
 // ---------- Utils ----------
@@ -34,6 +35,21 @@ const okDate = (d) => {
 };
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const lc = (s) => (s || '').toLowerCase();
+
+// Normaliza caracteres mal decodificados comunes (mojibake)
+function fixMojibake(s = '') {
+  if (!s) return s;
+  return s
+    .replace(/Ã¡/g, 'á').replace(/Ã©/g, 'é').replace(/Ã­/g, 'í')
+    .replace(/Ã³/g, 'ó').replace(/Ãº/g, 'ú').replace(/Ã±/g, 'ñ')
+    .replace(/Ã/g, 'Á').replace(/Ã/g, 'É').replace(/Ã/g, 'Í')
+    .replace(/Ã/g, 'Ó').replace(/Ã/g, 'Ú').replace(/Ã/g, 'Ñ')
+    .replace(/â/g, '“').replace(/â/g, '”').replace(/â/g, '’')
+    .replace(/â/g, '–').replace(/â/g, '—').replace(/â¦/g, '…')
+    .replace(/â|â/g, '"').replace(/â/g, "'")
+    .replace(/â¢/g, '•').replace(/â¢/g, '•')
+    .replace(/â¨/g, ' ').replace(/â¨/g, ' ');
+}
 
 const dedupeByTitle = (rows, limit) => {
   const seenU = new Set(), seenT = new Set(), out = [];
@@ -50,7 +66,7 @@ const dedupeByTitle = (rows, limit) => {
   return out;
 };
 
-// ---------- Glosario ----------
+// ---------- Glosario breve ----------
 function glossaryText(text='') {
   const pairs = [
     ['Euríbor', 'Índice que mueve hipotecas variables.'],
@@ -66,105 +82,160 @@ function glossaryText(text='') {
   return hits;
 }
 
-// ---------- Impacto (HOTFIX: nunca vacío) ----------
-const neutral = 'Sin efecto directo en tu día a día.';
+// ---------- Impacto (reglas ampliadas + fallback garantizado) ----------
 
-function impactAdultFrom(title = '', summary = '') {
-  const t = (title + ' ' + summary).toLowerCase();
+const NEUTRAL = 'Sin efecto directo en tu día a día.';
+const TEEN_NEUTRAL = 'Sin efecto directo en tu día a día.';
 
-  // Finanzas / hipotecas
-  if (/(eur[íi]bor|bce|tipos? de inter[eé]s|hipoteca)/.test(t))
-    return 'Si tu hipoteca es variable, la cuota puede moverse en próximas revisiones.';
+const BANNED = [
+  'seguimiento recomendado',
+  'pendiente de evolución',
+  'podría notarse en facturas o movilidad',
+  'apps y servicios pueden cambiar reglas y permisos'
+];
+const notGeneric = (s='') => s && s.length > 12 && !BANNED.some(b => lc(s).includes(b));
 
-  // Energía / combustibles
-  if (/(gasolina|di[eé]sel|petr[óo]leo|carburante|combustible|gas|electricidad|energ[íi]a)/.test(t))
-    return 'Vigila precios en surtidor y facturas: podrían moverse estos días.';
-
-  // Movilidad / huelgas
-  if (/(huelga|paro|paros)/.test(t) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo|taxis?)/.test(t))
-    return 'Revisa horarios y alternativas: puede haber retrasos o servicios mínimos.';
-
-  // Vivienda / empleo / salarios
-  if (/(alquiler|vivienda|vpo|salario|smi|empleo|paro\b)/.test(t))
-    return 'Posibles cambios en vivienda o nómina; revisa condiciones y plazos.';
-
-  // Impuestos / ayudas
-  if (/(impuesto|iva|tasas?|bono|subsidio|deducci[oó]n)/.test(t))
-    return 'Puede variar lo que pagas o recibes; revisa facturas, requisitos y fechas.';
-
-  // Tecnología / plataformas (TikTok, redes sociales)
-  if (/\b(tiktok|red(es)? social(es)?|instagram|facebook|twitter|x\.com)\b/.test(t))
-    return 'Si usas la plataforma, podrían cambiar funciones, avisos o acceso según acuerdos.';
-
-  // IA y tech normativa
-  if (/\b(inteligencia artificial|ia\b|ai act|algoritmo|modelos? de ia)\b/.test(t))
-    return 'Servicios con IA pueden ajustar avisos y permisos por nuevas normas.';
-
-  // Clima / tiempo severo
-  if (/(dana|tempor(al|ada)|lluvias intensas|olas? de calor|fr[ií]o|viento fuerte|inundaciones?)/.test(t))
-    return 'Ajusta planes y desplazamientos; revisa alertas y previsión local.';
-
-  // Sanidad / educación
-  if (/(sanidad|salud|vacunas?|lista de espera|colegios?|universidad|matr[ií]cula|becas?)/.test(t))
-    return 'Puede afectar a citas, trámites o calendarios; consulta tu centro o web oficial.';
-
-  // Política / normativa
-  if (/(decreto|ley|normativa|boe|parlamento|congreso|senado|gobierno|generalitat|ayuntamiento)/.test(t))
-    return 'Cambios normativos: comprueba si impactan en tu actividad o trámites.';
-
-  // Deportes / ocio
-  if (/(liga|champions|concierto|festival|entradas|taquilla|partido)/.test(t))
-    return 'Impacto puntual en planes y tráfico de la zona durante el evento.';
-
-  // Fallback
-  return neutral;
+// Deriva teen desde adulto si no hay uno específico
+function teenFromAdult(a='') {
+  if (!a) return TEEN_NEUTRAL;
+  let t = a;
+  t = t.replace(/\busted(es)?\b/gi, 'tú');
+  // ligero toque juvenil
+  if (t.length <= 110 && !/[\u{1F300}-\u{1FAFF}]/u.test(t)) t += ' 🙂';
+  return t;
 }
 
+function impactRules(title = '', summary = '') {
+  const text = lc(fixMojibake(`${title} ${summary}`));
+
+  // Finanzas / tipos / hipotecas
+  if (/(eur[íi]bor|bce|tipos? de inter[eé]s|hipoteca|inflaci[oó]n|ipc)/.test(text))
+    return {
+      adult: 'Si tu hipoteca es variable, revisa próximas cuotas y presupuesto.',
+      teen:  'Si en casa hay hipoteca variable, la letra puede moverse. 💶'
+    };
+
+  // Energía / combustibles / luz / gas
+  if (/(gasolina|di[eé]sel|petr[óo]leo|combustible|carburante|electricidad|luz\b|gas\b|energ[íi]a)/.test(text))
+    return {
+      adult: 'Atento a surtidor y factura: precios pueden moverse esta semana.',
+      teen:  'Depósito y facturas pueden subir un poco → planes más caros. ⛽'
+    };
+
+  // Movilidad / huelgas / transporte / aeropuertos
+  if (/(huelga|paros?\b)/.test(text) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo|taxis?)/.test(text))
+    return {
+      adult: 'Planifica desplazamientos: posibles retrasos y servicios mínimos.',
+      teen:  'Ojito con tren/metro: retrasos y tocar madrugar. 🚌'
+    };
+
+  // Vivienda / alquiler / empleo / salarios
+  if (/(alquiler|vivienda|vpo|salario|smi|empleo|paro\b)/.test(text))
+    return {
+      adult: 'Pueden cambiar condiciones de vivienda o nómina: revisa plazos.',
+      teen:  'Pisos/curro: podrían cambiar precios o condiciones. 🏠'
+    };
+
+  // Impuestos / tasas / ayudas
+  if (/(impuesto|iva\b|tasas?\b|bono|subsidio|deducci[oó]n)/.test(text))
+    return {
+      adult: 'Revisa facturas o ayudas: pueden variar importes y requisitos.',
+      teen:  'Cosas más caras o cambios en ayudas; pregunta en casa. 🧾'
+    };
+
+  // Internacional / geopolítica relevante
+  if (/(guerra|frente|alto el fuego|sanci[oó]n|otan|ue\b|un\b|nato|embargo|acuerdo internacional)/.test(text))
+    return {
+      adult: 'Posible efecto en precios y viajes si el escenario cambia.',
+      teen:  'Si sube la tensión, pueden encarecerse vuelos o compras. ✈️'
+    };
+
+  // Redes / grandes plataformas (TikTok/privacidad)
+  if (/(tiktok|instagram|facebook|meta|x\.com|twitter|red(es)? sociales?|privacidad|datos personales)/.test(text))
+    return {
+      adult: 'Apps pueden cambiar funciones o avisos; revisa permisos y tiempo de uso.',
+      teen:  'Alguna función de la app puede cambiar; mira permisos. 📱'
+    };
+
+  // Cultura / TV / entretenimiento popular
+  if (/(serie|premios|emmy|oscar|festival|concierto|estreno|netflix|hbo|disney\+)/.test(text))
+    return {
+      adult: 'Más interés y eventos: atención a horarios, entradas y movilidad.',
+      teen:  'Más hype y colas para entradas; planifica con amigos. 🎟️'
+    };
+
+  // Empleo / ERE / aerolíneas / recortes
+  if (/(ere|despidos?|recortes?)/.test(text) || (/(ryanair|vueling|iberia)\b/.test(text) && /(empleo|plantilla|base|aeropuerto)/.test(text)))
+    return {
+      adult: 'Si trabajas o viajas con la empresa afectada, revisa cambios y alternativas.',
+      teen:  'Si voláis con esa aerolínea, pueden cambiar horarios o rutas. ✈️'
+    };
+
+  // Clima severo
+  if (/(dana|temporal|lluvias intensas|ola de calor|inundaciones?|viento fuerte)/.test(text))
+    return {
+      adult: 'Ajusta planes y revisa alertas oficiales en tu zona.',
+      teen:  'Plan B si hay mal tiempo; mira avisos. 🌧️'
+    };
+
+  // Sanidad / educación
+  if (/(vacunas?|lista de espera|sanidad|salud|colegios?|universidad|matr[ií]cula|becas?)/.test(text))
+    return {
+      adult: 'Citas o trámites pueden moverse; consulta tu centro o web oficial.',
+      teen:  'Fechas de clases/becas pueden cambiar; revisa el centro. 📅'
+    };
+
+  // Política / normativa (genérico)
+  if (/(decreto|ley|normativa|boe|parlamento|congreso|senado|gobierno|generalitat|ayuntamiento)/.test(text))
+    return {
+      adult: 'Cambios normativos: comprueba si afectan a tus trámites o actividad.',
+      teen:  'Pueden cambiar reglas; si te afecta, entérate. 📌'
+    };
+
+  // Seguridad / sucesos → sin alarma
+  if (/(cad[aá]ver|homicidio|accidente|incendio|agresi[oó]n|detenci[oó]n|tribunal|juzgado)/.test(text))
+    return {
+      adult: 'Evita la zona y sigue indicaciones oficiales.',
+      teen:  'No te acerques por allí; espera avisos.'
+    };
+
+  // Deportes / eventos masivos
+  if (/(liga|champions|partido|derbi|concierto masivo|marat[oó]n)/.test(text))
+    return {
+      adult: 'Más tráfico y ocupación; sal con tiempo si estás cerca.',
+      teen:  'Puede haber lío para moverse; queda con margen. ⚽'
+    };
+
+  // Fallback
+  return { adult: NEUTRAL, teen: TEEN_NEUTRAL };
+}
+
+function impactAdultFrom(title = '', summary = '') {
+  const { adult } = impactRules(title, summary);
+  return notGeneric(adult) ? adult : NEUTRAL;
+}
 function impactTeenFrom(title = '', summary = '') {
-  const t = (title + ' ' + summary).toLowerCase();
-
-  if (/(eur[íi]bor|bce|tipos|hipoteca)/.test(t))
-    return 'Si en casa hay hipoteca variable, la letra puede cambiar.';
-  if (/(gasolina|di[eé]sel|petr[óo]leo|carburante|combustible|gas|electricidad)/.test(t))
-    return 'Depósito y facturas pueden subir un poco → planes más caros.';
-  if (/(huelga|paro|paros)/.test(t) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo|taxis?)/.test(t))
-    return 'Ojo con tren/metro: retrasos y tocar madrugar.';
-  if (/(alquiler|vivienda|vpo|salario|smi|empleo)/.test(t))
-    return 'Pisos o curro: pueden cambiar precios o condiciones.';
-  if (/(impuesto|iva|tasas?|bono|subsidio|deducci[oó]n)/.test(t))
-    return 'Cosas más caras o cambios en ayudas; pregunta en casa.';
-  if (/\b(tiktok|red(es)? social(es)?|instagram|facebook|twitter|x\.com)\b/.test(t))
-    return 'Si usas la app, alguna opción puede cambiar.';
-  if (/\b(inteligencia artificial|ia\b|ai act|algoritmo|modelos? de ia)\b/.test(t))
-    return 'Apps con IA con más normas y avisos.';
-  if (/(dana|temporal|lluvias intensas|ola de calor|fr[ií]o|viento|inundaciones?)/.test(t))
-    return 'Plan B para entrenos/planes: tiempo chungo.';
-  if (/(sanidad|vacunas?|colegios?|universidad|matr[ií]cula|becas?)/.test(t))
-    return 'Fechas o trámites pueden moverse; revisa el centro.';
-  if (/(liga|champions|concierto|festival|entradas|partido)/.test(t))
-    return 'Más gente y tráfico; sal con margen.';
-
-  return neutral;
+  const { teen, adult } = impactRules(title, summary);
+  const t = notGeneric(teen) ? teen : teenFromAdult(adult);
+  return t || TEEN_NEUTRAL;
 }
 
 // ---------- Normalización ----------
 function normalizeItem(it, srcName) {
-  const title = clean(it.title);
+  const rawTitle = clean(fixMojibake(it.title));
+  const title = rawTitle || 'Sin título';
   const url = clean(it.link || it.guid || '');
   const published_at = iso(it.isoDate || it.pubDate || null);
-  const summary = clean(it.contentSnippet || it.summary || it.content || '');
+  const summary = clean(fixMojibake(it.contentSnippet || it.summary || it.content || ''));
 
-  let impact_adult = impactAdultFrom(title, summary);
-  let impact_teen  = impactTeenFrom(title, summary);
-
-  // HOTFIX: nunca dejar vacío
-  if (!impact_adult) impact_adult = neutral;
-  if (!impact_teen)  impact_teen  = neutral;
+  const impact_adult = impactAdultFrom(title, summary);
+  const impact_teen  = impactTeenFrom(title, summary);
+  const impact = notGeneric(impact_adult) ? impact_adult : NEUTRAL;
 
   return {
-    title, url, source: srcName, published_at, summary,
-    impact: impact_adult,                // compat
-    impact_adult: impact_adult,
+    title, url, source: fixMojibake(srcName), published_at, summary,
+    impact,
+    impact_adult: impact,
     impact_teen: impact_teen,
     glossary: glossaryText(`${title} ${summary}`)
   };
@@ -238,7 +309,13 @@ async function main() {
     if (!def || !Array.isArray(def.feeds)) return [];
     const rows = await collectFromFeeds(def.feeds);
     const out = applyConsensus(rows, def.consensus ?? 2, def.maxItems ?? 3);
-    return out;
+    return out.map(it => ({
+      ...it,
+      // seguridad extra: jamás vacío
+      impact: it.impact || NEUTRAL,
+      impact_adult: it.impact_adult || NEUTRAL,
+      impact_teen: it.impact_teen || teenFromAdult(it.impact_adult || NEUTRAL)
+    }));
   }
 
   const catalunya = await buildBlock('Catalunya');
