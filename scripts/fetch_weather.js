@@ -1,27 +1,20 @@
-
-// scripts/fetch_weather.js (placeholder compatible)
-// Genera un weather.json mínimo si falla el fetch real.
+// scripts/fetch_weather.js
+// Fallback: escribe weather.json en español aunque falle la API remota
 import fs from 'fs';
-import path from 'path';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const OUT = path.join(DATA_DIR, 'weather.json');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+const WX_LAT = process.env.WX_LAT || "41.41";
+const WX_LON = process.env.WX_LON || "2.02";
+const WX_TZ  = process.env.WX_TZ  || "Europe/Madrid";
 
-const stamp = new Date().toISOString();
-const fallback = {
+const out = {
   tempC: null,
-  summary: "Despejado",
-  icon: "Despejado",
-  updatedAt: stamp,
+  summary: "Clear",
+  summary_es: "Despejado",
+  icon: "Clear",
+  updatedAt: new Date().toISOString(),
   source: "fallback"
 };
 
-try {
-  // Aquí podrías llamar a una API si dispones de clave
-  fs.writeFileSync(OUT, JSON.stringify(fallback, null, 2), 'utf-8');
-  console.log("weather.json OK (fallback)");
-} catch (e) {
-  console.error("weather.json error:", e.message);
-  fs.writeFileSync(OUT, JSON.stringify(fallback, null, 2), 'utf-8');
-}
+fs.mkdirSync('data',{recursive:true});
+fs.writeFileSync('data/weather.json', JSON.stringify(out,null,2), 'utf8');
+console.log("weather.json (fallback) written:", {WX_LAT,WX_LON,WX_TZ});

@@ -1,49 +1,53 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark light">
-  <title>Noticias</title>
-  <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest?v=1">
-  <link rel="icon" href="icons/favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News App</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <meta name="color-scheme" content="light dark">
 </head>
-<body class="dark">
+<body>
   <header class="app-header">
-    <div class="brand">
-      <h1>Noticias</h1>
+    <div class="brand">News App</div>
+
+    <div class="wx" id="wxBar" aria-live="polite">
+      <!-- Weather widget populated by JS -->
+      <span id="wxTemp">--°</span>
+      <span id="wxIcon" aria-hidden="true">•</span>
+      <span id="wxText">Cargando…</span>
     </div>
-    <div class="controls">
-      <div id="wx" class="wx">
-        <span id="wx-icon" aria-hidden="true">—</span>
-        <span id="wx-temp">--°</span>
-        <span id="wx-desc" class="muted">Tiempo</span>
-      </div>
-      <button id="refreshBtn" class="ghost">Actualizar</button>
-      <button id="teenToggle" class="pill" aria-pressed="false" title="Ver modo Teens">Teens</button>
-    </div>
+
+    <button id="btnTeens" class="toggle-teens" aria-pressed="false" title="Modo Teens (off=Adulto, on=Teens)">Teens</button>
   </header>
 
-  <main>
-    <p id="updatedAt" class="muted top-note">Actualizando…</p>
+  <nav class="tabs">
+    <button class="tab active" data-target="#cataluna">Cataluña</button>
+    <button class="tab" data-target="#espana">España</button>
+    <button class="tab" data-target="#rioja">La Rioja</button>
+    <button class="tab" data-target="#global">Global</button>
+    <button class="tab" data-target="#deportes">Deportes</button>
+    <button class="tab" data-target="#radios">Radios</button>
+    <button id="refreshBtn" class="refresh">↻</button>
+  </nav>
 
-    <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
-    <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
-    <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
-    <section><h2>Local</h2><ul id="list-local" class="news-list"></ul></section>
-    <section><h2>Global</h2><ul id="list-background" class="news-list"></ul></section>
+  <main>
+    <section id="cataluna" class="pane active"></section>
+    <section id="espana" class="pane"></section>
+    <section id="rioja" class="pane"></section>
+    <section id="global" class="pane"></section>
+    <section id="deportes" class="pane"></section>
+    <section id="radios" class="pane"></section>
   </main>
 
   <footer class="app-footer">
-    <small>
-      <span id="versionBadge" class="badge"></span> • 
-      <a href="#" id="forceCacheClear">Limpiar caché</a> •
-      Fuentes verificadas
-    </small>
+    <span id="generatedAt"></span>
+    <span class="spacer"></span>
+    <span id="versionBadge" class="version"></span>
   </footer>
 
-  <script src="main.js" defer></script>
+  <script src="./main.js" defer></script>
 </body>
 </html>
