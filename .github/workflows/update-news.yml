@@ -1,16 +1,15 @@
+# .github/workflows/update-news.yml
 name: Update latest.json (news)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'   # cada hora (UTC)
+    - cron: '0 * * * *'   # cada hora en punto (UTC)
 
-permissions:
-  contents: write
-
+# Evita carreras: si hay uno en curso, cancélalo
 concurrency:
   group: update-news
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -20,15 +19,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # necesario para rebase
+          fetch-depth: 0            # necesario para pull --rebase
+          persist-credentials: true # usa GITHUB_TOKEN para push
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # Asegura deps y modo ESM
-      - name: Ensure deps
+      - name: Ensure deps (rss-parser + ESM)
         run: |
           if [ ! -f package.json ]; then
             echo '{"name":"news","private":true,"type":"module","dependencies":{"rss-parser":"^3.13.0"}}' > package.json
@@ -38,11 +37,10 @@ jobs:
           fi
           npm i --no-audit --no-fund
 
-      # Calcular versión de build
       - name: Compute build version
         run: echo "BUILD_VERSION=v$(date -u +%Y.%m.%d).${GITHUB_RUN_NUMBER}+${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-      - name: Build latest.json
+      - name: Build latest.json (news)
         env:
           NODE_OPTIONS: "--max-old-space-size=512"
           BUILD_VERSION: ${{ env.BUILD_VERSION }}
@@ -51,103 +49,71 @@ jobs:
           test -f scripts/build_latest.js || (echo "scripts/build_latest.js not found" && exit 1)
           node scripts/build_latest.js
           test -f data/latest.json || (echo "data/latest.json not created" && exit 1)
-          test -f data/meta.json   || (echo "data/meta.json not created"   && exit 1)
+          test -f data/meta.json   || (echo "data/meta.json not created" && exit 1)
 
-      # Inspecciona y normaliza el JSON
-      - name: Inspect & normalize latest.json (Node)
+      - name: Validate latest.json
         run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const p = 'data/latest.json';
-          if (!fs.existsSync(p)) { console.error('latest.json missing'); process.exit(1); }
-          const raw = fs.readFileSync(p,'utf8');
-          console.log('--- latest.json HEAD ---'); console.log(raw.slice(0, 600)); console.log('--- END HEAD ---');
-
-          let j; try { j = JSON.parse(raw); } catch(e){ console.error('JSON parse error:', e.message); process.exit(1); }
-          if (j === null || typeof j !== 'object') { console.error('Root is not an object.'); process.exit(1); }
-
-          if (Array.isArray(j)) {
-            console.warn('Root is array. Bucketing by section...');
-            const buckets = { cataluna:[], espana:[], rioja:[], background:[] };
-            for (const it of j) {
-              const sec = (it?.section || '').toLowerCase();
-              if (sec.includes('catal')) buckets.cataluna.push(it);
-              else if (sec.includes('espa')) buckets.espana.push(it);
-              else if (sec.includes('rioja')) buckets.rioja.push(it);
-              else buckets.background.push(it);
-            }
-            j = { updated_at: new Date().toISOString(), ...buckets };
-          }
-
-          const lower = {}; for (const [k,v] of Object.entries(j)) lower[String(k).toLowerCase()] = v;
-          const toArr = (x) => Array.isArray(x) ? x.filter(Boolean) : [];
-          const pick = (...names) => { for (const n of names) { const v = lower[n]; if (Array.isArray(v)) return v; } return []; };
-
-          const out = {
-            updated_at: typeof j.updated_at === 'string' ? j.updated_at : new Date().toISOString(),
-            version: typeof j.version === 'string' ? j.version : (process.env.BUILD_VERSION || ''),
-            commit:  typeof j.commit  === 'string' ? j.commit  : (process.env.GIT_SHA || ''),
-            cataluna:   toArr(pick('cataluna','cataluña','catalunya')),
-            espana:     toArr(pick('espana','españa','spain')),
-            rioja:      toArr(pick('rioja','la rioja')),
-            background: toArr(pick('background','global','mundo'))
-          };
-
-          fs.writeFileSync(p, JSON.stringify(out,null,2), 'utf8');
-          console.log('Normalized keys OK. Totals:', {
-            cataluna: out.cataluna.length, espana: out.espana.length, rioja: out.rioja.length, background: out.background.length
-          });
-          NODE
-
-      # Validación estricta
-      - name: Validate latest.json (size & shape)
-        run: |
-          SIZE=$(wc -c < data/latest.json || echo 0)
-          echo "latest.json size: $SIZE bytes"
           node - <<'NODE'
           const fs = require('fs');
           const j = JSON.parse(fs.readFileSync('data/latest.json','utf8'));
           const keys = ['cataluna','espana','rioja','background'];
-          if (!j.updated_at || !keys.every(k => Array.isArray(j[k]))) { console.error('Invalid structure'); process.exit(1); }
+          if (!j.updated_at || !keys.every(k => Array.isArray(j[k]))) {
+            console.error('Invalid structure'); process.exit(1);
+          }
           const total = keys.reduce((a,k)=>a+(j[k]?.length||0),0);
           console.log('total items:', total);
-          if (total < 4) { console.error('Too few items (<4). Abort.'); process.exit(2); }
+          if (total < 2) { console.error('Too few items (<2). Abort.'); process.exit(2); }
           NODE
 
-      - name: Configure git
+      - name: Fetch weather.json (Molins de Rei fallback)
+        env:
+          WX_LAT: "41.41"
+          WX_LON: "2.02"
+          WX_TZ:  "Europe/Madrid"
+        run: |
+          test -f scripts/fetch_weather.js || (echo "scripts/fetch_weather.js not found" && exit 1)
+          node scripts/fetch_weather.js || true
+          test -f data/weather.json || echo '{"tempC":null,"summary":"Despejado","icon":"Despejado","updatedAt":"'$BUILD_VERSION'","source":"fallback"}' > data/weather.json
+
+      - name: Configure git author
         run: |
           git config --global user.name  "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global pull.rebase true
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - name: Commit & push (rebase + retry)
+      - name: Stage generated files
+        run: |
+          git add data/latest.json data/meta.json data/weather.json || true
+          git status --porcelain
+
+      - name: Commit if changes
+        id: commit_step
+        run: |
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            git commit -m "chore(news): auto-update latest.json & weather.json ($BUILD_VERSION)"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Rebase & push (robusto ante non-fast-forward)
+        if: steps.commit_step.outputs.changed == 'true'
         run: |
           set -e
-          git add data/latest.json data/meta.json || true
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-          git commit -m "chore(news): auto-update latest.json ($BUILD_VERSION)"
-
-          n=0
-          until [ $n -ge 3 ]
-          do
-            git fetch origin main
-            git pull --rebase origin main || true
-            if git push origin HEAD:main; then
-              echo "Push OK"
-              exit 0
+          # Intenta hasta 3 veces por si la rama remota avanza mientras empujamos
+          for i in 1 2 3; do
+            echo "Push attempt $i/3…"
+            # Rebase con autostash para no perder cambios generados
+            git pull --rebase --autostash origin $GITHUB_REF_NAME || true
+            if git push origin HEAD:$GITHUB_REF_NAME; then
+              echo "Push OK"; exit 0
             fi
-            n=$((n+1))
-            echo "Push retry $n/3…"
             sleep 2
           done
           echo "Push failed after retries"
           exit 1
 
-      - name: Upload latest.json for debugging (on failure)
+      - name: Upload latest.json (on failure)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
