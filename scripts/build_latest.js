@@ -1,31 +1,37 @@
 // scripts/build_latest.js
+// Node ESM. Requires "rss-parser" and "type":"module" in package.json
 import fs from 'fs';
 import path from 'path';
 import Parser from 'rss-parser';
 import { generateImpact } from './impactEngine.js';
 
+// ---------- Paths ----------
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data');
 const SOURCES_PATH = path.join(DATA_DIR, 'sources.json');
 const OUT_PATH = path.join(DATA_DIR, 'latest.json');
 const META_PATH = path.join(DATA_DIR, 'meta.json');
 
+// ---------- Version (injected by workflow) ----------
 const BUILD_VERSION = process.env.BUILD_VERSION || `v-dev.${Date.now()}`;
 const GIT_SHA = process.env.GIT_SHA || 'local';
 
-const MAX_DAYS = 7;
+// ---------- Recency ----------
+const MAX_DAYS = 7; // noticias de los últimos 7 días
 const MIN_YEAR = 2023;
 const NOW = Date.now();
 const CUTOFF = NOW - MAX_DAYS * 24 * 60 * 60 * 1000;
 
 const parser = new Parser({ timeout: 15000, maxRedirects: 3 });
 
+// ---------- Utils ----------
 const iso = (d) => { try { return new Date(d).toISOString(); } catch { return null; } };
 const okDate = (d) => {
   if (!d) return false;
   const ts = new Date(d).getTime();
   if (Number.isNaN(ts)) return false;
   const y = new Date(d).getUTCFullYear();
+  // tolerancia +3h por TZs/servidores
   return y >= MIN_YEAR && ts >= CUTOFF && ts <= NOW + 3 * 60 * 60 * 1000;
 };
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
@@ -46,6 +52,7 @@ const dedupeByTitle = (rows, limit) => {
   return out;
 };
 
+// ---------- Glosario breve ----------
 function glossaryText(text='') {
   const pairs = [
     ['Euríbor', 'Índice que mueve hipotecas variables.'],
@@ -61,6 +68,7 @@ function glossaryText(text='') {
   return hits;
 }
 
+// ---------- Consenso ----------
 function normalizeTitleKey(title=''){
   return title
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -69,8 +77,9 @@ function normalizeTitleKey(title=''){
     .trim();
 }
 
+// Aplica consenso por título (aparece en ≥ consensus fuentes del bloque) y recorta a maxItems
 function applyConsensus(rows = [], consensus = 2, maxItems = 3) {
-  const map = new Map();
+  const map = new Map(); // key -> {item, count, latest, sources:Set}
   for (const r of rows) {
     const key = normalizeTitleKey(r.title);
     if (!key) continue;
@@ -90,9 +99,11 @@ function applyConsensus(rows = [], consensus = 2, maxItems = 3) {
     .filter(x => x.count >= consensus)
     .sort((a,b) => b.latest - a.latest)
     .map(x => x.item);
+
   return dedupeByTitle(eligible, maxItems);
 }
 
+// ---------- Fetch ----------
 async function fetchFeed(url) {
   try {
     const feed = await parser.parseURL(url);
@@ -114,26 +125,32 @@ async function collectFromFeeds(feeds = []) {
       const summary = clean(it.contentSnippet || it.summary || it.content || '');
       if (!published_at || !okDate(published_at)) continue;
 
-      let adult_impact = "", teen_impact = "";
+      // Motor de impacto (LLM opcional; fallback keywords si no hay API key)
+      let adult_impact = "";
+      let teen_impact  = "";
       try {
         const out = await generateImpact(null, { title, summary });
         adult_impact = out.adult_impact || "";
         teen_impact  = out.teen_impact  || "";
-      } catch {}
+      } catch {
+        // en caso de error, deja impactos vacíos; el front los omitirá
+      }
 
       rows.push({
         title, url, source: f.name, published_at, summary,
-        impact: adult_impact,
+        impact: adult_impact,              // compat con front antiguo
         impact_adult: adult_impact,
-        impact_teen: teen_impact,
+        impact_teen:  teen_impact,
         glossary: glossaryText(`${title} ${summary}`)
       });
     }
+    // pequeño respiro para no saturar servidores
     await new Promise(r => setTimeout(r, 200));
   }
   return rows;
 }
 
+// ---------- Main ----------
 async function main() {
   if (!fs.existsSync(SOURCES_PATH)) throw new Error(`No existe ${SOURCES_PATH}.`);
   const src = JSON.parse(fs.readFileSync(SOURCES_PATH, 'utf-8'));
@@ -144,6 +161,7 @@ async function main() {
     if (!def || !Array.isArray(def.feeds)) return [];
     const rows = await collectFromFeeds(def.feeds);
     const out = applyConsensus(rows, def.consensus ?? 2, def.maxItems ?? 3);
+    console.log(`block "${blockName}" raw:${rows.length} -> after consensus:${out.length}`);
     return out;
   }
 
@@ -155,11 +173,13 @@ async function main() {
 
   function keepPrevIfEmpty(currentArr, prevKey) {
     if ((!currentArr || currentArr.length === 0) && prev && Array.isArray(prev[prevKey]) && prev[prevKey].length) {
+      console.log(`⚠️ keep previous for section: ${prevKey} (no fresh items)`);
       return prev[prevKey];
     }
     return currentArr;
   }
 
+  // Estructura para tu frontend actual
   const outCompat = {
     updated_at: new Date().toISOString(),
     version: BUILD_VERSION,
@@ -167,7 +187,11 @@ async function main() {
     cataluna:  keepPrevIfEmpty(catalunya, 'cataluna'),
     espana:    keepPrevIfEmpty(espana,    'espana'),
     rioja:     keepPrevIfEmpty(rioja,     'rioja'),
-    background:keepPrevIfEmpty(global,    'background')
+    background:keepPrevIfEmpty(global,    'background'),
+    // Bloques extra (para "local" en el front)
+    blocksOut: {
+      MolinsDeRei: molins
+    }
   };
 
   const meta = {
@@ -178,7 +202,7 @@ async function main() {
   fs.writeFileSync(META_PATH, JSON.stringify(meta, null, 2), 'utf-8');
   fs.writeFileSync(OUT_PATH, JSON.stringify(outCompat, null, 2), 'utf-8');
 
-  console.log('latest.json actualizado', BUILD_VERSION);
+  console.log('✅ latest.json actualizado', BUILD_VERSION);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
