@@ -1,7 +1,7 @@
 {
-  "updated_at": "2025-09-19T19:18:39.050Z",
-  "version": "v2025.09.19.49+d2f0844",
-  "commit": "d2f0844f349d62a1ec683d8c27a59a341db00837",
+  "updated_at": "2025-09-19T20:18:13.617Z",
+  "version": "v2025.09.19.51+65b1de8",
+  "commit": "65b1de83571e495fc782a0c36e5ffb7a88e456ad",
   "cataluna": [],
   "espana": [
     {
@@ -107,5 +107,12 @@
       "impact_teen": "",
       "glossary": []
     }
-  ]
+  ],
+  "blocksOut": {
+    "Catalunya": [],
+    "España": [],
+    "MolinsDeRei": [],
+    "LaRioja": [],
+    "Global": []
+  }
 }

@@ -1,5 +1,7 @@
 {
-  "tempC": 24,
-  "summary": "Sunny",
-  "icon": "Sunny"
+  "tempC": 22,
+  "summary": "Despejado",
+  "icon": "Despejado",
+  "updatedAt": "2025-09-19T20:23:35.098Z",
+  "source": "open-meteo"
 }
