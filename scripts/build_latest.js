@@ -82,7 +82,7 @@ function impactAdultFrom(title = '', summary = '') {
   if (/(huelga|paro|paros)/.test(t) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo|taxis?)/.test(t)) return 'Revisa horarios y alternativas: puede haber retrasos o servicios mínimos.';
   if (/(alquiler|vivienda|vpo|hipoteca|salario|smi|empleo|paro\b)/.test(t)) return 'Posibles cambios en vivienda o nómina; revisa condiciones y plazos.';
   if (/(impuesto|iva|tasas?|bono|subsidio|deducci[oó]n)/.test(t)) return 'Puede variar lo que pagas o recibes; revisa facturas, requisitos y fechas.';
-  if (/\b(inteligencia artificial|ia\b|ai act|algoritmo|modelos? de ia)\b/.test(t)) return 'Servicios con IA pueden cambiar avisos y permisos por nuevas normas.';
+  if (/\b(inteligencia artificial|ai act|algoritmos?\s+de\s+ia)\b/.test(t)) return 'Algunas apps podrían cambiar avisos o permisos por nuevas normas.';
   if (/(dana|tempor(al|ada)|lluvias intensas|olas? de calor|fr[ií]o|viento fuerte|inundaciones?)/.test(t)) return 'Ajusta planes y desplazamientos; revisa alertas y previsión local.';
   if (/(sanidad|salud|vacunas?|lista de espera|colegios?|universidad|matr[ií]cula|becas?)/.test(t)) return 'Puede afectar a citas, trámites o calendarios; consulta tu centro o web oficial.';
   if (/(decreto|ley|normativa|boe|parlamento|congreso|senado|gobierno|generalitat|ayuntamiento)/.test(t)) return 'Cambios normativos: comprueba si impactan en tu actividad o trámites.';
@@ -97,7 +97,7 @@ function impactTeenFrom(title = '', summary = '') {
   if (/(huelga|paro|paros)/.test(t) && /(tren|metro|bus|rodalies|renfe|aeropuerto|vuelo|taxis?)/.test(t)) return 'Ojito con el metro/tren: retrasos y tocar madrugar. 🚌';
   if (/(alquiler|vivienda|vpo|salario|smi|empleo)/.test(t)) return 'Pisos/curro: pueden cambiar precios o condiciones. 🏠';
   if (/(impuesto|iva|tasas?|bono|subsidio|deducci[oó]n)/.test(t)) return 'Cosas más caras o cambios en ayudas; pregunta en casa. 🧾';
-  if (/\b(inteligencia artificial|ia\b|ai act|algoritmo|modelos? de ia)\b/.test(t)) return 'Apps con IA con más normas y avisos; alguna función cambia. 📱';
+  if (/\b(inteligencia artificial|ai act|algoritmos?\s+de\s+ia)\b/.test(t)) return 'Apps con IA pueden pedir más avisos o permisos. 📱';
   if (/(dana|temporal|lluvias intensas|ola de calor|fr[ií]o|viento|inundaciones?)/.test(t)) return 'Plan B para entrenos/planes: tiempo chungo. 🌧️';
   if (/(sanidad|vacunas?|colegios?|universidad|matr[ií]cula|becas?)/.test(t)) return 'Fechas y trámites pueden moverse: revisa el centro. 📅';
   if (/(liga|champions|concierto|festival|entradas)/.test(t)) return 'Más gente y tráfico cerca del evento; llega con margen. 🎟️';
