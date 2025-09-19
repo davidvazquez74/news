@@ -1,30 +1,128 @@
 {
-  "version": "1.0",
-  "language": "es",
-  "updatedAt": "2025-09-19T00:00:00.000Z",
   "Catalunya": {
-    "maxItems": 5,
-    "consensus": 2,
-    "feeds": []
+    "consensus": 1,
+    "maxItems": 6,
+    "feeds": [
+      {
+        "name": "El Periódico - Catalunya",
+        "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
+      },
+      {
+        "name": "324.cat",
+        "url": "https://www.ccma.cat/324/rss/324.xml"
+      },
+      {
+        "name": "La Vanguardia - Catalunya",
+        "url": "https://www.lavanguardia.com/rss/catalunya"
+      },
+      {
+        "name": "Ara",
+        "url": "https://www.ara.cat/rss/"
+      },
+      {
+        "name": "NacióDigital",
+        "url": "https://www.naciodigital.cat/rss"
+      },
+      {
+        "name": "El País - Cataluña",
+        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/ccaa/catalunya/portada?format=xml"
+      }
+    ]
   },
   "España": {
-    "maxItems": 3,
     "consensus": 2,
-    "feeds": []
-  },
-  "MolinsDeRei": {
-    "maxItems": 3,
-    "consensus": 2,
-    "feeds": []
+    "maxItems": 8,
+    "feeds": [
+      {
+        "name": "El País – Portada",
+        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada?format=xml"
+      },
+      {
+        "name": "El Mundo",
+        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"
+      },
+      {
+        "name": "RTVE Noticias",
+        "url": "https://www.rtve.es/rss/temas/noticias.xml"
+      },
+      {
+        "name": "ElDiario.es – Portada",
+        "url": "https://www.eldiario.es/rss/"
+      },
+      {
+        "name": "Europa Press",
+        "url": "https://www.europapress.es/rss/rss.aspx?ch=00069"
+      },
+      {
+        "name": "Agencia EFE",
+        "url": "https://www.efe.com/efe/espana/1/rss"
+      },
+      {
+        "name": "La Vanguardia – Vida",
+        "url": "https://www.lavanguardia.com/mvc/feed/rss/vida"
+      },
+      {
+        "name": "El Confidencial",
+        "url": "https://www.elconfidencial.com/rss/espana/"
+      }
+    ]
   },
   "LaRioja": {
-    "maxItems": 3,
-    "consensus": 2,
-    "feeds": []
+    "consensus": 1,
+    "maxItems": 5,
+    "feeds": [
+      {
+        "name": "El Día de La Rioja (eldiario.es)",
+        "url": "https://www.eldiario.es/rss/feeds/edrioja.xml"
+      },
+      {
+        "name": "La Rioja - Larioja.com",
+        "url": "https://www.larioja.com/rss/2.0/portada"
+      },
+      {
+        "name": "Nuevecuatrouno",
+        "url": "https://nuevecuatrouno.com/feed/"
+      }
+    ]
+  },
+  "MolinsDeRei": {
+    "consensus": 1,
+    "maxItems": 4,
+    "feeds": [
+      {
+        "name": "Viu Molins de Rei",
+        "url": "https://www.viumolinsderei.com/feed/"
+      },
+      {
+        "name": "Ajuntament de Molins de Rei",
+        "url": "https://www.molinsderei.cat/rss"
+      }
+    ]
   },
   "Global": {
-    "maxItems": 3,
     "consensus": 2,
-    "feeds": []
+    "maxItems": 8,
+    "feeds": [
+      {
+        "name": "BBC Mundo",
+        "url": "https://feeds.bbci.co.uk/mundo/rss.xml"
+      },
+      {
+        "name": "Reuters World (ES)",
+        "url": "https://www.reuters.com/world/latam/rss"
+      },
+      {
+        "name": "AP Noticias (ES)",
+        "url": "https://apnews.com/hub/apf-noticias?utm_source=apnews&utm_medium=rss&utm_campaign=apf-noticias"
+      },
+      {
+        "name": "The Guardian World",
+        "url": "https://www.theguardian.com/world/rss"
+      },
+      {
+        "name": "NYTimes World",
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+      }
+    ]
   }
 }
