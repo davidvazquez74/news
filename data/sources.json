@@ -1,80 +1,30 @@
 {
+  "version": "1.0",
+  "language": "es",
+  "updatedAt": "2025-09-19T00:00:00.000Z",
   "Catalunya": {
     "maxItems": 5,
     "consensus": 2,
-    "feeds": [
-      {
-        "name": "La Vanguardia – Catalunya",
-        "url": "https://www.lavanguardia.com/mvc/feed/rss/catalunya"
-      },
-      {
-        "name": "El Periódico – Catalunya",
-        "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
-      }
-    ]
+    "feeds": []
   },
   "España": {
     "maxItems": 3,
     "consensus": 2,
-    "feeds": [
-      {
-        "name": "El País – Portada",
-        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"
-      },
-      {
-        "name": "RTVE Noticias",
-        "url": "https://www.rtve.es/rss/"
-      },
-      {
-        "name": "El Mundo – España",
-        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
-      }
-    ]
+    "feeds": []
   },
   "MolinsDeRei": {
     "maxItems": 3,
     "consensus": 2,
-    "feeds": [
-      {
-        "name": "Ajuntament de Molins de Rei – Notícies",
-        "url": "https://www.molinsderei.cat/rss/8/noticies"
-      },
-      {
-        "name": "Viu Molins de Rei",
-        "url": "https://www.viumolinsderei.com/feed/"
-      }
-    ]
+    "feeds": []
   },
   "LaRioja": {
     "maxItems": 3,
     "consensus": 2,
-    "feeds": [
-      {
-        "name": "El Día de La Rioja (eldiario.es)",
-        "url": "https://www.eldiario.es/rss/"
-      },
-      {
-        "name": "Gobierno de La Rioja – Actualidad",
-        "url": "https://actualidad.larioja.org/rss"
-      }
-    ]
+    "feeds": []
   },
   "Global": {
     "maxItems": 3,
     "consensus": 2,
-    "feeds": [
-      {
-        "name": "Agencia EFE Internacional",
-        "url": "https://www.efe.com/efe/espana/rss/1004"
-      },
-      {
-        "name": "Reuters – Top News (español)",
-        "url": "https://www.reuters.com/rssFeed/spanishNews"
-      },
-      {
-        "name": "BBC Mundo",
-        "url": "https://feeds.bbci.co.uk/mundo/rss.xml"
-      }
-    ]
+    "feeds": []
   }
 }
