@@ -1,9 +1,137 @@
 {
-  "updated_at": "2025-09-19T21:48:05.164987Z",
-  "version": "v-local",
-  "commit": "local",
-  "cataluna": [],
+  "updated_at": "2025-09-19T21:55:25.006Z",
+  "version": "v2025.09.19.61+cabc8b8",
+  "commit": "cabc8b8",
+  "cataluna": [
+    {
+      "title": "\"No descansa mai, està tota l’estona liderant\"",
+      "url": "https://www.ara.cat/esports/basquet/ricky-rubio_130_5501915.html",
+      "source": "Ara",
+      "published_at": "2025-09-19T21:13:06.000Z",
+      "summary": "\"No havíem tingut mai una llista de sol·licituds d'entrevistes tan llarga com la que tenim ara amb el Ricky\". Judit Borrull, responsable de comunicació del Joventut, resumeix perfectament la il·lusió que ha generat el retorn de Ricky Rubio a la Penya. El base de 34 anys viu el seu epíleg somiat al club que el va formar. La venda de samarretes amb el dorsal 9 s'ha disparat i el número d'abonats no para de créixer.",
+      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "glossary": []
+    },
+    {
+      "title": "El prestigi a l’exili de l’Antoni Clavé il·lustrador (1946)",
+      "url": "https://www.ara.cat/opinio/prestigi-l-exili-l-antoni-clave-il-lustrador-1946_1_5497621.html",
+      "source": "Ara",
+      "published_at": "2025-09-19T21:00:56.000Z",
+      "summary": "De dues cròniques de Rafael Tasis (Barcelona, 1906 - París 1966) enviades de París estant i publicades a La Nostra Revista (Mèxic, I-II, 1946). Fa vint anys de la mort de l’artista Antoni Clavé (Barcelona, 1913 - Saint-Tropez, 2005). Fins al 16 de novembre hi ha oberta al Palau Martorell (Barcelona) una retrospectiva d’aquest pintor i dibuixant, que va excel·lir com un cartellista i il·lustrador amb projecció internacional.",
+      "impact": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
+      "impact_adult": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
+      "impact_teen": "Puede cambiar lo que cobras o pagas; pregunta en casa. 🧾",
+      "glossary": []
+    },
+    {
+      "title": "L'enigma de Lleó XIV",
+      "url": "https://www.ara.cat/internacional/europa/l-enigma-lleo-xiv_1_5502706.html",
+      "source": "Ara",
+      "published_at": "2025-09-19T20:24:22.000Z",
+      "summary": "Han passat més de quatre mesos des que el fum blanc de la Capella Sixtina va anunciar l’elecció d’un nou papa i, encara avui, són pocs els que al Vaticà s’atreveixen a traçar un perfil més o menys precís de Lleó XIV. La periodista nord-americana Elise Ann Allen, corresponsal a Roma del mitjà catòlic Crux, ho fa al llibre Lleó XIV: ciutadà del món, missioner del segle XXI, que inclou la primera entrevista a Robert Prevost des de la seva elecció a la càtedra de Sant Pere.",
+      "impact": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
+      "impact_adult": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": []
+    },
+    {
+      "title": "Una tarda a la caça de multireincidents pel centre de Barcelona",
+      "url": "https://www.ara.cat/societat/successos/tarda-caca-multireincidents-pel-centre-barcelona_1_5502645.html",
+      "source": "Ara",
+      "published_at": "2025-09-19T19:54:04.000Z",
+      "summary": "Sovint, res és el que sembla. Quan els agents dels Mossos d'Esquadra veuen tres persones entrant a botigues i intentant vendre primer un telèfon i després unes joies, els segueixen. El mòbil és un iPhone Pro Max 16, però que ells venen bastant més barat, per uns 300 euros. I les joies diuen que són d'or, però les cadenes les volen col·locar a 25 euros. Quan, finalment, els aturen, veuen que una d'elles té dos \"vermells\". Per l'emissora ressona diverses vegades aquest color: és el codi intern per dir que algú té una ordre de detenció pendent. Res és el que sembla perquè els venedors resulten ser fugitius, l'iPhone és fals –els agents han anat fins a la botiga Apple a corroborar-ho– i l'or no era or –també han anat a una botiga especialitzada a comprovar-ho.",
+      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "glossary": []
+    },
+    {
+      "title": "Catalunya sense llei electoral",
+      "url": "https://naciodigital.cat/opinio/catalunya-sense-llei-electoral.html",
+      "source": "NacióDigital",
+      "published_at": "2025-09-19T19:50:08.000Z",
+      "summary": "«Que els catalans de l’exterior hagin de presentar una ILP perquè el Parlament quedi retratat no és només una anècdota»",
+      "impact": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
+      "impact_adult": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": []
+    },
+    {
+      "title": "La Setmana del Llibre en Català 2025 obre les portes: «Venim per fomentar la llengua i la cultura catalana»",
+      "url": "https://naciodigital.cat/cultura-i-mitjans/la-setmana-del-llibre-en-catala-2025-obre-les-portes-venim-per-fomentar-la-llengua-i-la-cultura-catalana.html",
+      "source": "NacióDigital",
+      "published_at": "2025-09-19T19:24:59.000Z",
+      "summary": "La 43a edició de la fira busca repetir l'èxit de l'edició anterior que va aplegar uns 100.000 visitants i ofereix \"llibres de quilòmetre zero\" i tres-centes activitats per menuts i grans",
+      "impact": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
+      "impact_adult": "Atento a cambios laborales o nómina; revisa comunicaciones de empresa o SEPE.",
+      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "glossary": []
+    }
+  ],
   "espana": [],
-  "rioja": [],
+  "rioja": [
+    {
+      "title": "Salaverri II y Artola se apuntan a San Mateo",
+      "url": "https://www.larioja.com/deportes/pelota/salaverri-iiy-artola-apuntan-san-mateo-20250919234354-nt.html",
+      "source": "La Rioja - Larioja.com",
+      "published_at": "2025-09-19T21:44:47.000Z",
+      "summary": "Después de un inicio dubitativo el riojano y el guipuzcoano entendieron que la victoria pasaba por meterle más ritmo al juego y mover a Zubizarreta",
+      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "glossary": []
+    },
+    {
+      "title": "Logroño se anuda el pañuelo: que la fiesta releve a la polémica en San Mateo",
+      "url": "https://nuevecuatrouno.com/2025/09/19/logrono-previa-fiestas-san-mateo-tradicion-gastronomia-musica/",
+      "source": "Nuevecuatrouno",
+      "published_at": "2025-09-19T21:38:42.000Z",
+      "summary": "Logroño se anuda el pañuelo: que la fiesta releve a la polémica en San Mateo Logroño se anuda el pañuelo: que la fiesta releve a la polémica en San Mateo",
+      "impact": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
+      "impact_adult": "Efectos indirectos en precios, suministros o viajes; permanece atento a avisos.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": []
+    },
+    {
+      "title": "Estonia y Polonia denuncian la intrusión de cinco aviones de combate rusos en el Báltico",
+      "url": "https://www.larioja.com/internacional/europa/tres-aviones-combate-rusos-violan-espacio-aereo-20250919165727-ntrc.html",
+      "source": "La Rioja - Larioja.com",
+      "published_at": "2025-09-19T21:27:52.000Z",
+      "summary": "La OTAN movilizó una escuadrilla y consideró una «temeridad» la actitud de Putin al violar el espacio aéreo occidental de forma repetida",
+      "impact": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_adult": "Cambios en apps o privacidad; revisa ajustes y condiciones de servicio.",
+      "impact_teen": "Apps y privacidad con cambios; revisa permisos. 📱",
+      "glossary": [
+        {
+          "term": "OTAN",
+          "expl": "Alianza militar euroatlántica."
+        }
+      ]
+    },
+    {
+      "title": "'Tristes tigres' triunfa en el festival ¡Cort...en! con el premio del jurado y al actor joven",
+      "url": "https://www.larioja.com/comarcas/calahorra/tristes-tigres-triunfa-festival-corten-premio-jurado-20250920232154-nt.html",
+      "source": "La Rioja - Larioja.com",
+      "published_at": "2025-09-19T21:21:55.000Z",
+      "summary": "El corto 'Piruletas' se llevó el galardón del Público y '21 de octubre', al mejor director menor de 30 años",
+      "impact": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
+      "impact_adult": "Podrían variar pagos o ayudas; consulta requisitos y fechas límite.",
+      "impact_teen": "Puede cambiar lo que cobras o pagas; pregunta en casa. 🧾",
+      "glossary": []
+    },
+    {
+      "title": "El agua se hace vino en Logroño para dar la bienvenida a San Mateo",
+      "url": "https://nuevecuatrouno.com/2025/09/19/logrono-fuente-vino-fiestas-san-mateo-folclore/",
+      "source": "Nuevecuatrouno",
+      "published_at": "2025-09-19T20:24:16.000Z",
+      "summary": "El agua se hace vino en Logroño para dar la bienvenida a las fiestas El agua se hace vino en Logroño para dar la bienvenida a San Mateo",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "glossary": []
+    }
+  ],
   "background": []
 }
