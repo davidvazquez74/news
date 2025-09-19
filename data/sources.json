@@ -1,127 +1,130 @@
 {
+  "version": "1.1",
+  "language": "es",
+  "updatedAt": "2025-09-19T22:11:49.954180+00:00",
   "Catalunya": {
-    "consensus": 1,
-    "maxItems": 6,
+    "maxItems": 5,
+    "consensus": 2,
     "feeds": [
       {
-        "name": "El Periódico - Catalunya",
+        "name": "La Vanguardia – Portada",
+        "url": "https://www.lavanguardia.com/rss/home.xml"
+      },
+      {
+        "name": "La Vanguardia – Política",
+        "url": "https://www.lavanguardia.com/rss/politica.xml"
+      },
+      {
+        "name": "El Periódico – Portada",
+        "url": "https://www.elperiodico.com/es/rss/"
+      },
+      {
+        "name": "El Periódico – Catalunya",
         "url": "https://www.elperiodico.com/es/rss/catalunya/rss.xml"
-      },
-      {
-        "name": "324.cat",
-        "url": "https://www.ccma.cat/324/rss/324.xml"
-      },
-      {
-        "name": "La Vanguardia - Catalunya",
-        "url": "https://www.lavanguardia.com/rss/catalunya"
-      },
-      {
-        "name": "Ara",
-        "url": "https://www.ara.cat/rss/"
-      },
-      {
-        "name": "NacióDigital",
-        "url": "https://www.naciodigital.cat/rss"
-      },
-      {
-        "name": "El País - Cataluña",
-        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/ccaa/catalunya/portada?format=xml"
       }
     ]
   },
   "España": {
+    "maxItems": 3,
     "consensus": 2,
-    "maxItems": 8,
     "feeds": [
       {
         "name": "El País – Portada",
-        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada?format=xml"
+        "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"
       },
       {
-        "name": "El Mundo",
-        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"
+        "name": "El Mundo – España",
+        "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml"
       },
       {
-        "name": "RTVE Noticias",
-        "url": "https://www.rtve.es/rss/temas/noticias.xml"
+        "name": "ABC – Portada",
+        "url": "https://www.abc.es/rss/feeds/abc_ultima.xml"
       },
       {
-        "name": "ElDiario.es – Portada",
-        "url": "https://www.eldiario.es/rss/"
-      },
-      {
-        "name": "Europa Press",
-        "url": "https://www.europapress.es/rss/rss.aspx?ch=00069"
-      },
-      {
-        "name": "Agencia EFE",
-        "url": "https://www.efe.com/efe/espana/1/rss"
-      },
-      {
-        "name": "La Vanguardia – Vida",
-        "url": "https://www.lavanguardia.com/mvc/feed/rss/vida"
-      },
-      {
-        "name": "El Confidencial",
-        "url": "https://www.elconfidencial.com/rss/espana/"
-      }
-    ]
-  },
-  "LaRioja": {
-    "consensus": 1,
-    "maxItems": 5,
-    "feeds": [
-      {
-        "name": "El Día de La Rioja (eldiario.es)",
-        "url": "https://www.eldiario.es/rss/feeds/edrioja.xml"
-      },
-      {
-        "name": "La Rioja - Larioja.com",
-        "url": "https://www.larioja.com/rss/2.0/portada"
-      },
-      {
-        "name": "Nuevecuatrouno",
-        "url": "https://nuevecuatrouno.com/feed/"
+        "name": "Cadena SER – Portada",
+        "url": "https://cadenaser.com/arc/outboundfeeds/rss/portada.xml"
       }
     ]
   },
   "MolinsDeRei": {
-    "consensus": 1,
-    "maxItems": 4,
+    "maxItems": 3,
+    "consensus": 2,
     "feeds": [
+      {
+        "name": "Ajuntament de Molins de Rei – Notícies",
+        "url": "https://www.molinsderei.cat/rss/8/noticies"
+      },
       {
         "name": "Viu Molins de Rei",
         "url": "https://www.viumolinsderei.com/feed/"
+      }
+    ]
+  },
+  "LaRioja": {
+    "maxItems": 3,
+    "consensus": 2,
+    "feeds": [
+      {
+        "name": "Gobierno de La Rioja – Actualidad",
+        "url": "https://actualidad.larioja.org/rss"
       },
       {
-        "name": "Ajuntament de Molins de Rei",
-        "url": "https://www.molinsderei.cat/rss"
+        "name": "El Día de La Rioja (eldiario.es)",
+        "url": "https://www.eldiario.es/rss/"
       }
     ]
   },
   "Global": {
+    "maxItems": 3,
     "consensus": 2,
-    "maxItems": 8,
     "feeds": [
       {
         "name": "BBC Mundo",
         "url": "https://feeds.bbci.co.uk/mundo/rss.xml"
       },
       {
-        "name": "Reuters World (ES)",
-        "url": "https://www.reuters.com/world/latam/rss"
+        "name": "Reuters – Últimas",
+        "url": "https://www.reuters.com/rssWorldNews"
       },
       {
-        "name": "AP Noticias (ES)",
-        "url": "https://apnews.com/hub/apf-noticias?utm_source=apnews&utm_medium=rss&utm_campaign=apf-noticias"
+        "name": "Agencia EFE – Internacional (ES)",
+        "url": "https://www.efe.com/efe/espana/rss/1004"
+      }
+    ]
+  },
+  "Deportes": {
+    "maxItems": 3,
+    "consensus": 2,
+    "feeds": [
+      {
+        "name": "SPORT – Última hora",
+        "url": "https://www.sport.es/es/rss/"
       },
       {
-        "name": "The Guardian World",
-        "url": "https://www.theguardian.com/world/rss"
+        "name": "SPORT – Barça",
+        "url": "https://www.sport.es/es/rss/barca/rss.xml"
       },
       {
-        "name": "NYTimes World",
-        "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+        "name": "Marca – Última hora",
+        "url": "https://e00-marca.uecdn.es/rss/portada.xml"
+      }
+    ]
+  },
+  "Radios": {
+    "maxItems": 3,
+    "consensus": 2,
+    "feeds": [
+      {
+        "name": "Cadena SER – Portada",
+        "url": "https://cadenaser.com/arc/outboundfeeds/rss/portada.xml"
+      },
+      {
+        "name": "RAC1 – Portada",
+        "url": "https://www.rac1.cat/rss"
+      },
+      {
+        "name": "Catalunya Ràdio – Notícies",
+        "url": "https://www.ccma.cat/feeds/rss/Noticies"
       }
     ]
   }

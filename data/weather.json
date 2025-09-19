@@ -1,7 +1,6 @@
 {
-  "tempC": 21,
-  "summary": "Nubes",
-  "icon": "Nubes",
-  "updatedAt": "2025-09-19T22:00:14.547Z",
-  "source": "open-meteo"
+  "temp_c": 22,
+  "desc_es": "Despejado",
+  "desc": "Clear",
+  "icon": "☀️"
 }

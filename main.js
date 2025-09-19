@@ -1,64 +1,80 @@
-// main.js — botón Teens + versión en footer + soporte weather.json
+// Frontend News App
 const $ = s => document.querySelector(s);
-
 let mode = (localStorage.getItem('mode') === 'teen') ? 'teen' : 'adult';
 let appVersion = localStorage.getItem('appVersion') || '';
 
-function fmtDate(iso){
+// --- utils ---
+const fmtDate = (iso) => {
   if(!iso) return '';
-  try{ return new Date(iso).toLocaleString(undefined,{hour12:false}); }catch{ return ''; }
+  try { return new Date(iso).toLocaleString('es-ES',{hour12:false}); } catch { return ''; }
+};
+const el = (t,c) => { const n=document.createElement(t); if(c) n.className=c; return n; };
+async function fetchJSON(u){
+  const r = await fetch(u + (u.includes('?')?'&':'?') + 't=' + Date.now(), {cache:'no-store'});
+  if(!r.ok) throw new Error('HTTP '+r.status+' @ '+u);
+  return r.json();
 }
-function el(tag, cls){ const n=document.createElement(tag); if(cls) n.className=cls; return n; }
 
+// --- render ---
 function renderCard(item){
-  const wrap = el('article','news-card');
-  const a = el('a','news-title'); a.target='_blank'; a.rel='noopener noreferrer';
-  a.textContent = item.title || 'Sin título'; a.href = item.url || item.link || '#'; wrap.appendChild(a);
+  const wrap = el('li','news-card');
+  const a = el('a','news-title');
+  a.target = '_blank'; a.rel='noopener noreferrer';
+  a.textContent = item.title || 'Sin título';
+  a.href = item.url || item.link || '#';
+  wrap.appendChild(a);
+
   const meta = el('p','meta');
-  meta.textContent = item.published_at ? fmtDate(item.published_at) : (item.published ? fmtDate(item.published) : '');
+  meta.textContent = item.published_at ? fmtDate(item.published_at) : (item.published?fmtDate(item.published):'');
   if (meta.textContent) wrap.appendChild(meta);
-  const impact = (mode==='teen') ? (item.impact_teen || '') : (item.impact_adult || item.impact || '');
-  if (impact){ const b = el('div','block'); b.innerHTML = `<p>${impact}</p>`; wrap.appendChild(b); }
-  const gl = Array.isArray(item.glossary) ? item.glossary : [];
-  if (gl.length){
-    const box = el('div','block gloss'); const ul = el('ul','glossary');
-    for (const g of gl){ const li = el('li','gloss-item'); li.innerHTML = `<strong>${g.term||''}:</strong> ${g.expl||g.def||''}`; ul.appendChild(li); }
-    box.appendChild(ul); wrap.appendChild(box);
+
+  const impactAdult = item.impact_adult || item.impact || '';
+  const impactTeen  = item.impact_teen  || '';
+  const impactTxt = mode==='teen' ? (impactTeen||impactAdult) : impactAdult;
+  if (impactTxt){
+    const div = el('div','block');
+    div.innerHTML = `<p>${impactTxt}</p>`;
+    wrap.appendChild(div);
+  }
+
+  const gl = item.glossary||[];
+  if (Array.isArray(gl) && gl.length){
+    const g = el('div','block gloss');
+    g.innerHTML = gl.map(x=>`<div class="gloss-item"><strong>${x.term}:</strong> ${x.expl||x.def||''}</div>`).join('');
+    wrap.appendChild(g);
   }
   return wrap;
 }
-function renderList(id, items){
-  const c = $(id); if(!c) return; c.innerHTML='';
-  const arr = Array.isArray(items) ? items : [];
-  if(!arr.length){ c.innerHTML = '<p class="empty">Sin contenidos (todavía)</p>'; return; }
-  arr.forEach(n => c.appendChild(renderCard(n)));
+
+function renderSection(sel, items){
+  const c = $(sel); if(!c) return;
+  c.innerHTML='';
+  const arr = Array.isArray(items)?items:[];
+  if(!arr.length){ c.innerHTML = '<li class="empty">Sin contenidos (todavía)</li>'; return; }
+  arr.forEach(n=> c.appendChild(renderCard(n)));
 }
 
-async function fetchJSON(url){
-  const r = await fetch(url + (url.includes('?')?'&':'?') + 't=' + Date.now(), {cache:'no-store'});
-  if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
-}
-
+// --- load ---
 async function loadAll(){
   try{
     const data = await fetchJSON('/data/latest.json');
-    renderList('#list-cataluna',  data.cataluna||[]);
-    renderList('#list-espana',    data.espana||[]);
-    renderList('#list-rioja',     data.rioja||[]);
-    renderList('#list-background',data.background||[]);
+    renderSection('#list-cataluna', data.cataluna||[]);
+    renderSection('#list-espana',   data.espana||[]);
+    renderSection('#list-rioja',    data.rioja||[]);
+    renderSection('#list-background', data.background||[]);
     const localItems = (data.blocksOut && Array.isArray(data.blocksOut.MolinsDeRei)) ? data.blocksOut.MolinsDeRei : (data.cataluna||[]);
-    renderList('#list-local', localItems);
-    $('#updatedAt').textContent = data.updated_at ? 'Actualizado: ' + fmtDate(data.updated_at) : '';
-    if (data.version) { appVersion = data.version; localStorage.setItem('appVersion', appVersion); }
-    const $ver = $('#versionBadge'); if ($ver) $ver.textContent = appVersion || '—';
+    renderSection('#list-local', localItems);
+    $('#updatedAt').textContent = data.updated_at ? ('Actualizado: ' + fmtDate(data.updated_at)) : '';
+    if (data.version){ $('#versionBadge').textContent = data.version; }
   }catch(e){
-    console.error('loadAll', e);
+    console.error(e);
     ['#list-cataluna','#list-espana','#list-rioja','#list-background','#list-local'].forEach(id=>{
-      const el = $(id); if (el) el.innerHTML='<p class="empty">No se pudieron cargar noticias.</p>';
+      const n=$(id); if(n) n.innerHTML='<li class="empty">No se pudieron cargar noticias.</li>';
     });
   }
 }
 
+// --- version bust + wx ---
 async function checkVersion(){
   try{
     const meta = await fetchJSON('/data/meta.json');
@@ -66,34 +82,66 @@ async function checkVersion(){
     if(newV && newV !== appVersion){
       localStorage.setItem('appVersion', newV);
       appVersion = newV;
-      if (window.caches?.keys) {
-        const ks = await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));
+      if (window.caches?.keys){
+        const ks = await caches.keys();
+        await Promise.all(ks.map(k=>caches.delete(k)));
       }
-      location.replace((location.pathname.replace(/\/+/g,'/')) + '?b=' + encodeURIComponent(newV));
+      location.replace((location.pathname||'/') + '?b=' + encodeURIComponent(newV));
     }
-  }catch{}
+  }catch(e){ /*noop*/ }
 }
 
-function applyMode(newMode){
-  mode = (newMode==='teen') ? 'teen' : 'adult';
-  localStorage.setItem('mode', mode);
-  const $tg = $('#teenToggle');
-  if ($tg) $tg.setAttribute('aria-pressed', String(mode==='teen'));
-  loadAll();
+async function loadWeather(){
+  try{
+    const res = await fetchJSON('/data/weather.json');
+    const t = Math.round(res.temp_c);
+    $('#wx-temp').textContent = t + '°';
+    $('#wx-desc').textContent = res.desc_es || res.desc || '';
+    $('#wx-icon').textContent = res.icon || '•';
+  }catch{ /* optional */ }
 }
-function toggleTeens(){ applyMode(mode==='teen' ? 'adult' : 'teen'); }
 
+// --- events ---
+function bindUI(){
+  const $teen = $('#teenToggle');
+  if($teen){
+    const pressed = (mode==='teen');
+    $teen.setAttribute('aria-pressed', String(pressed));
+    $teen.addEventListener('click', ()=>{
+      mode = (mode==='teen') ? 'adult' : 'teen';
+      localStorage.setItem('mode', mode);
+      $teen.setAttribute('aria-pressed', String(mode==='teen'));
+      loadAll();
+    });
+  }
+  $('#refreshBtn')?.addEventListener('click', async ()=>{
+    localStorage.removeItem('appVersion');
+    if (window.caches?.keys){
+      const ks = await caches.keys();
+      await Promise.all(ks.map(k=>caches.delete(k)));
+    }
+    location.replace((location.pathname||'/') + '?force=' + Date.now());
+  });
+  $('#forceCacheClear')?.addEventListener('click', async (e)=>{
+    e.preventDefault();
+    localStorage.clear();
+    if (window.caches?.keys){
+      const ks = await caches.keys();
+      await Promise.all(ks.map(k=>caches.delete(k)));
+    }
+    location.reload();
+  });
+}
+
+// --- init ---
 window.addEventListener('DOMContentLoaded', ()=>{
   const urlMode = new URLSearchParams(location.search).get('mode');
   if (urlMode==='teen') mode='teen';
   localStorage.setItem('mode', mode);
-  $('#refreshBtn')?.addEventListener('click', ()=>{
-    localStorage.removeItem('appVersion');
-    location.replace((location.pathname.replace(/\/+/g,'/')) + '?force=' + Date.now());
-  });
-  $('#teenToggle')?.addEventListener('click', toggleTeens);
-  $('#teenToggle')?.setAttribute('aria-pressed', String(mode==='teen'));
+
+  bindUI();
   checkVersion();
+  loadWeather();
   loadAll();
   setInterval(checkVersion, 5*60*1000);
 });

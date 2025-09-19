@@ -1,15 +1,15 @@
 {
-  "name": "News",
-  "short_name": "News",
-  "display": "standalone",
+  "name": "Noticias",
+  "short_name": "Noticias",
   "start_url": "/",
+  "display": "standalone",
   "background_color": "#0b0c0f",
   "theme_color": "#0b0c0f",
   "icons": [
     {
-      "src": "icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "src": "icons/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
     }
   ]
 }

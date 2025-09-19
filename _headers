@@ -7,14 +7,8 @@
 /data/meta.json
   Cache-Control: no-cache, no-store, must-revalidate
 
-/data/weather.json
-  Cache-Control: no-cache, no-store, must-revalidate
-
 /main.js
   Cache-Control: no-cache, no-store, must-revalidate
 
 /styles.css
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/weather_client.js
   Cache-Control: no-cache, no-store, must-revalidate
