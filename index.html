@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <title>News • v3.21.1-lite</title>
+  <title>News • v3.21.2-lite</title>
   <meta name="theme-color" content="#0b0c0f">
-  <link rel="manifest" href="manifest.webmanifest?v=3211">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3211">
-  <link rel="icon" href="icons/favicon.ico?v=3211">
-  <link rel="stylesheet" href="styles.weather.v1.css">
+  <link rel="manifest" href="manifest.webmanifest?v=3212">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3212">
+  <link rel="icon" href="icons/favicon.ico?v=3212">
+  <link rel="stylesheet" href="styles.v3212.css">
 </head>
 <body class="dark">
   <header class="app-header">
     <div class="brand">
       <h1>Noticias</h1>
-      <span id="versionBadge">v3.21.1-lite</span>
+      <span id="versionBadge" class="version">v3.21.2-lite</span>
     </div>
     <div class="segmented" role="tablist" aria-label="Controles">
       <button id="refreshBtn" role="tab">Forzar actualización</button>
@@ -24,13 +24,25 @@
     </div>
   </header>
 
-  <!-- Widget del tiempo -->
-  <section id="weatherWidget" class="weather-widget">
-    <p class="muted">Cargando el tiempo en Molins de Rei…</p>
+  <!-- Widget del tiempo (compacto, Apple-friendly) -->
+  <section id="weatherWidget" class="weather-widget" aria-live="polite">
+    <div class="weather-inner">
+      <div class="w-left">
+        <img id="wIcon" alt="" width="28" height="28" />
+        <div class="w-temp">
+          <span id="wTemp">—</span>
+          <small id="wDesc" class="muted">Cargando…</small>
+        </div>
+      </div>
+      <div class="w-right">
+        <small id="wHiLo" class="muted">Molins de Rei</small>
+      </div>
+    </div>
   </section>
 
   <main>
     <p id="updatedAt" class="muted top-note">Actualizando…</p>
+
     <section><h2>Cataluña</h2><ul id="cataluna" class="news-list"></ul></section>
     <section><h2>España</h2><ul id="espana" class="news-list"></ul></section>
     <section><h2>La Rioja</h2><ul id="rioja" class="news-list"></ul></section>
@@ -42,6 +54,6 @@
     <small><a href="#" id="forceCacheClear">Limpiar caché</a> • Fuentes verificadas</small>
   </footer>
 
-  <script src="main.v3211.js" defer></script>
+  <script src="main.v3212.js" defer></script>
 </body>
 </html>
