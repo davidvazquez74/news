@@ -1,23 +1,23 @@
 // scripts/build_latest.js
-// Node ESM. Requires "rss-parser" and "type":"module" in package.json
+// Node ESM. Requiere "rss-parser" y "type":"module" en package.json
 import fs from 'fs';
 import path from 'path';
 import Parser from 'rss-parser';
-import { generateImpact } from './impactEngine.js';
+import { generateImpactFromKeywords } from './impact_engine/impactEngine.js';
 
-// ---------- Paths ----------
+// ---------- Rutas ----------
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data');
 const SOURCES_PATH = path.join(DATA_DIR, 'sources.json');
 const OUT_PATH = path.join(DATA_DIR, 'latest.json');
 const META_PATH = path.join(DATA_DIR, 'meta.json');
 
-// ---------- Version (injected by workflow) ----------
+// ---------- Versión (inyectada por el workflow) ----------
 const BUILD_VERSION = process.env.BUILD_VERSION || `v-dev.${Date.now()}`;
 const GIT_SHA = process.env.GIT_SHA || 'local';
 
-// ---------- Recency ----------
-const MAX_DAYS = 7; // noticias de los últimos 7 días
+// ---------- Frescura ----------
+const MAX_DAYS = 10;
 const MIN_YEAR = 2023;
 const NOW = Date.now();
 const CUTOFF = NOW - MAX_DAYS * 24 * 60 * 60 * 1000;
@@ -31,7 +31,6 @@ const okDate = (d) => {
   const ts = new Date(d).getTime();
   if (Number.isNaN(ts)) return false;
   const y = new Date(d).getUTCFullYear();
-  // tolerancia +3h por TZs/servidores
   return y >= MIN_YEAR && ts >= CUTOFF && ts <= NOW + 3 * 60 * 60 * 1000;
 };
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
@@ -52,23 +51,25 @@ const dedupeByTitle = (rows, limit) => {
   return out;
 };
 
-// ---------- Glosario breve ----------
-function glossaryText(text='') {
-  const pairs = [
-    ['Euríbor', 'Índice que mueve hipotecas variables.'],
-    ['BCE', 'Banco Central Europeo: decide tipos.'],
-    ['inflación', 'Subida general de precios.'],
-    ['arancel', 'Impuesto a importaciones.'],
-    ['OTAN', 'Alianza militar euroatlántica.'],
-    ['AI Act', 'Ley europea que regula la IA.']
-  ];
-  const low = lc(text);
-  const hits = [];
-  for (const [term, expl] of pairs) if (low.includes(lc(term))) hits.push({ term, expl });
-  return hits;
+// ---------- Normalización + Impacto (keywords) ----------
+function normalizeItem(it, srcName) {
+  const title = clean(it.title);
+  const url = clean(it.link || it.guid || '');
+  const published_at = iso(it.isoDate || it.pubDate || null);
+  const summary = clean(it.contentSnippet || it.summary || it.content || '');
+
+  const { adult, teen } = generateImpactFromKeywords(title, summary);
+
+  return {
+    title, url, source: srcName, published_at, summary,
+    impact: adult,
+    impact_adult: adult,
+    impact_teen:  teen,
+    glossary: []
+  };
 }
 
-// ---------- Consenso ----------
+// ---------- Consensus ----------
 function normalizeTitleKey(title=''){
   return title
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -76,10 +77,8 @@ function normalizeTitleKey(title=''){
     .replace(/[^a-z0-9]+/g,' ')
     .trim();
 }
-
-// Aplica consenso por título (aparece en ≥ consensus fuentes del bloque) y recorta a maxItems
 function applyConsensus(rows = [], consensus = 2, maxItems = 3) {
-  const map = new Map(); // key -> {item, count, latest, sources:Set}
+  const map = new Map();
   for (const r of rows) {
     const key = normalizeTitleKey(r.title);
     if (!key) continue;
@@ -99,7 +98,6 @@ function applyConsensus(rows = [], consensus = 2, maxItems = 3) {
     .filter(x => x.count >= consensus)
     .sort((a,b) => b.latest - a.latest)
     .map(x => x.item);
-
   return dedupeByTitle(eligible, maxItems);
 }
 
@@ -113,38 +111,16 @@ async function fetchFeed(url) {
     return [];
   }
 }
-
 async function collectFromFeeds(feeds = []) {
   const rows = [];
   for (const f of feeds) {
     const items = await fetchFeed(f.url);
     for (const it of items) {
-      const title = clean(it.title);
-      const url = clean(it.link || it.guid || '');
-      const published_at = iso(it.isoDate || it.pubDate || null);
-      const summary = clean(it.contentSnippet || it.summary || it.content || '');
-      if (!published_at || !okDate(published_at)) continue;
-
-      // Motor de impacto (LLM opcional; fallback keywords si no hay API key)
-      let adult_impact = "";
-      let teen_impact  = "";
-      try {
-        const out = await generateImpact(null, { title, summary });
-        adult_impact = out.adult_impact || "";
-        teen_impact  = out.teen_impact  || "";
-      } catch {
-        // en caso de error, deja impactos vacíos; el front los omitirá
-      }
-
-      rows.push({
-        title, url, source: f.name, published_at, summary,
-        impact: adult_impact,              // compat con front antiguo
-        impact_adult: adult_impact,
-        impact_teen:  teen_impact,
-        glossary: glossaryText(`${title} ${summary}`)
-      });
+      const n = normalizeItem(it, f.name);
+      if (!n.published_at) continue;
+      if (!okDate(n.published_at)) continue;
+      rows.push(n);
     }
-    // pequeño respiro para no saturar servidores
     await new Promise(r => setTimeout(r, 200));
   }
   return rows;
@@ -161,7 +137,6 @@ async function main() {
     if (!def || !Array.isArray(def.feeds)) return [];
     const rows = await collectFromFeeds(def.feeds);
     const out = applyConsensus(rows, def.consensus ?? 2, def.maxItems ?? 3);
-    console.log(`block "${blockName}" raw:${rows.length} -> after consensus:${out.length}`);
     return out;
   }
 
@@ -173,36 +148,29 @@ async function main() {
 
   function keepPrevIfEmpty(currentArr, prevKey) {
     if ((!currentArr || currentArr.length === 0) && prev && Array.isArray(prev[prevKey]) && prev[prevKey].length) {
-      console.log(`⚠️ keep previous for section: ${prevKey} (no fresh items)`);
       return prev[prevKey];
     }
     return currentArr;
   }
 
-  // Estructura para tu frontend actual
   const outCompat = {
     updated_at: new Date().toISOString(),
     version: BUILD_VERSION,
     commit: GIT_SHA,
-    cataluna:  keepPrevIfEmpty(catalunya, 'cataluna'),
-    espana:    keepPrevIfEmpty(espana,    'espana'),
-    rioja:     keepPrevIfEmpty(rioja,     'rioja'),
-    background:keepPrevIfEmpty(global,    'background'),
-    // Bloques extra (para "local" en el front)
-    blocksOut: {
-      MolinsDeRei: molins
-    }
+    cataluna:   keepPrevIfEmpty(catalunya, 'cataluna'),
+    espana:     keepPrevIfEmpty(espana, 'espana'),
+    rioja:      keepPrevIfEmpty(rioja, 'rioja'),
+    background: keepPrevIfEmpty(global, 'background')
   };
 
-  const meta = {
-    version: BUILD_VERSION,
-    builtAt: new Date().toISOString(),
-    commit: GIT_SHA
-  };
+  const blocksOut = { Catalunya: catalunya, España: espana, MolinsDeRei: molins, LaRioja: rioja, Global: global };
+  const finalOut = { ...outCompat, blocksOut };
+
+  const meta = { version: BUILD_VERSION, builtAt: new Date().toISOString(), commit: GIT_SHA };
   fs.writeFileSync(META_PATH, JSON.stringify(meta, null, 2), 'utf-8');
-  fs.writeFileSync(OUT_PATH, JSON.stringify(outCompat, null, 2), 'utf-8');
+  fs.writeFileSync(OUT_PATH, JSON.stringify(finalOut, null, 2), 'utf-8');
 
-  console.log('✅ latest.json actualizado', BUILD_VERSION);
+  const counts = { cataluna: finalOut.cataluna?.length||0, espana: finalOut.espana?.length||0, rioja: finalOut.rioja?.length||0, background: finalOut.background?.length||0 };
+  console.log('latest.json actualizado →', OUT_PATH, '\ncounts:', counts);
 }
-
 main().catch(e => { console.error(e); process.exit(1); });
