@@ -1,5 +1,7 @@
 // scripts/build_latest.js
-// Node ESM. Requiere "rss-parser" y "type":"module" en package.json
+// Debug + garantías de impacto (adult/teen) usando motor por keywords.
+// Reemplaza tu build_latest.js por éste y ejecuta el workflow.
+
 import fs from 'fs';
 import path from 'path';
 import Parser from 'rss-parser';
@@ -12,7 +14,7 @@ const SOURCES_PATH = path.join(DATA_DIR, 'sources.json');
 const OUT_PATH = path.join(DATA_DIR, 'latest.json');
 const META_PATH = path.join(DATA_DIR, 'meta.json');
 
-// ---------- Versión (inyectada por el workflow) ----------
+// ---------- Versión ----------
 const BUILD_VERSION = process.env.BUILD_VERSION || `v-dev.${Date.now()}`;
 const GIT_SHA = process.env.GIT_SHA || 'local';
 
@@ -22,6 +24,7 @@ const MIN_YEAR = 2023;
 const NOW = Date.now();
 const CUTOFF = NOW - MAX_DAYS * 24 * 60 * 60 * 1000;
 
+// Parser RSS
 const parser = new Parser({ timeout: 15000, maxRedirects: 3 });
 
 // ---------- Utils ----------
@@ -51,20 +54,30 @@ const dedupeByTitle = (rows, limit) => {
   return out;
 };
 
-// ---------- Normalización + Impacto (keywords) ----------
+// ---------- Normalización + Impacto ----------
 function normalizeItem(it, srcName) {
   const title = clean(it.title);
   const url = clean(it.link || it.guid || '');
   const published_at = iso(it.isoDate || it.pubDate || null);
   const summary = clean(it.contentSnippet || it.summary || it.content || '');
 
-  const { adult, teen } = generateImpactFromKeywords(title, summary);
+  // Motor keywords (sin API). Devuelve {adult, teen, tag, severity, horizon, action, confidence}
+  const imp = generateImpactFromKeywords(title, summary);
+
+  // Garantías: nunca vacío
+  const impact_adult = imp.adult || 'Sin efecto directo en tu día a día.';
+  const impact_teen  = imp.teen  || 'Sin efecto directo en tu día a día.';
 
   return {
     title, url, source: srcName, published_at, summary,
-    impact: adult,
-    impact_adult: adult,
-    impact_teen:  teen,
+    impact: impact_adult,
+    impact_adult, impact_teen,
+    // Campos de depuración (para inspeccionar en /data/latest.json)
+    impact_tag: imp.tag,
+    impact_severity: imp.severity,
+    impact_horizon: imp.horizon,
+    impact_action: imp.action,
+    impact_confidence: imp.confidence,
     glossary: []
   };
 }
@@ -136,7 +149,9 @@ async function main() {
     const def = src[blockName];
     if (!def || !Array.isArray(def.feeds)) return [];
     const rows = await collectFromFeeds(def.feeds);
+    console.log(`[impact] ${blockName}: raw=${rows.length}`);
     const out = applyConsensus(rows, def.consensus ?? 2, def.maxItems ?? 3);
+    console.log(`[impact] ${blockName}: after consensus → ${out.length}`);
     return out;
   }
 
@@ -148,6 +163,7 @@ async function main() {
 
   function keepPrevIfEmpty(currentArr, prevKey) {
     if ((!currentArr || currentArr.length === 0) && prev && Array.isArray(prev[prevKey]) && prev[prevKey].length) {
+      console.log(`⚠️ keep previous for section: ${prevKey} (no fresh items)`);
       return prev[prevKey];
     }
     return currentArr;
@@ -172,5 +188,17 @@ async function main() {
 
   const counts = { cataluna: finalOut.cataluna?.length||0, espana: finalOut.espana?.length||0, rioja: finalOut.rioja?.length||0, background: finalOut.background?.length||0 };
   console.log('latest.json actualizado →', OUT_PATH, '\ncounts:', counts);
+
+  // Dump de diagnóstico de los 2 primeros ítems por bloque (titulo + tag + sev)
+  function dbg(name, arr){
+    const show = (arr||[]).slice(0,2).map(x => ({
+      title: x.title, tag: x.impact_tag, severity: x.impact_severity, action: x.impact_action
+    }));
+    console.log(`[diag] ${name}`, JSON.stringify(show, null, 2));
+  }
+  dbg('cataluna', finalOut.cataluna);
+  dbg('espana', finalOut.espana);
+  dbg('rioja', finalOut.rioja);
+  dbg('background', finalOut.background);
 }
 main().catch(e => { console.error(e); process.exit(1); });
