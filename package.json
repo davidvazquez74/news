@@ -1,1 +1,8 @@
-{ "name": "news", "type": "module", "dependencies": { "rss-parser": "^3.13.0" } }
+{
+  "name": "news-impact-engine-teen2",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}

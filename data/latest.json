@@ -1,1 +1,11 @@
-{ "updated_at": "demo", "espana": [] }
+{
+  "updated_at": "2025-09-19T22:27:56.312671Z",
+  "version": "v-dev.sample",
+  "commit": "local",
+  "cataluna": [],
+  "espana": [],
+  "rioja": [],
+  "background": [],
+  "deportes": [],
+  "radios": []
+}
