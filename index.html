@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <title>News • v3.20.9-lite</title>
+  <title>News</title>
   <meta name="theme-color" content="#0b0c0f">
   <link rel="manifest" href="manifest.webmanifest?v=3209">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3209">
@@ -15,7 +15,7 @@
   <header class="app-header">
     <div class="brand">
       <h1>Noticias</h1>
-      <span class="version">v3.20.9-lite</span>
+      <span id="versionBadge">—</span>
     </div>
     <div class="segmented" role="tablist" aria-label="Controles">
       <button id="refreshBtn" role="tab" aria-selected="false">Forzar actualización</button>
@@ -39,5 +39,18 @@
   </footer>
 
   <script src="main.v3209.js" defer></script>
+  <script>
+    // Cargar versión dinámica desde meta.json
+    fetch("/data/meta.json?t=" + Date.now())
+      .then(r => r.json())
+      .then(meta => {
+        const el = document.getElementById("versionBadge");
+        if (el) el.textContent = meta.version ? meta.version : "—";
+      })
+      .catch(() => {
+        const el = document.getElementById("versionBadge");
+        if (el) el.textContent = "—";
+      });
+  </script>
 </body>
 </html>
