@@ -2,24 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>News App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <title>Noticias</title>
+  <meta name="theme-color" content="#0b0c0f">
+  <link rel="manifest" href="manifest.webmanifest?v=1">
+  <link rel="icon" href="icons/favicon.ico">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <header class="topbar">
-    <h1>Noticias</h1>
-    <div class="mode">
-      <button id="toggleTeen" aria-pressed="false" title="Ver impactos Teen">Teens</button>
+<body class="dark">
+  <header class="app-header">
+    <div class="brand">
+      <h1>Noticias</h1>
+    </div>
+    <div class="controls">
+      <div id="wx" class="wx">
+        <span id="wx-icon" aria-hidden="true">—</span>
+        <span id="wx-temp">--°</span>
+        <span id="wx-desc" class="muted">Tiempo</span>
+      </div>
+      <button id="refreshBtn" class="ghost">Actualizar</button>
+      <button id="teenToggle" class="pill" aria-pressed="false" title="Ver modo Teens">Teens</button>
     </div>
   </header>
 
-  <main id="app" class="container" aria-live="polite">
-    <div class="loading">Cargando…</div>
+  <main>
+    <p id="updatedAt" class="muted top-note">Actualizando…</p>
+
+    <section><h2>Cataluña</h2><ul id="list-cataluna" class="news-list"></ul></section>
+    <section><h2>España</h2><ul id="list-espana" class="news-list"></ul></section>
+    <section><h2>La Rioja</h2><ul id="list-rioja" class="news-list"></ul></section>
+    <section><h2>Local</h2><ul id="list-local" class="news-list"></ul></section>
+    <section><h2>Global</h2><ul id="list-background" class="news-list"></ul></section>
   </main>
 
-  <footer class="footer">
-    <span id="version"></span>
+  <footer class="app-footer">
+    <small>
+      <span id="versionBadge" class="badge"></span> • 
+      <a href="#" id="forceCacheClear">Limpiar caché</a> •
+      Fuentes verificadas
+    </small>
   </footer>
 
   <script src="main.js" defer></script>
