@@ -1,15 +1,9 @@
-# .github/workflows/update-news.yml
-name: Update latest.json (news)
+name: Update News
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'   # cada hora en punto (UTC)
-
-# Evita carreras: si hay uno en curso, cancélalo
-concurrency:
-  group: update-news
-  cancel-in-progress: true
+    - cron: "0 */3 * * *" # cada 3 horas
+  workflow_dispatch: # para lanzarlo manualmente desde GitHub Actions
 
 jobs:
   build:
@@ -17,105 +11,29 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0            # necesario para pull --rebase
-          persist-credentials: true # usa GITHUB_TOKEN para push
+          fetch-depth: 0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "18"
 
-      - name: Ensure deps (rss-parser + ESM)
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build script
+        run: node scripts/build_latest.js
+
+      - name: Commit changes
         run: |
-          if [ ! -f package.json ]; then
-            echo '{"name":"news","private":true,"type":"module","dependencies":{"rss-parser":"^3.13.0"}}' > package.json
-          else
-            node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json')); if(p.type!=='module'){p.type='module'; fs.writeFileSync('package.json', JSON.stringify(p,null,2));}"
-            npm pkg set dependencies.rss-parser='^3.13.0'
-          fi
-          npm i --no-audit --no-fund
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add data/latest.json
+          git commit -m "chore(news): auto-update latest.json (v${{ github.run_number }})" || echo "No changes to commit"
 
-      - name: Compute build version
-        run: echo "BUILD_VERSION=v$(date -u +%Y.%m.%d).${GITHUB_RUN_NUMBER}+${GITHUB_SHA::7}" >> $GITHUB_ENV
-
-      - name: Build latest.json (news)
-        env:
-          NODE_OPTIONS: "--max-old-space-size=512"
-          BUILD_VERSION: ${{ env.BUILD_VERSION }}
-          GIT_SHA: ${{ github.sha }}
+      - name: Push changes
         run: |
-          test -f scripts/build_latest.js || (echo "scripts/build_latest.js not found" && exit 1)
-          node scripts/build_latest.js
-          test -f data/latest.json || (echo "data/latest.json not created" && exit 1)
-          test -f data/meta.json   || (echo "data/meta.json not created" && exit 1)
-
-      - name: Validate latest.json
-        run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const j = JSON.parse(fs.readFileSync('data/latest.json','utf8'));
-          const keys = ['cataluna','espana','rioja','background'];
-          if (!j.updated_at || !keys.every(k => Array.isArray(j[k]))) {
-            console.error('Invalid structure'); process.exit(1);
-          }
-          const total = keys.reduce((a,k)=>a+(j[k]?.length||0),0);
-          console.log('total items:', total);
-          if (total < 2) { console.error('Too few items (<2). Abort.'); process.exit(2); }
-          NODE
-
-      - name: Fetch weather.json (Molins de Rei fallback)
-        env:
-          WX_LAT: "41.41"
-          WX_LON: "2.02"
-          WX_TZ:  "Europe/Madrid"
-        run: |
-          test -f scripts/fetch_weather.js || (echo "scripts/fetch_weather.js not found" && exit 1)
-          node scripts/fetch_weather.js || true
-          test -f data/weather.json || echo '{"tempC":null,"summary":"Despejado","icon":"Despejado","updatedAt":"'$BUILD_VERSION'","source":"fallback"}' > data/weather.json
-
-      - name: Configure git author
-        run: |
-          git config --global user.name  "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Stage generated files
-        run: |
-          git add data/latest.json data/meta.json data/weather.json || true
-          git status --porcelain
-
-      - name: Commit if changes
-        id: commit_step
-        run: |
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No changes to commit"
-          else
-            git commit -m "chore(news): auto-update latest.json & weather.json ($BUILD_VERSION)"
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Rebase & push (robusto ante non-fast-forward)
-        if: steps.commit_step.outputs.changed == 'true'
-        run: |
-          set -e
-          # Intenta hasta 3 veces por si la rama remota avanza mientras empujamos
-          for i in 1 2 3; do
-            echo "Push attempt $i/3…"
-            # Rebase con autostash para no perder cambios generados
-            git pull --rebase --autostash origin $GITHUB_REF_NAME || true
-            if git push origin HEAD:$GITHUB_REF_NAME; then
-              echo "Push OK"; exit 0
-            fi
-            sleep 2
-          done
-          echo "Push failed after retries"
-          exit 1
-
-      - name: Upload latest.json (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: latest-json-debug
-          path: data/latest.json
+          git pull --rebase origin main || true
+          git push origin HEAD:main
