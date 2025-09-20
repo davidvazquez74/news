@@ -1,50 +1,149 @@
-:root{
-  --bg:#111317; --fg:#EDEFF3; --muted:#A9B0BC; --card:#181B21; --card2:#1C2027;
-  --blue:#8CC8FF; --chip:#232831; --accent:#3A86FF;
-  --radius:22px; --pad:16px; --pad2:20px;
-  --title: clamp(28px, 5vw, 44px);
+// NotiBuddy - front minimal compatible
+const $ = s => document.querySelector(s);
+const appEl = $("#app");
+const nowFmt = () => new Date().toISOString();
+
+// Footer/build info
+function setBuildInfo(meta){
+  const appV = `App vTeen2.3`;
+  const dataV = meta?.version ? `Datos ${meta.version}` : "Datos –";
+  $("#app-version").textContent = appV;
+  $("#app-version-bottom").textContent = appV;
+  $("#data-version").textContent = dataV;
+  $("#data-version-bottom").textContent = dataV;
+  const t = new Date().toISOString();
+  $("#now").textContent = t;
+  $("#now-bottom").textContent = t;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text","Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color:var(--fg); background:var(--bg); -webkit-font-smoothing:antialiased; line-height:1.4;
+
+// Fetch JSON helper (always bypass HTTP cache)
+async function getJSON(url){
+  const u = new URL(url, location.href);
+  u.searchParams.set("_", Date.now().toString());
+  const res = await fetch(u.toString(), { cache: "no-store" });
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  return res.json();
 }
-.nb-header{position:sticky; top:0; z-index:10; background:linear-gradient(180deg, rgba(17,19,23,.98), rgba(17,19,23,.9) 70%, rgba(17,19,23,0)); padding:var(--pad2) var(--pad); backdrop-filter:saturate(140%) blur(8px)}
-.nb-header__top{display:flex; align-items:center; gap:12px; justify-content:space-between}
-.nb-title{font-size:var(--title); margin:0; letter-spacing:.2px}
-.nb-actions{display:flex; gap:10px; align-items:center}
-.nb-btn{border:1px solid #2A2F38; background:var(--chip); color:var(--fg); padding:10px 14px; border-radius:14px; font-weight:600}
-.nb-btn--ghost{background:transparent}
-.nb-seg{border:none; background:var(--chip); color:var(--fg); padding:8px 12px; border-radius:20px; font-weight:600; opacity:.6}
-.nb-seg.active{opacity:1; background:#2A313B}
-.nb-buildline{color:var(--muted); font-size:12px; margin-top:4px; display:flex; gap:8px; align-items:center}
 
-.nb-main{padding:8px var(--pad) 120px}
-.nb-section-title{margin:26px 0 10px; font-weight:800; font-size:22px; letter-spacing:.3px}
-.nb-card{background:var(--card); border-radius:var(--radius); padding:16px; margin:10px 0; box-shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 10px 30px rgba(0,0,0,.25)}
-.nb-card--click{transition:transform .08s ease, background .2s ease}
-.nb-card--click:active{transform:scale(.995)}
-.nb-card h3{margin:0 0 8px; font-size:20px; color:var(--blue); line-height:1.25}
-.nb-card p{margin:0 0 8px}
-.nb-tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-.nb-tag{background:var(--chip); color:var(--muted); padding:4px 10px; border-radius:999px; font-size:12px}
-.nb-muted{color:var(--muted)}
-.nb-mutedsm{color:var(--muted); font-size:12px}
-
-.nb-card--weather{display:flex; flex-direction:column; gap:6px; background:var(--card2)}
-.nb-weather__now{display:flex; align-items:center; gap:14px}
-.nb-weather__temp{font-size:32px; font-weight:800}
-.nb-weather__desc{display:flex; flex-direction:column; gap:2px}
-
-.nb-footer{position:sticky; bottom:0; background:linear-gradient(180deg, rgba(17,19,23,0), rgba(17,19,23,.8) 30%, rgba(17,19,23,1) 60%); padding:14px var(--pad) 20px; backdrop-filter: blur(8px);}
-.nb-footer__row{display:flex; gap:10px; flex-wrap:wrap}
-.nb-chip{background:var(--chip); border:1px solid #2A2F38; color:var(--fg); padding:10px 14px; border-radius:18px; font-weight:600}
-.nb-footer__meta{color:var(--muted); margin-top:8px; font-size:12px; display:flex; gap:8px; align-items:center}
-
-a.nb-link{color:inherit; text-decoration:none}
-a.nb-link:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-
-@media (min-width:900px){
-  .nb-main{max-width:860px; margin:0 auto}
+function hoursAgo(iso){
+  try{
+    const diff = (Date.now() - new Date(iso).getTime())/36e5;
+    if(diff < 1) return "hace unos minutos";
+    if(diff < 24) return `hace ${Math.round(diff)} h`;
+    return new Date(iso).toLocaleString();
+  }catch{ return ""; }
 }
+
+function card(news){
+  const tags = [];
+  if(news.tag) tags.push(`<span class="nb-tag">#${news.tag}</span>`);
+  if(typeof news.severity === "number") tags.push(`<span class="nb-tag">sev ${news.severity}</span>`);
+  const time = news.published_at ? new Date(news.published_at).toLocaleString() : "";
+  return `
+    <a class="nb-link" href="${news.url || "#"}" target="_blank" rel="noopener">
+      <article class="nb-card nb-card--click">
+        <h3>${news.title}</h3>
+        ${news.summary ? `<p class="nb-muted">${news.summary}</p>` : ""}
+        ${news.impact ? `<p><strong>Impacto:</strong> ${news.impact}</p>` : ""}
+        ${time ? `<div class="nb-mutedsm">${time}</div>` : ""}
+        ${tags.length ? `<div class="nb-tags">${tags.join("")}</div>` : ""}
+      </article>
+    </a>`;
+}
+
+function section(name, items){
+  const id = name.toLowerCase().replace(/\s+/g,"-");
+  const title = name.toUpperCase();
+  return `
+    <section id="${id}">
+      <h2 class="nb-section-title">${title}</h2>
+      ${items.map(card).join("")}
+    </section>`;
+}
+
+async function render(){
+  try{
+    const json = await getJSON("./latest.json");
+    setBuildInfo(json);
+    appEl.innerHTML = "";
+    const groups = [];
+    if(json.cataluna?.length) groups.push(section("Cataluña", json.cataluna));
+    if(json.espana?.length) groups.push(section("España", json.espana));
+    if(json.rioja?.length) groups.push(section("Rioja", json.rioja));
+    if(json.background?.length) groups.push(section("Global", json.background));
+    if(groups.length === 0){
+      appEl.innerHTML = `<div class="nb-card"><h3>Sin noticias</h3><p class="nb-muted">No hay datos en latest.json</p></div>`;
+    }else{
+      appEl.innerHTML = groups.join("\n");
+    }
+  }catch(err){
+    appEl.innerHTML = `<div class="nb-card"><h3>Error</h3><p class="nb-muted">No se pudo cargar latest.json</p><pre class="nb-mutedsm">${String(err)}</pre></div>`;
+  }
+}
+
+// Controls
+$("#btn-clear").addEventListener("click", async () => {
+  if("caches" in window){
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => caches.delete(k)));
+  }
+  sessionStorage.clear(); localStorage.clear();
+  location.reload();
+});
+$("#btn-force").addEventListener("click", () => location.reload(true));
+$("#force-refresh").addEventListener("click", () => location.reload(true));
+
+// Toggle teen view (client side, filtro por impact_teen si existe)
+let teenMode = false;
+function setSegUI(){
+  $("#toggle-mode").classList.toggle("active", !teenMode);
+  $("#toggle-mode-teen").classList.toggle("active", teenMode);
+}
+$("#toggle-mode").addEventListener("click", ()=>{ teenMode=false; render(); setSegUI(); });
+$("#toggle-mode-teen").addEventListener("click", ()=>{ teenMode=true; renderTeen(); setSegUI(); });
+$("#btn-teen").addEventListener("click", ()=>{ teenMode = !teenMode; teenMode ? renderTeen() : render(); setSegUI(); });
+
+async function renderTeen(){
+  try{
+    const json = await getJSON("./latest.json");
+    setBuildInfo(json);
+    const mapTeen = (arr=[]) => arr.map(n => ({
+      ...n,
+      impact: n.impact_teen || n.impact
+    }));
+    const out = [];
+    if(json.cataluna?.length) out.push(section("Cataluña", mapTeen(json.cataluna)));
+    if(json.espana?.length)   out.push(section("España",   mapTeen(json.espana)));
+    if(json.rioja?.length)    out.push(section("Rioja",    mapTeen(json.rioja)));
+    if(json.background?.length) out.push(section("Global", mapTeen(json.background)));
+    appEl.innerHTML = out.join("\n") || `<div class="nb-card"><h3>Sin noticias</h3></div>`;
+  }catch(e){
+    appEl.innerHTML = `<div class="nb-card"><h3>Error</h3><pre class="nb-mutedsm">${String(e)}</pre></div>`;
+  }
+}
+
+// Weather (uses existing weather_client.js API if present)
+(function initWeather(){
+  if(typeof window.NotiWeather === "function"){
+    window.NotiWeather({
+      onUpdate: (w) => {
+        const now = w?.now || {};
+        const place = w?.place || {};
+        const hi = w?.today?.hi;
+        const lo = w?.today?.lo;
+        document.getElementById("w-temp").textContent = (now.temp ?? "--") + "°C";
+        document.getElementById("w-summary").textContent = now.summary || "";
+        document.getElementById("w-location").textContent = place.name || "";
+        document.getElementById("w-hi").textContent = (hi!=null? "↑"+hi+"°":"");
+        document.getElementById("w-lo").textContent = (lo!=null? "↓"+lo+"°":"");
+        document.getElementById("w-updated").textContent = "Actualizado: " + (now.time || new Date().toLocaleString());
+      }
+    });
+  }else{
+    // fallback label
+    document.getElementById("w-summary").textContent = "Tiempo no disponible";
+  }
+})();
+
+render();
+setSegUI();
