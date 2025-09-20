@@ -1,26 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>NotiBuddy</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="styles.weather.v1.css">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#111317">
 </head>
 <body>
-  <header>
-    <h1>NotiBuddy</h1>
-    <p>Noticias con impacto útil</p>
-    <div id="weather-widget"></div>
+  <div id="safe-area"></div>
+
+  <header class="nb-header">
+    <div class="nb-header__top">
+      <h1 class="nb-title">Noticias</h1>
+      <div class="nb-actions">
+        <button id="force-refresh" class="nb-btn nb-btn--ghost">Forzar app</button>
+        <button id="toggle-mode" class="nb-seg active">Adulto</button>
+        <button id="toggle-mode-teen" class="nb-seg">Teen</button>
+      </div>
+    </div>
+    <div class="nb-buildline">
+      <span id="app-version">App vTeen</span>
+      <span>•</span>
+      <span id="data-version">Datos</span>
+      <span>•</span>
+      <time id="now"></time>
+    </div>
   </header>
-  <main id="news"></main>
-  <footer>
-    <button id="toggle-teen">Modo Teen</button>
-    <button id="clear-cache">Limpiar caché</button>
-    <button id="force-app">Forzar app</button>
-    <div id="version"></div>
+
+  <section id="weather" class="nb-weather" aria-live="polite">
+    <div class="nb-card nb-card--weather">
+      <div class="nb-weather__now">
+        <div class="nb-weather__temp" id="w-temp">--°C</div>
+        <div class="nb-weather__desc">
+          <div id="w-summary">Cargando…</div>
+          <div class="nb-muted"><span id="w-location"></span> · <span id="w-hi">↑--°</span> <span id="w-lo">↓--°</span></div>
+        </div>
+      </div>
+      <div class="nb-mutedsm" id="w-updated">Actualizado: —</div>
+    </div>
+  </section>
+
+  <main id="app" class="nb-main">
+    <!-- Secciones de noticias -->
+  </main>
+
+  <footer class="nb-footer">
+    <div class="nb-footer__row">
+      <button id="btn-teen" class="nb-chip">Modo Teen</button>
+      <button id="btn-clear" class="nb-chip">Limpiar caché</button>
+      <button id="btn-force" class="nb-chip">Forzar app</button>
+    </div>
+    <div class="nb-footer__meta">
+      <span id="app-version-bottom"></span>
+      <span>•</span>
+      <span id="data-version-bottom"></span>
+      <span>•</span>
+      <time id="now-bottom"></time>
+    </div>
   </footer>
+
   <script src="weather_client.js"></script>
-  <script src="main.js"></script>
+  <script src="main.js" type="module"></script>
 </body>
 </html>
