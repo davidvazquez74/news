@@ -1,149 +1,204 @@
-// NotiBuddy - front minimal compatible
-const $ = s => document.querySelector(s);
-const appEl = $("#app");
-const nowFmt = () => new Date().toISOString();
-
-// Footer/build info
-function setBuildInfo(meta){
-  const appV = `App vTeen2.3`;
-  const dataV = meta?.version ? `Datos ${meta.version}` : "Datos –";
-  $("#app-version").textContent = appV;
-  $("#app-version-bottom").textContent = appV;
-  $("#data-version").textContent = dataV;
-  $("#data-version-bottom").textContent = dataV;
-  const t = new Date().toISOString();
-  $("#now").textContent = t;
-  $("#now-bottom").textContent = t;
+/* ====== Base / Theme ====== */
+:root{
+  --bg: #0f1115;
+  --bg-elev: #161a20;
+  --card: #181d23;
+  --text: #e7ecf2;
+  --muted: #a9b2bd;
+  --muted-2: #8b96a3;
+  --primary: #7cc3ff; /* azul titular */
+  --stroke: #222833;
+  --shadow: 0 8px 24px rgba(0,0,0,.35);
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+  --space-5: 22px;
+  --space-6: 28px;
+  --space-7: 34px;
+  --maxw: 980px;
 }
 
-// Fetch JSON helper (always bypass HTTP cache)
-async function getJSON(url){
-  const u = new URL(url, location.href);
-  u.searchParams.set("_", Date.now().toString());
-  const res = await fetch(u.toString(), { cache: "no-store" });
-  if(!res.ok) throw new Error("HTTP "+res.status);
-  return res.json();
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 12px) env(safe-area-inset-left);
+  background:var(--bg);
+  color:var(--text);
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
 }
 
-function hoursAgo(iso){
-  try{
-    const diff = (Date.now() - new Date(iso).getTime())/36e5;
-    if(diff < 1) return "hace unos minutos";
-    if(diff < 24) return `hace ${Math.round(diff)} h`;
-    return new Date(iso).toLocaleString();
-  }catch{ return ""; }
+/* Contenedor centrado */
+#safe-area, .nb-container{
+  width:100%;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding: 0 var(--space-4);
 }
 
-function card(news){
-  const tags = [];
-  if(news.tag) tags.push(`<span class="nb-tag">#${news.tag}</span>`);
-  if(typeof news.severity === "number") tags.push(`<span class="nb-tag">sev ${news.severity}</span>`);
-  const time = news.published_at ? new Date(news.published_at).toLocaleString() : "";
-  return `
-    <a class="nb-link" href="${news.url || "#"}" target="_blank" rel="noopener">
-      <article class="nb-card nb-card--click">
-        <h3>${news.title}</h3>
-        ${news.summary ? `<p class="nb-muted">${news.summary}</p>` : ""}
-        ${news.impact ? `<p><strong>Impacto:</strong> ${news.impact}</p>` : ""}
-        ${time ? `<div class="nb-mutedsm">${time}</div>` : ""}
-        ${tags.length ? `<div class="nb-tags">${tags.join("")}</div>` : ""}
-      </article>
-    </a>`;
+/* ====== Header ====== */
+.nb-header{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(180deg, rgba(15,17,21,.98), rgba(15,17,21,.9) 70%, rgba(15,17,21,0));
+  backdrop-filter:saturate(140%) blur(6px);
+  padding: var(--space-5) 0 var(--space-3);
+}
+.nb-header .nb-header-left h1{
+  font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont;
+  font-size: 42px; font-weight: 800; letter-spacing:.2px;
+  margin: 0 0 var(--space-2) 0;
+}
+.nb-header{
+  display:flex; align-items:flex-end; justify-content:space-between;
+}
+.nb-meta{
+  display:flex; align-items:center; gap:8px;
+  color:var(--muted); font-size:13px;
+}
+.nb-meta .dot{opacity:.5}
+
+/* Switch Teen */
+.nb-switch{
+  position:relative; display:inline-flex; align-items:center; gap:10px;
+  cursor:pointer; user-select:none;
+}
+.nb-switch input{ display:none; }
+.nb-switch .slider{
+  width:46px; height:28px; border-radius:999px;
+  background:#2a313d; border:1px solid var(--stroke);
+  position:relative; transition:.2s background;
+}
+.nb-switch .slider::after{
+  content:""; position:absolute; top:50%; left:4px; translate:0 -50%;
+  width:20px; height:20px; border-radius:50%;
+  background:#fff; transition:.2s left;
+}
+.nb-switch input:checked + .slider{
+  background:#2c7be5;
+}
+.nb-switch input:checked + .slider::after{
+  left:22px;
+}
+.nb-switch .label{ color:var(--muted); font-weight:600; }
+
+/* ====== Pills (categorías) ====== */
+.nb-pills{
+  margin: var(--space-3) 0 var(--space-4);
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  padding-bottom: 2px;
+}
+.nb-pills::-webkit-scrollbar{ display:none; }
+.nb-pills .pill{
+  appearance:none; border:1px solid var(--stroke);
+  background: var(--bg-elev);
+  color:var(--text); opacity:.9;
+  padding: 8px 14px; border-radius:999px;
+  font-weight:600; font-size:14px;
+  white-space:nowrap; cursor:pointer;
+}
+.nb-pills .pill.active{ background:#263041; color:#cfe7ff; border-color:#2f3b4f; }
+
+/* ====== Weather card ====== */
+.nb-weather-card{
+  background:var(--card); border:1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5); margin-bottom: var(--space-5);
+  box-shadow: var(--shadow);
+}
+.nb-weather-loading{ color:var(--muted); }
+.nb-weather-card .row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.nb-weather-card .temp{
+  font-size: 36px; font-weight:800;
+}
+.nb-weather-card .meta{
+  color:var(--muted); font-size:14px;
 }
 
-function section(name, items){
-  const id = name.toLowerCase().replace(/\s+/g,"-");
-  const title = name.toUpperCase();
-  return `
-    <section id="${id}">
-      <h2 class="nb-section-title">${title}</h2>
-      ${items.map(card).join("")}
-    </section>`;
+/* ====== Secciones / Cards de noticia ====== */
+main#content{ padding-bottom: var(--space-7); }
+main section{ margin: var(--space-6) 0; }
+
+main section::before{
+  content: attr(id); /* será reemplazado por JS con título visible si lo prefieres */
+  display:block; color:#dfe6ed; opacity:.92;
+  font-family: "SF Pro Display"; font-weight: 900; letter-spacing:.6px;
+  font-size: 26px; margin: 0 0 var(--space-3);
+  text-transform: uppercase;
 }
 
-async function render(){
-  try{
-    const json = await getJSON("./latest.json");
-    setBuildInfo(json);
-    appEl.innerHTML = "";
-    const groups = [];
-    if(json.cataluna?.length) groups.push(section("Cataluña", json.cataluna));
-    if(json.espana?.length) groups.push(section("España", json.espana));
-    if(json.rioja?.length) groups.push(section("Rioja", json.rioja));
-    if(json.background?.length) groups.push(section("Global", json.background));
-    if(groups.length === 0){
-      appEl.innerHTML = `<div class="nb-card"><h3>Sin noticias</h3><p class="nb-muted">No hay datos en latest.json</p></div>`;
-    }else{
-      appEl.innerHTML = groups.join("\n");
-    }
-  }catch(err){
-    appEl.innerHTML = `<div class="nb-card"><h3>Error</h3><p class="nb-muted">No se pudo cargar latest.json</p><pre class="nb-mutedsm">${String(err)}</pre></div>`;
-  }
+/* Si ya imprimes el título por JS, oculta el pseudo: */
+/* main section::before { content: none; } */
+
+.nb-card{
+  background:var(--card); border:1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5); margin-bottom: var(--space-4);
+  box-shadow: var(--shadow);
+}
+.nb-card h3{
+  margin:0 0 var(--space-3); font-size:22px; line-height:1.2;
+  color:#cfe7ff; font-weight:800;
+}
+.nb-card a{ color:var(--primary); text-decoration:none; }
+.nb-card a:hover{ text-decoration:underline; }
+.nb-card .excerpt{ color:var(--text); opacity:.92; margin: 0 0 var(--space-3); }
+.nb-card .meta{
+  display:flex; flex-wrap:wrap; gap:10px; color:var(--muted-2); font-size:13px;
+}
+.nb-tag{
+  background:#222935; border:1px solid #2b3442; color:#bcd3ea;
+  padding: 5px 10px; border-radius:999px; font-size:12px; font-weight:600;
+}
+.nb-impact{
+  margin-top: var(--space-3); color:#dfe6ed; font-weight:700;
+}
+.nb-impact small{ color:var(--muted); font-weight:600 }
+
+/* ====== Footer ====== */
+.nb-footer{
+  position:sticky; bottom:0; z-index:40;
+  margin-top: var(--space-6);
+  background: linear-gradient(0deg, rgba(15,17,21,.96), rgba(15,17,21,.85) 70%, rgba(15,17,21,0));
+  backdrop-filter: blur(6px);
+  padding: var(--space-5) 0 var(--space-5);
+}
+.nb-footer .nb-footer-actions{
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  margin-bottom: var(--space-3);
+}
+.nb-btn{
+  appearance:none; border:1px solid var(--stroke);
+  background: var(--bg-elev); color: var(--text);
+  padding: 12px 16px; border-radius: 14px; font-weight:700;
+}
+.nb-btn:active{ transform: translateY(1px); }
+.nb-footer .nb-meta{
+  justify-content:center; gap:8px; color:var(--muted); font-size:13px;
 }
 
-// Controls
-$("#btn-clear").addEventListener("click", async () => {
-  if("caches" in window){
-    const keys = await caches.keys();
-    await Promise.all(keys.map(k => caches.delete(k)));
-  }
-  sessionStorage.clear(); localStorage.clear();
-  location.reload();
-});
-$("#btn-force").addEventListener("click", () => location.reload(true));
-$("#force-refresh").addEventListener("click", () => location.reload(true));
+/* ====== Helpers ====== */
+.hidden{ display:none !important; }
+.center{ text-align:center; }
 
-// Toggle teen view (client side, filtro por impact_teen si existe)
-let teenMode = false;
-function setSegUI(){
-  $("#toggle-mode").classList.toggle("active", !teenMode);
-  $("#toggle-mode-teen").classList.toggle("active", teenMode);
-}
-$("#toggle-mode").addEventListener("click", ()=>{ teenMode=false; render(); setSegUI(); });
-$("#toggle-mode-teen").addEventListener("click", ()=>{ teenMode=true; renderTeen(); setSegUI(); });
-$("#btn-teen").addEventListener("click", ()=>{ teenMode = !teenMode; teenMode ? renderTeen() : render(); setSegUI(); });
-
-async function renderTeen(){
-  try{
-    const json = await getJSON("./latest.json");
-    setBuildInfo(json);
-    const mapTeen = (arr=[]) => arr.map(n => ({
-      ...n,
-      impact: n.impact_teen || n.impact
-    }));
-    const out = [];
-    if(json.cataluna?.length) out.push(section("Cataluña", mapTeen(json.cataluna)));
-    if(json.espana?.length)   out.push(section("España",   mapTeen(json.espana)));
-    if(json.rioja?.length)    out.push(section("Rioja",    mapTeen(json.rioja)));
-    if(json.background?.length) out.push(section("Global", mapTeen(json.background)));
-    appEl.innerHTML = out.join("\n") || `<div class="nb-card"><h3>Sin noticias</h3></div>`;
-  }catch(e){
-    appEl.innerHTML = `<div class="nb-card"><h3>Error</h3><pre class="nb-mutedsm">${String(e)}</pre></div>`;
-  }
+@media (min-width:700px){
+  .nb-header .nb-header-left h1{ font-size: 56px; }
+  .nb-card h3{ font-size:24px; }
+  .nb-weather-card .temp{ font-size:42px; }
 }
 
-// Weather (uses existing weather_client.js API if present)
-(function initWeather(){
-  if(typeof window.NotiWeather === "function"){
-    window.NotiWeather({
-      onUpdate: (w) => {
-        const now = w?.now || {};
-        const place = w?.place || {};
-        const hi = w?.today?.hi;
-        const lo = w?.today?.lo;
-        document.getElementById("w-temp").textContent = (now.temp ?? "--") + "°C";
-        document.getElementById("w-summary").textContent = now.summary || "";
-        document.getElementById("w-location").textContent = place.name || "";
-        document.getElementById("w-hi").textContent = (hi!=null? "↑"+hi+"°":"");
-        document.getElementById("w-lo").textContent = (lo!=null? "↓"+lo+"°":"");
-        document.getElementById("w-updated").textContent = "Actualizado: " + (now.time || new Date().toLocaleString());
-      }
-    });
-  }else{
-    // fallback label
-    document.getElementById("w-summary").textContent = "Tiempo no disponible";
-  }
-})();
-
-render();
-setSegUI();
+/* ====== Legacy compatibility (por si tu JS antiguo inyecta estas clases) ====== */
+/* Esto evita “romper” mientras migras JS */
+.nb-card--weather{ background:var(--card); border:1px solid var(--stroke); border-radius:var(--radius-xl); }
+.nb-chip, .nb-seg{
+  display:inline-flex; align-items:center; justify-content:center;
+  background: var(--bg-elev); color: var(--text); border:1px solid var(--stroke);
+  padding:10px 14px; border-radius:14px; font-weight:700;
+}
+.nb-seg.active{ background:#263041; color:#cfe7ff; border-color:#2f3b4f; }
