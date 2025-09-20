@@ -1,28 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NotiBuddy — Demo</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotiBuddy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.weather.v1.css">
 </head>
 <body>
-  <header class="app-header">
+  <header>
     <h1>NotiBuddy</h1>
-    <p class="subtitle">Noticias con impacto útil</p>
+    <p>Noticias con impacto útil</p>
+    <div id="weather-widget"></div>
   </header>
-
-  <main>
-    <section id="feed"></section>
-  </main>
-
-  <footer id="app-footer"></footer>
-
-  <script>
-    // ======= Config de la App (build estático) =======
-    const APP_VERSION = 'vTeen2.2';
-    const LATEST_URL = './latest.json'; // ajústalo si lo sirves desde otro origen
-  </script>
-  <script src="./main.js"></script>
+  <main id="news"></main>
+  <footer>
+    <button id="toggle-teen">Modo Teen</button>
+    <button id="clear-cache">Limpiar caché</button>
+    <button id="force-app">Forzar app</button>
+    <div id="version"></div>
+  </footer>
+  <script src="weather_client.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
