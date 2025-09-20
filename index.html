@@ -4,31 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>NotiBuddy</title>
-
-  <!-- PWA / iOS -->
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <meta name="theme-color" content="#111317">
-
-  <!-- Estilos -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="styles.weather.v1.css">
-
-  <style>
-    /* Oculta elementos legacy que mantenemos por compatibilidad JS */
-    .visually-hidden {
-      position: absolute !important;
-      height: 1px; width: 1px;
-      overflow: hidden; clip: rect(1px,1px,1px,1px);
-      white-space: nowrap; clip-path: inset(50%);
-      border: 0; padding: 0; margin: -1px;
-    }
-  </style>
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#111317">
 </head>
 <body>
   <div id="safe-area"></div>
 
-  <!-- ========== HEADER NUEVO (requerido) ========== -->
   <header class="nb-header">
     <div class="nb-header-left">
       <h1>Noticias</h1>
@@ -42,7 +26,7 @@
     </div>
 
     <div class="nb-header-right">
-      <label class="nb-switch">
+      <label class="nb-switch nb-switch--text">
         <input type="checkbox" id="teenToggle" />
         <span class="slider"></span>
         <span class="label">Teen</span>
@@ -50,26 +34,6 @@
     </div>
   </header>
 
-  <!-- ======= HEADER LEGACY (oculto, para no romper JS existente) ======= -->
-  <header class="nb-header visually-hidden" aria-hidden="true">
-    <div class="nb-header__top">
-      <h1 class="nb-title">Noticias</h1>
-      <div class="nb-actions">
-        <button id="force-refresh" class="nb-btn nb-btn--ghost">Forzar app</button>
-        <button id="toggle-mode" class="nb-seg active">Adulto</button>
-        <button id="toggle-mode-teen" class="nb-seg">Teen</button>
-      </div>
-    </div>
-    <div class="nb-buildline">
-      <span id="app-version">App vTeen</span>
-      <span>•</span>
-      <span id="data-version">Datos</span>
-      <span>•</span>
-      <time id="now"></time>
-    </div>
-  </header>
-
-  <!-- ========== NAV PILLS (requerido) ========== -->
   <nav class="nb-pills" id="nbPills">
     <button data-target="cat-para-ti" class="pill active">Para ti</button>
     <button data-target="cat-cataluna" class="pill">Cataluña</button>
@@ -78,40 +42,18 @@
     <button data-target="cat-global" class="pill">Mundo</button>
   </nav>
 
-  <!-- ========== WEATHER (requerido) ========== -->
-  <section id="weather" class="nb-weather-card" aria-live="polite">
-    <!-- Lo rellena weather_client.js / main.js -->
+  <section id="weather" class="nb-weather-card">
     <div class="nb-weather-loading">Cargando el tiempo…</div>
   </section>
 
-  <!-- ======= WEATHER LEGACY (oculto, por compatibilidad de selectores) ======= -->
-  <section id="weather-legacy" class="nb-weather visually-hidden" aria-hidden="true">
-    <div class="nb-card nb-card--weather">
-      <div class="nb-weather__now">
-        <div class="nb-weather__temp" id="w-temp">--°C</div>
-        <div class="nb-weather__desc">
-          <div id="w-summary">Cargando…</div>
-          <div class="nb-muted"><span id="w-location"></span> · <span id="w-hi">↑--°</span> <span id="w-lo">↓--°</span></div>
-        </div>
-      </div>
-      <div class="nb-mutedsm" id="w-updated">Actualizado: —</div>
-    </div>
-  </section>
-
-  <!-- ========== CONTENT (requerido) ========== -->
-  <!-- Conservamos tu contenedor #app para no romper el código actual.
-       Dentro incluimos las secciones con los IDs que has pedido. -->
-  <main id="app" class="nb-main">
-    <main id="content">
-      <section id="cat-para-ti"></section>
-      <section id="cat-cataluna"></section>
-      <section id="cat-espana"></section>
-      <section id="cat-rioja"></section>
-      <section id="cat-global"></section>
-    </main>
+  <main id="content">
+    <section id="cat-para-ti"></section>
+    <section id="cat-cataluna"></section>
+    <section id="cat-espana"></section>
+    <section id="cat-rioja"></section>
+    <section id="cat-global"></section>
   </main>
 
-  <!-- ========== FOOTER NUEVO (requerido) ========== -->
   <footer class="nb-footer">
     <div class="nb-footer-actions">
       <button id="btnClearCache" class="nb-btn">Limpiar caché</button>
@@ -126,24 +68,7 @@
     </div>
   </footer>
 
-  <!-- ======= FOOTER LEGACY (oculto, por compatibilidad) ======= -->
-  <footer class="nb-footer visually-hidden" aria-hidden="true">
-    <div class="nb-footer__row">
-      <button id="btn-teen" class="nb-chip">Modo Teen</button>
-      <button id="btn-clear" class="nb-chip">Limpiar caché</button>
-      <button id="btn-force" class="nb-chip">Forzar app</button>
-    </div>
-    <div class="nb-footer__meta">
-      <span id="app-version-bottom"></span>
-      <span>•</span>
-      <span id="data-version-bottom"></span>
-      <span>•</span>
-      <time id="now-bottom"></time>
-    </div>
-  </footer>
-
-  <!-- Scripts (respetamos tu carga actual) -->
-  <script src="weather_client.js"></script>
-  <script src="main.js" type="module"></script>
+  <script src="./weather_client.js" defer></script>
+  <script src="./main.js" defer></script>
 </body>
 </html>

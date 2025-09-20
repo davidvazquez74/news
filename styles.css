@@ -1,204 +1,67 @@
-/* ====== Base / Theme ====== */
+/* Estilos principales Apple-friendly */
 :root{
-  --bg: #0f1115;
-  --bg-elev: #161a20;
-  --card: #181d23;
-  --text: #e7ecf2;
-  --muted: #a9b2bd;
-  --muted-2: #8b96a3;
-  --primary: #7cc3ff; /* azul titular */
-  --stroke: #222833;
-  --shadow: 0 8px 24px rgba(0,0,0,.35);
-  --radius-xl: 20px;
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --space-1: 6px;
-  --space-2: 10px;
-  --space-3: 14px;
-  --space-4: 18px;
-  --space-5: 22px;
-  --space-6: 28px;
-  --space-7: 34px;
-  --maxw: 980px;
+  --bg: #0f1116;
+  --card: #171a21;
+  --text: #e6e9ef;
+  --muted:#9aa3af;
+  --pill:#1f2430;
+  --pillActive:#2b3140;
+  --radius: 18px;
 }
+body{ background:var(--bg); color:var(--text); margin:0; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif; }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 12px) env(safe-area-inset-left);
-  background:var(--bg);
-  color:var(--text);
-  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-}
-
-/* Contenedor centrado */
-#safe-area, .nb-container{
-  width:100%;
-  max-width:var(--maxw);
-  margin:0 auto;
-  padding: 0 var(--space-4);
-}
-
-/* ====== Header ====== */
 .nb-header{
-  position:sticky; top:0; z-index:50;
-  background:linear-gradient(180deg, rgba(15,17,21,.98), rgba(15,17,21,.9) 70%, rgba(15,17,21,0));
-  backdrop-filter:saturate(140%) blur(6px);
-  padding: var(--space-5) 0 var(--space-3);
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:24px 16px 8px;
 }
-.nb-header .nb-header-left h1{
-  font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont;
-  font-size: 42px; font-weight: 800; letter-spacing:.2px;
-  margin: 0 0 var(--space-2) 0;
-}
-.nb-header{
-  display:flex; align-items:flex-end; justify-content:space-between;
-}
-.nb-meta{
-  display:flex; align-items:center; gap:8px;
-  color:var(--muted); font-size:13px;
-}
-.nb-meta .dot{opacity:.5}
+.nb-header-left h1{ font-size:44px; line-height:1.05; margin:0; }
+.nb-meta{ font-size:.85rem; color:var(--muted); display:flex; gap:.5rem; align-items:center; }
+.nb-meta .dot{ opacity:.5; }
 
-/* Switch Teen */
-.nb-switch{
-  position:relative; display:inline-flex; align-items:center; gap:10px;
-  cursor:pointer; user-select:none;
-}
-.nb-switch input{ display:none; }
-.nb-switch .slider{
-  width:46px; height:28px; border-radius:999px;
-  background:#2a313d; border:1px solid var(--stroke);
-  position:relative; transition:.2s background;
+.nb-switch { display:inline-flex; align-items:center; gap:.5rem; user-select:none; cursor:pointer; }
+.nb-switch input { display:none; }
+.nb-switch .slider {
+  width:44px; height:28px; border-radius:999px;
+  background:#2a2f3a; position:relative; transition:background .2s ease;
 }
 .nb-switch .slider::after{
-  content:""; position:absolute; top:50%; left:4px; translate:0 -50%;
-  width:20px; height:20px; border-radius:50%;
-  background:#fff; transition:.2s left;
+  content:""; width:20px; height:20px; border-radius:50%;
+  background:#fff; position:absolute; top:4px; left:4px;
+  transition:transform .2s ease;
 }
-.nb-switch input:checked + .slider{
-  background:#2c7be5;
-}
-.nb-switch input:checked + .slider::after{
-  left:22px;
-}
-.nb-switch .label{ color:var(--muted); font-weight:600; }
+.nb-switch input:checked + .slider { background:#4c8dff; }
+.nb-switch input:checked + .slider::after { transform:translateX(16px); }
+.nb-switch .label{ font-weight:600; color:#cfd5df; }
 
-/* ====== Pills (categorías) ====== */
-.nb-pills{
-  margin: var(--space-3) 0 var(--space-4);
-  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
-  padding-bottom: 2px;
-}
-.nb-pills::-webkit-scrollbar{ display:none; }
+.nb-pills{ display:flex; gap:.5rem; padding:8px 12px 12px; overflow-x:auto; }
 .nb-pills .pill{
-  appearance:none; border:1px solid var(--stroke);
-  background: var(--bg-elev);
-  color:var(--text); opacity:.9;
-  padding: 8px 14px; border-radius:999px;
-  font-weight:600; font-size:14px;
-  white-space:nowrap; cursor:pointer;
+  background:var(--pill); color:var(--text);
+  border:none; padding:10px 14px; border-radius:999px; font-weight:600;
 }
-.nb-pills .pill.active{ background:#263041; color:#cfe7ff; border-color:#2f3b4f; }
+.nb-pills .pill.active{ background:var(--pillActive); }
 
-/* ====== Weather card ====== */
 .nb-weather-card{
-  background:var(--card); border:1px solid var(--stroke);
-  border-radius: var(--radius-xl);
-  padding: var(--space-5); margin-bottom: var(--space-5);
-  box-shadow: var(--shadow);
+  display:grid; grid-template-columns:1fr auto; gap:8px;
+  background:var(--card); border-radius:var(--radius); padding:16px;
+  margin:8px 12px 16px;
 }
-.nb-weather-loading{ color:var(--muted); }
-.nb-weather-card .row{
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-}
-.nb-weather-card .temp{
-  font-size: 36px; font-weight:800;
-}
-.nb-weather-card .meta{
-  color:var(--muted); font-size:14px;
-}
+.nb-weather-left .temp{ font-size:32px; font-weight:700; }
+.nb-weather-right{ text-align:right; color:var(--muted); }
+.nb-weather-loading{ padding:12px; }
 
-/* ====== Secciones / Cards de noticia ====== */
-main#content{ padding-bottom: var(--space-7); }
-main section{ margin: var(--space-6) 0; }
+#content > section{ padding:8px 12px 24px; }
+.nb-section-title{ letter-spacing:.08em; font-size:1rem; color:var(--muted); margin:8px 4px 12px; }
+.nb-card{ background:var(--card); border-radius:var(--radius); padding:18px; margin-bottom:12px; box-shadow: 0 1px 0 rgba(255,255,255,.04) inset; }
+.nb-title{ font-size:1.35rem; margin:0 0 .5rem 0; }
+.nb-summary{ color:#c9d1db; margin:.25rem 0 .5rem; }
+.nb-impact strong{ font-weight:800; }
+.nb-meta-line{ margin-top:.75rem; display:flex; justify-content:space-between; align-items:center; color:var(--muted); }
+.nb-tag{ display:inline-block; padding:.25rem .6rem; border-radius:999px; background:#232836; color:#cfd5df; font-size:.85rem; margin-left:.35rem; }
 
-main section::before{
-  content: attr(id); /* será reemplazado por JS con título visible si lo prefieres */
-  display:block; color:#dfe6ed; opacity:.92;
-  font-family: "SF Pro Display"; font-weight: 900; letter-spacing:.6px;
-  font-size: 26px; margin: 0 0 var(--space-3);
-  text-transform: uppercase;
-}
+.nb-footer{ padding:18px 12px 28px; }
+.nb-footer-actions{ display:flex; gap:12px; justify-content:center; }
+.nb-btn{ background:var(--card); color:var(--text); border:none; border-radius:16px; padding:14px 18px; font-weight:600; }
 
-/* Si ya imprimes el título por JS, oculta el pseudo: */
-/* main section::before { content: none; } */
-
-.nb-card{
-  background:var(--card); border:1px solid var(--stroke);
-  border-radius: var(--radius-xl);
-  padding: var(--space-5); margin-bottom: var(--space-4);
-  box-shadow: var(--shadow);
-}
-.nb-card h3{
-  margin:0 0 var(--space-3); font-size:22px; line-height:1.2;
-  color:#cfe7ff; font-weight:800;
-}
-.nb-card a{ color:var(--primary); text-decoration:none; }
-.nb-card a:hover{ text-decoration:underline; }
-.nb-card .excerpt{ color:var(--text); opacity:.92; margin: 0 0 var(--space-3); }
-.nb-card .meta{
-  display:flex; flex-wrap:wrap; gap:10px; color:var(--muted-2); font-size:13px;
-}
-.nb-tag{
-  background:#222935; border:1px solid #2b3442; color:#bcd3ea;
-  padding: 5px 10px; border-radius:999px; font-size:12px; font-weight:600;
-}
-.nb-impact{
-  margin-top: var(--space-3); color:#dfe6ed; font-weight:700;
-}
-.nb-impact small{ color:var(--muted); font-weight:600 }
-
-/* ====== Footer ====== */
-.nb-footer{
-  position:sticky; bottom:0; z-index:40;
-  margin-top: var(--space-6);
-  background: linear-gradient(0deg, rgba(15,17,21,.96), rgba(15,17,21,.85) 70%, rgba(15,17,21,0));
-  backdrop-filter: blur(6px);
-  padding: var(--space-5) 0 var(--space-5);
-}
-.nb-footer .nb-footer-actions{
-  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
-  margin-bottom: var(--space-3);
-}
-.nb-btn{
-  appearance:none; border:1px solid var(--stroke);
-  background: var(--bg-elev); color: var(--text);
-  padding: 12px 16px; border-radius: 14px; font-weight:700;
-}
-.nb-btn:active{ transform: translateY(1px); }
-.nb-footer .nb-meta{
-  justify-content:center; gap:8px; color:var(--muted); font-size:13px;
-}
-
-/* ====== Helpers ====== */
-.hidden{ display:none !important; }
-.center{ text-align:center; }
-
-@media (min-width:700px){
-  .nb-header .nb-header-left h1{ font-size: 56px; }
-  .nb-card h3{ font-size:24px; }
-  .nb-weather-card .temp{ font-size:42px; }
-}
-
-/* ====== Legacy compatibility (por si tu JS antiguo inyecta estas clases) ====== */
-/* Esto evita “romper” mientras migras JS */
-.nb-card--weather{ background:var(--card); border:1px solid var(--stroke); border-radius:var(--radius-xl); }
-.nb-chip, .nb-seg{
-  display:inline-flex; align-items:center; justify-content:center;
-  background: var(--bg-elev); color: var(--text); border:1px solid var(--stroke);
-  padding:10px 14px; border-radius:14px; font-weight:700;
-}
-.nb-seg.active{ background:#263041; color:#cfe7ff; border-color:#2f3b4f; }
+/* Enlaces */
+.nb-card a, #content a { color:inherit; text-decoration:none; }
+.nb-card a:hover, #content a:focus { text-decoration:underline; }
