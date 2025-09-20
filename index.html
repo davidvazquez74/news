@@ -1,19 +1,57 @@
-!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>NotiBuddy</title>
+
+  <!-- PWA / iOS -->
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="styles.weather.v1.css">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <meta name="theme-color" content="#111317">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.weather.v1.css">
+
+  <style>
+    /* Oculta elementos legacy que mantenemos por compatibilidad JS */
+    .visually-hidden {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden; clip: rect(1px,1px,1px,1px);
+      white-space: nowrap; clip-path: inset(50%);
+      border: 0; padding: 0; margin: -1px;
+    }
+  </style>
 </head>
 <body>
   <div id="safe-area"></div>
 
+  <!-- ========== HEADER NUEVO (requerido) ========== -->
   <header class="nb-header">
+    <div class="nb-header-left">
+      <h1>Noticias</h1>
+      <div class="nb-meta" id="nbMetaTop">
+        <span id="nbAppVersion"></span>
+        <span class="dot">•</span>
+        <span id="nbDataVersion"></span>
+        <span class="dot">•</span>
+        <span id="nbDataUpdatedAt"></span>
+      </div>
+    </div>
+
+    <div class="nb-header-right">
+      <label class="nb-switch">
+        <input type="checkbox" id="teenToggle" />
+        <span class="slider"></span>
+        <span class="label">Teen</span>
+      </label>
+    </div>
+  </header>
+
+  <!-- ======= HEADER LEGACY (oculto, para no romper JS existente) ======= -->
+  <header class="nb-header visually-hidden" aria-hidden="true">
     <div class="nb-header__top">
       <h1 class="nb-title">Noticias</h1>
       <div class="nb-actions">
@@ -31,7 +69,23 @@
     </div>
   </header>
 
-  <section id="weather" class="nb-weather" aria-live="polite">
+  <!-- ========== NAV PILLS (requerido) ========== -->
+  <nav class="nb-pills" id="nbPills">
+    <button data-target="cat-para-ti" class="pill active">Para ti</button>
+    <button data-target="cat-cataluna" class="pill">Cataluña</button>
+    <button data-target="cat-espana" class="pill">España</button>
+    <button data-target="cat-rioja" class="pill">La Rioja</button>
+    <button data-target="cat-global" class="pill">Mundo</button>
+  </nav>
+
+  <!-- ========== WEATHER (requerido) ========== -->
+  <section id="weather" class="nb-weather-card" aria-live="polite">
+    <!-- Lo rellena weather_client.js / main.js -->
+    <div class="nb-weather-loading">Cargando el tiempo…</div>
+  </section>
+
+  <!-- ======= WEATHER LEGACY (oculto, por compatibilidad de selectores) ======= -->
+  <section id="weather-legacy" class="nb-weather visually-hidden" aria-hidden="true">
     <div class="nb-card nb-card--weather">
       <div class="nb-weather__now">
         <div class="nb-weather__temp" id="w-temp">--°C</div>
@@ -44,11 +98,36 @@
     </div>
   </section>
 
+  <!-- ========== CONTENT (requerido) ========== -->
+  <!-- Conservamos tu contenedor #app para no romper el código actual.
+       Dentro incluimos las secciones con los IDs que has pedido. -->
   <main id="app" class="nb-main">
-    <!-- Secciones de noticias -->
+    <main id="content">
+      <section id="cat-para-ti"></section>
+      <section id="cat-cataluna"></section>
+      <section id="cat-espana"></section>
+      <section id="cat-rioja"></section>
+      <section id="cat-global"></section>
+    </main>
   </main>
 
+  <!-- ========== FOOTER NUEVO (requerido) ========== -->
   <footer class="nb-footer">
+    <div class="nb-footer-actions">
+      <button id="btnClearCache" class="nb-btn">Limpiar caché</button>
+      <button id="btnForceApp" class="nb-btn">Forzar app</button>
+    </div>
+    <div class="nb-meta" id="nbMetaBottom">
+      <span id="nbAppVersionBottom"></span>
+      <span class="dot">•</span>
+      <span id="nbDataVersionBottom"></span>
+      <span class="dot">•</span>
+      <span id="nbDataUpdatedAtBottom"></span>
+    </div>
+  </footer>
+
+  <!-- ======= FOOTER LEGACY (oculto, por compatibilidad) ======= -->
+  <footer class="nb-footer visually-hidden" aria-hidden="true">
     <div class="nb-footer__row">
       <button id="btn-teen" class="nb-chip">Modo Teen</button>
       <button id="btn-clear" class="nb-chip">Limpiar caché</button>
@@ -63,6 +142,7 @@
     </div>
   </footer>
 
+  <!-- Scripts (respetamos tu carga actual) -->
   <script src="weather_client.js"></script>
   <script src="main.js" type="module"></script>
 </body>
