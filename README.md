@@ -1,72 +1,38 @@
 
-# Tech-only patch (sin cambios de estilo/maquetación)
+# NotiBuddy – Fix técnico (plug & play)
 
-Este paquete incluye **solo cambios técnicos**, sin tocar el formato visual, estilos ni el look&feel.
+Solo cambios **técnicos**. No se alteran estilos ni el look&feel.
 
-## Qué corrige
-
-1. **Adiós al texto repetido** “Sin efecto directo en tu día a día”  
-   - Se elimina en ingestión o en runtime **sin cambiar el diseño**.
-   - Si la tarjeta queda sin mensaje y el `tag` lo permite, se rellena con un texto más útil y consistente (determinista).
-
-2. **Versión más clara _técnicamente_ sin cambiar lo que se ve**  
-   - Mantienes el mismo contenido visible en la UI.
-   - Añadimos `title` y `aria-label` al elemento de versión con: hora local de `updated_at`, `commit` y `version`.
-   - Resultado: mejor accesibilidad/tooltip y depuración, **sin cambios de estilos**.
-
----
-
-## Uso en **build/ingestión** (recomendado)
-
-1. Copia `normalizer.mjs` a tu repo (por ejemplo en `scripts/`).
-2. En tu pipeline de fetch/cron (donde generas `latest.json`), añade:
-
-```js
-// scripts/build-latest.mjs (ejemplo)
-import fs from 'node:fs/promises';
-import { normalizeLatest } from './normalizer.mjs';
-
-const raw = JSON.parse(await fs.readFile('latest.json', 'utf8'));
-const cleaned = normalizeLatest(raw);
-await fs.writeFile('latest.json', JSON.stringify(cleaned, null, 2), 'utf8');
+## Instalación
+1. Copia la carpeta `scripts/` (y opcionalmente `data/`) en tu repo.
+2. En tu HTML principal, antes de `</body>` añade:
+```html
+<script type="module" src="./scripts/boot.js"></script>
+```
+3. Asegura estos anclajes en el DOM (o cambia los IDs en código):
+```html
+<div id="app"></div>
+<button id="btn-teens"></button>
+<div id="weather-box"></div>
+<span id="footer-version"></span>
+```
+4. Si tu `latest.json` está en otra ruta, usa `?feed=`:
+```
+https://…/index.html?feed=https://ruta/correcta/latest.json
 ```
 
-> También puedes ejecutarlo como CLI:
->
-> ```bash
-> node -e "import('./scripts/normalizer.mjs').then(m=>m.cli(process.argv))" -- --in latest.json --out latest.json
-> ```
+## Arreglos incluidos
+- Resolución robusta de `latest.json` (querystring → ./data/latest.json → /latest.json → ./latest.json) con `cache:'no-store'` y **cache-buster**.
+- Renderiza **todas** las noticias (sin límites escondidos).
+- **Botón Teens** persistente (LocalStorage). Alterna entre `impact`, `impact_adult` y `impact_teen`.
+- **Tiempo** con `iframe` y **reintento** automático si falla la primera carga.
+- **Footer** muestra `version` + `updated_at` en hora local.
+- Los scripts **no tocan clases** ni estilos de tus componentes.
 
----
+## API mínima
+- `initNotiBuddy({ feedUrl })` — opcional. Auto-inicia si existe `#app`.
 
-## Uso en **runtime** (si no puedes tocar el build)
-
-1. Copia `frontend-patch.mjs` y `normalizer.mjs` a tu carpeta pública o de módulos.
-2. Justo después de hacer el `fetch('latest.json')`, aplica:
-
-```js
-import { sanitizeLatestForRender, computeVersionA11y } from './frontend-patch.mjs';
-
-const res = await fetch('latest.json', { cache: 'no-store' });
-const data = await res.json();
-
-// 1) Arreglo técnico de impactos (in-memory, sin afectar estilos)
-const sane = sanitizeLatestForRender(data);
-
-// 2) Mejorar accesibilidad de la versión SIN cambiar lo que se ve
-const versionNode = document.querySelector('#version'); // usa tu selector real
-computeVersionA11y(sane, versionNode);
-
-// 3) Renderiza con `sane` como siempre (tu UI no cambia)
-renderApp(sane);
-```
-
----
-
-## Política de cambios
-
-- No modifica claves, orden ni estructura del JSON.
-- No añade estilos, ni clases nuevas que alteren el CSS.
-- No cambia el texto visible de la versión (solo `title`/`aria-label`).
-
-Cualquier duda, dime dónde engancharlo en tu repo (ruta del `fetch` y selector del nodo de versión) y te dejo el diff exacto.
+## Troubleshooting
+- Solo ves 3 noticias → revisa que tus filtros/plantillas no limiten el array. Este paquete no corta nada.
+- `latest.json` distinto en app vs repo → confirma la **ruta efectiva** con `?feed=URL-raw-de-github` o despliegue CDN.
+- `btn-teens` no aparece → añade el botón al HTML. El script no añade estilos ni posición.
