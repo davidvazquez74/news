@@ -1,6 +1,6 @@
 {
-  "updated_at": "2025-09-20T13:55:34.445Z",
-  "version": "v-dev.1758376534445",
+  "updated_at": "2025-09-20T14:13:58.132Z",
+  "version": "v-dev.1758377638132",
   "commit": "local",
   "cataluna": [
     {
@@ -116,6 +116,20 @@
       "action": "FYI"
     },
     {
+      "title": "Un incendio en el municipio gallego de Pantón arrasa 2.000 hectáreas",
+      "url": "https://www.lavanguardia.com/vida/20250920/11080495/incendio-municipio-gallego-panton-arrasa-2-000-hectareas.html",
+      "source": "Autor Agencias",
+      "published_at": "2025-09-20T13:40:21.000Z",
+      "summary": "Un segundo fuego, que afectaba a la localidad ourensana de O Bolo, ha quedado estabilizado",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
+    {
       "title": "El desastroso efecto demo de Mark Zuckerberg",
       "url": "https://www.lavanguardia.com/vida/20250920/11078831/desastroso-efecto-demo-mark-zuckerberg.html",
       "source": "Francisco Bracero Osuna",
@@ -212,20 +226,6 @@
       "severity": 0,
       "horizon": "sin plazo",
       "action": "FYI"
-    },
-    {
-      "title": "Detectado en Catalunya el virus que está siendo letal para los meros",
-      "url": "https://www.lavanguardia.com/vida/20250919/11078536/detectado-catalunya-virus-esta-siendo-letal-meros.html",
-      "source": "Antonio Cerrillo Jodar",
-      "published_at": "2025-09-19T15:29:23.000Z",
-      "summary": "El ejemplar muerto fue hallado en aguas frente a Barcelona",
-      "impact": "Sigue indicaciones oficiales y revisa calendario de vacunas.",
-      "impact_adult": "Sigue indicaciones oficiales y revisa calendario de vacunas.",
-      "impact_teen": "Si hay brote: gel, sentido común y ya 😷",
-      "tag": "salud_publica",
-      "severity": 2,
-      "horizon": "esta semana",
-      "action": "vigilar"
     }
   ],
   "espana": [],
@@ -376,7 +376,7 @@
       "title": "Quién fue Raphael Lemkin, el hombre que inventó la palabra \"genocidio\"",
       "url": "https://www.bbc.com/mundo/articles/c90xll9kg1wo?at_medium=RSS&at_campaign=rss",
       "source": "",
-      "published_at": "2023-12-02T09:06:44.000Z",
+      "published_at": "2025-09-20T14:00:26.000Z",
       "summary": "Luchó toda su vida para que el Derecho Internacional estableciera una ley que condenara ese tipo de asesinatos en masa que buscan aniquilar a un pueblo.",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
@@ -574,6 +574,20 @@
         "action": "FYI"
       },
       {
+        "title": "Un incendio en el municipio gallego de Pantón arrasa 2.000 hectáreas",
+        "url": "https://www.lavanguardia.com/vida/20250920/11080495/incendio-municipio-gallego-panton-arrasa-2-000-hectareas.html",
+        "source": "Autor Agencias",
+        "published_at": "2025-09-20T13:40:21.000Z",
+        "summary": "Un segundo fuego, que afectaba a la localidad ourensana de O Bolo, ha quedado estabilizado",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
+      {
         "title": "El desastroso efecto demo de Mark Zuckerberg",
         "url": "https://www.lavanguardia.com/vida/20250920/11078831/desastroso-efecto-demo-mark-zuckerberg.html",
         "source": "Francisco Bracero Osuna",
@@ -670,20 +684,6 @@
         "severity": 0,
         "horizon": "sin plazo",
         "action": "FYI"
-      },
-      {
-        "title": "Detectado en Catalunya el virus que está siendo letal para los meros",
-        "url": "https://www.lavanguardia.com/vida/20250919/11078536/detectado-catalunya-virus-esta-siendo-letal-meros.html",
-        "source": "Antonio Cerrillo Jodar",
-        "published_at": "2025-09-19T15:29:23.000Z",
-        "summary": "El ejemplar muerto fue hallado en aguas frente a Barcelona",
-        "impact": "Sigue indicaciones oficiales y revisa calendario de vacunas.",
-        "impact_adult": "Sigue indicaciones oficiales y revisa calendario de vacunas.",
-        "impact_teen": "Si hay brote: gel, sentido común y ya 😷",
-        "tag": "salud_publica",
-        "severity": 2,
-        "horizon": "esta semana",
-        "action": "vigilar"
       }
     ],
     "España": [],
@@ -835,7 +835,7 @@
         "title": "Quién fue Raphael Lemkin, el hombre que inventó la palabra \"genocidio\"",
         "url": "https://www.bbc.com/mundo/articles/c90xll9kg1wo?at_medium=RSS&at_campaign=rss",
         "source": "",
-        "published_at": "2023-12-02T09:06:44.000Z",
+        "published_at": "2025-09-20T14:00:26.000Z",
         "summary": "Luchó toda su vida para que el Derecho Internacional estableciera una ley que condenara ese tipo de asesinatos en masa que buscan aniquilar a un pueblo.",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
