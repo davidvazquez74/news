@@ -1,8 +1,22 @@
 {
-  "updated_at": "2025-09-20T12:47:32.343Z",
-  "version": "v-dev.1758372452343",
+  "updated_at": "2025-09-20T13:55:34.445Z",
+  "version": "v-dev.1758376534445",
   "commit": "local",
   "cataluna": [
+    {
+      "title": "Tellado advierte de que el Gobierno llevará la polarización “al límite”",
+      "url": "https://www.lavanguardia.com/politica/20250920/11080385/tellado-advierte-gobierno-llevara-polarizacion-limite.html",
+      "source": "Autor Agencias",
+      "published_at": "2025-09-20T12:44:34.000Z",
+      "summary": "El PP pide “mano dura con las mafias, con la inmigración ilegal y con la delincuencia”",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
     {
       "title": "El PNV toma posesión del palacete de París y ya ondea la ikurriña",
       "url": "https://www.lavanguardia.com/politica/20250920/11080287/pnv-toma-posesion-palacete-paris-ondea-ikurrina.html",
@@ -93,20 +107,6 @@
       "source": "Hèctor Sanjuán",
       "published_at": "2025-09-20T02:40:00.000Z",
       "summary": "Las paradas de comidas para llevar y souvenirs crecen: “Se venden más ensaladillas rusas que quilos de patatas”",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
-    },
-    {
-      "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
-      "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
-      "source": "Redacción La Vanguardia",
-      "published_at": "2025-09-19T18:01:53.000Z",
-      "summary": "El almirante general Antonio Piñeiro señala que su misión es “ayudar y salvar” a quienes se encuentren en peligro en el mar",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
@@ -234,7 +234,7 @@
       "title": "El equipo distintivo de los agentes de España, Francia, Italia y Portugal",
       "url": "https://www.larioja.com/logrono/san-mateo/equipo-distintivo-agentes-espana-francia-italia-portugal-20250919112050-nt.html",
       "source": "",
-      "published_at": "2025-09-20T12:34:16.000Z",
+      "published_at": "2025-09-20T13:32:19.000Z",
       "summary": "Durante las fiestas de San Mateo patrullarán, junto a la Policía Nacional, miembros de las fuerzas del orden de otros tres países de la Unión Europea, identificables por sus uniformes, escudos y armas",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
@@ -243,6 +243,34 @@
       "severity": 0,
       "horizon": "sin plazo",
       "action": "FYI"
+    },
+    {
+      "title": "Fotos: el cohete de San Mateo desde la plaza del Ayuntamiento",
+      "url": "https://www.larioja.com/logrono/san-mateo/imagenes-cohete-san-mateo-logrono-plaza-ayuntamiento-20250920150621-ga.html",
+      "source": "Justo Rodríguez",
+      "published_at": "2025-09-20T13:07:07.000Z",
+      "summary": "Logroñeses y visitantes de todas las edades han disfrutado del ambiente",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
+    {
+      "title": "Un ciberataque colapsa los aeropuertos de Londres, Bruselas y Berlín y provoca retrasos masivos",
+      "url": "https://www.larioja.com/internacional/europa/ciberataque-causa-retrasos-cancelaciones-aeropuertos-londres-bruselas-20250920095813-ntrc.html",
+      "source": "Yvannia Salazar-Saborio",
+      "published_at": "2025-09-20T12:47:05.000Z",
+      "summary": "El asalto contra el proveedor estadounidense de servicios ha dejado inactiva la gestión de los embarques, que debe hacerse de forma manual, y causado cancelaciones de vuelos y colas kilométricas",
+      "impact": "Podrían variar pagos o ayudas; revisa plazos y requisitos.",
+      "impact_adult": "Podrían variar pagos o ayudas; revisa plazos y requisitos.",
+      "impact_teen": "Puede cambiar lo que cobras/pagas; coméntalo en casa 🧾",
+      "tag": "impuestos",
+      "severity": 2,
+      "horizon": "este mes",
+      "action": "vigilar"
     },
     {
       "title": "Y la mejor ciudad del mundo saltó por San Mateo",
@@ -313,34 +341,6 @@
       "severity": 0,
       "horizon": "sin plazo",
       "action": "FYI"
-    },
-    {
-      "title": "La plaza del Ayuntamiento, a imagen y semejanza de una gran pista de baile",
-      "url": "https://www.larioja.com/logrono/san-mateo/plaza-ayuntamiento-imagen-semejanza-gran-pista-baile-20250920122933-nt.html",
-      "source": "Javier Campos",
-      "published_at": "2025-09-20T11:28:52.000Z",
-      "summary": "La DJ Carmen de la Fuente ameniza el 'chupinazo', tal y como lo denomina la creciente juventud que abarrota los espacios más cercanos al principal escenario mateo",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
-    },
-    {
-      "title": "Fallece Crescencio Cañas, histórico periodista riojano, a los 80 años",
-      "url": "https://www.larioja.com/la-rioja/fallece-crescencio-canas-historico-periodista-riojano-anos-20250920131946-nt.html",
-      "source": "",
-      "published_at": "2025-09-20T11:19:46.000Z",
-      "summary": "Cañas inició su andadura en los programas musicales de Radio Rioja, antes de incorporarse a Nueva Rioja",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
     }
   ],
   "background": [
@@ -364,6 +364,20 @@
       "source": "",
       "published_at": "2025-09-19T14:07:07.000Z",
       "summary": "Emerson Colindres tenía apenas 8 años cuando en 2014 partió para Estados Unidos con su madre, Ada Bell Baquedano Amador, y su hermana, Alison Analy, de cinco.",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
+    {
+      "title": "Quién fue Raphael Lemkin, el hombre que inventó la palabra \"genocidio\"",
+      "url": "https://www.bbc.com/mundo/articles/c90xll9kg1wo?at_medium=RSS&at_campaign=rss",
+      "source": "",
+      "published_at": "2023-12-02T09:06:44.000Z",
+      "summary": "Luchó toda su vida para que el Derecho Internacional estableciera una ley que condenara ese tipo de asesinatos en masa que buscan aniquilar a un pueblo.",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
@@ -441,26 +455,26 @@
       "severity": 2,
       "horizon": "este mes",
       "action": "vigilar"
-    },
-    {
-      "title": "Muere la destacada astrónoma y divulgadora científica mexicana Julieta Fierro: lee su última entrevista con BBC Mundo",
-      "url": "https://www.bbc.com/mundo/articles/c0lk6j8e1ero?at_medium=RSS&at_campaign=rss",
-      "source": "",
-      "published_at": "2025-09-19T21:21:23.000Z",
-      "summary": "Fierro fue investigadora del Instituto de Astronomía de la UNAM y miembro de la Academia Mexicana de la Lengua. Dedicó su investigación al Sistema Solar y el medio interestelar.",
-      "impact": "Revisa calendario, becas y comunicaciones del centro.",
-      "impact_adult": "Revisa calendario, becas y comunicaciones del centro.",
-      "impact_teen": "Profs de huelga/cambios: mira la app del insti 📚",
-      "tag": "educacion",
-      "severity": 2,
-      "horizon": "esta semana",
-      "action": "planificar"
     }
   ],
   "deportes": [],
   "radios": [],
   "blocksOut": {
     "Catalunya": [
+      {
+        "title": "Tellado advierte de que el Gobierno llevará la polarización “al límite”",
+        "url": "https://www.lavanguardia.com/politica/20250920/11080385/tellado-advierte-gobierno-llevara-polarizacion-limite.html",
+        "source": "Autor Agencias",
+        "published_at": "2025-09-20T12:44:34.000Z",
+        "summary": "El PP pide “mano dura con las mafias, con la inmigración ilegal y con la delincuencia”",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
       {
         "title": "El PNV toma posesión del palacete de París y ya ondea la ikurriña",
         "url": "https://www.lavanguardia.com/politica/20250920/11080287/pnv-toma-posesion-palacete-paris-ondea-ikurrina.html",
@@ -551,20 +565,6 @@
         "source": "Hèctor Sanjuán",
         "published_at": "2025-09-20T02:40:00.000Z",
         "summary": "Las paradas de comidas para llevar y souvenirs crecen: “Se venden más ensaladillas rusas que quilos de patatas”",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
-      },
-      {
-        "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
-        "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
-        "source": "Redacción La Vanguardia",
-        "published_at": "2025-09-19T18:01:53.000Z",
-        "summary": "El almirante general Antonio Piñeiro señala que su misión es “ayudar y salvar” a quienes se encuentren en peligro en el mar",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
         "impact_teen": "Sin efecto directo en tu día a día.",
@@ -693,7 +693,7 @@
         "title": "El equipo distintivo de los agentes de España, Francia, Italia y Portugal",
         "url": "https://www.larioja.com/logrono/san-mateo/equipo-distintivo-agentes-espana-francia-italia-portugal-20250919112050-nt.html",
         "source": "",
-        "published_at": "2025-09-20T12:34:16.000Z",
+        "published_at": "2025-09-20T13:32:19.000Z",
         "summary": "Durante las fiestas de San Mateo patrullarán, junto a la Policía Nacional, miembros de las fuerzas del orden de otros tres países de la Unión Europea, identificables por sus uniformes, escudos y armas",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
@@ -702,6 +702,34 @@
         "severity": 0,
         "horizon": "sin plazo",
         "action": "FYI"
+      },
+      {
+        "title": "Fotos: el cohete de San Mateo desde la plaza del Ayuntamiento",
+        "url": "https://www.larioja.com/logrono/san-mateo/imagenes-cohete-san-mateo-logrono-plaza-ayuntamiento-20250920150621-ga.html",
+        "source": "Justo Rodríguez",
+        "published_at": "2025-09-20T13:07:07.000Z",
+        "summary": "Logroñeses y visitantes de todas las edades han disfrutado del ambiente",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
+      {
+        "title": "Un ciberataque colapsa los aeropuertos de Londres, Bruselas y Berlín y provoca retrasos masivos",
+        "url": "https://www.larioja.com/internacional/europa/ciberataque-causa-retrasos-cancelaciones-aeropuertos-londres-bruselas-20250920095813-ntrc.html",
+        "source": "Yvannia Salazar-Saborio",
+        "published_at": "2025-09-20T12:47:05.000Z",
+        "summary": "El asalto contra el proveedor estadounidense de servicios ha dejado inactiva la gestión de los embarques, que debe hacerse de forma manual, y causado cancelaciones de vuelos y colas kilométricas",
+        "impact": "Podrían variar pagos o ayudas; revisa plazos y requisitos.",
+        "impact_adult": "Podrían variar pagos o ayudas; revisa plazos y requisitos.",
+        "impact_teen": "Puede cambiar lo que cobras/pagas; coméntalo en casa 🧾",
+        "tag": "impuestos",
+        "severity": 2,
+        "horizon": "este mes",
+        "action": "vigilar"
       },
       {
         "title": "Y la mejor ciudad del mundo saltó por San Mateo",
@@ -772,34 +800,6 @@
         "severity": 0,
         "horizon": "sin plazo",
         "action": "FYI"
-      },
-      {
-        "title": "La plaza del Ayuntamiento, a imagen y semejanza de una gran pista de baile",
-        "url": "https://www.larioja.com/logrono/san-mateo/plaza-ayuntamiento-imagen-semejanza-gran-pista-baile-20250920122933-nt.html",
-        "source": "Javier Campos",
-        "published_at": "2025-09-20T11:28:52.000Z",
-        "summary": "La DJ Carmen de la Fuente ameniza el 'chupinazo', tal y como lo denomina la creciente juventud que abarrota los espacios más cercanos al principal escenario mateo",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
-      },
-      {
-        "title": "Fallece Crescencio Cañas, histórico periodista riojano, a los 80 años",
-        "url": "https://www.larioja.com/la-rioja/fallece-crescencio-canas-historico-periodista-riojano-anos-20250920131946-nt.html",
-        "source": "",
-        "published_at": "2025-09-20T11:19:46.000Z",
-        "summary": "Cañas inició su andadura en los programas musicales de Radio Rioja, antes de incorporarse a Nueva Rioja",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
       }
     ],
     "Global": [
@@ -823,6 +823,20 @@
         "source": "",
         "published_at": "2025-09-19T14:07:07.000Z",
         "summary": "Emerson Colindres tenía apenas 8 años cuando en 2014 partió para Estados Unidos con su madre, Ada Bell Baquedano Amador, y su hermana, Alison Analy, de cinco.",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
+      {
+        "title": "Quién fue Raphael Lemkin, el hombre que inventó la palabra \"genocidio\"",
+        "url": "https://www.bbc.com/mundo/articles/c90xll9kg1wo?at_medium=RSS&at_campaign=rss",
+        "source": "",
+        "published_at": "2023-12-02T09:06:44.000Z",
+        "summary": "Luchó toda su vida para que el Derecho Internacional estableciera una ley que condenara ese tipo de asesinatos en masa que buscan aniquilar a un pueblo.",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
         "impact_teen": "Sin efecto directo en tu día a día.",
@@ -900,20 +914,6 @@
         "severity": 2,
         "horizon": "este mes",
         "action": "vigilar"
-      },
-      {
-        "title": "Muere la destacada astrónoma y divulgadora científica mexicana Julieta Fierro: lee su última entrevista con BBC Mundo",
-        "url": "https://www.bbc.com/mundo/articles/c0lk6j8e1ero?at_medium=RSS&at_campaign=rss",
-        "source": "",
-        "published_at": "2025-09-19T21:21:23.000Z",
-        "summary": "Fierro fue investigadora del Instituto de Astronomía de la UNAM y miembro de la Academia Mexicana de la Lengua. Dedicó su investigación al Sistema Solar y el medio interestelar.",
-        "impact": "Revisa calendario, becas y comunicaciones del centro.",
-        "impact_adult": "Revisa calendario, becas y comunicaciones del centro.",
-        "impact_teen": "Profs de huelga/cambios: mira la app del insti 📚",
-        "tag": "educacion",
-        "severity": 2,
-        "horizon": "esta semana",
-        "action": "planificar"
       }
     ]
   }
