@@ -1,55 +1,16 @@
-
-:root{
-  --bg: #0b0c10;
-  --card: #12141a;
-  --text: #e8ecf1;
-  --muted: #9aa7b2;
-  --accent: #7cd3ff;
-  --chip: #1b2230;
-  --ok: #2ecc71;
-  --warn: #f1c40f;
-  --bad: #e74c3c;
+/* patch vTeen2.3 */
+.news-card {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  background: #111;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+footer {
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #ccc;
 }
-.app-header{
-  padding: 24px 20px 12px;
-  border-bottom: 1px solid #1f2533;
+footer button {
+  margin-right: 8px;
 }
-.app-header h1{margin:0;font-size:24px}
-.subtitle{margin:6px 0 0;color:var(--muted)}
-#feed{display:grid;gap:12px;padding:16px}
-.card{
-  background:var(--card);
-  border:1px solid #1f2533;
-  border-radius:14px;
-  padding:14px;
-}
-.card h3{margin:0 0 6px;font-size:16px}
-.card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;color:var(--muted);font-size:12px}
-.chip{background:var(--chip);padding:2px 8px;border-radius:999px;font-size:12px}
-.impacts{display:grid;gap:6px;margin-top:8px}
-.impacts p{margin:0}
-.badge{padding:1px 8px;border-radius:999px;font-size:11px;border:1px solid #2a3246;color:#c7d2e1}
-.badge.sev-0{background:#1b2230}
-.badge.sev-1{background:#1b2a20}
-.badge.sev-2{background:#2a261b}
-.badge.sev-3{background:#2a1b1b}
-footer#app-footer{
-  padding:12px 16px;
-  color:var(--muted);
-  border-top:1px solid #1f2533;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-}
-footer#app-footer .right{opacity:.85}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
