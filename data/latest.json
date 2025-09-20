@@ -1,8 +1,22 @@
 {
-  "updated_at": "2025-09-20T01:50:18.618Z",
-  "version": "v-dev.1758333018618",
+  "updated_at": "2025-09-20T03:31:17.897Z",
+  "version": "v-dev.1758339077897",
   "commit": "local",
   "cataluna": [
+    {
+      "title": "De pollería a 'paellería': la imparable transformación del Mercat Central de València",
+      "url": "https://www.lavanguardia.com/local/valencia/20250920/11070402/polleria-paelleria-imparable-transformacion-mercat-central-valencia.html",
+      "source": "Hèctor Sanjuán",
+      "published_at": "2025-09-20T02:40:00.000Z",
+      "summary": "Las paradas de comidas para llevar y souvenirs crecen: “Se venden más ensaladillas rusas que quilos de patatas”",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
     {
       "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
       "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
@@ -93,20 +107,6 @@
       "source": "Autor Agencias",
       "published_at": "2025-09-19T09:40:05.000Z",
       "summary": "La reunión de este jueves se ha centrado en la falta de cumplimiento en los acuerdos sellados para investir a Sánchez, según los posconvergentes",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
-    },
-    {
-      "title": "El PSOE presentará en los ayuntamientos mociones de apoyo al pueblo palestino",
-      "url": "https://www.lavanguardia.com/politica/20250919/11076324/psoe-presentara-ayuntamientos-mociones-apoyo-pueblo-palestino.html",
-      "source": "Luis B. García García",
-      "published_at": "2025-09-19T09:07:27.000Z",
-      "summary": "Las resoluciones expresarán una condena al genocidio de Israel en Gaza y la exigencia de un alto el fuego inmediato y permanente",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
@@ -387,11 +387,11 @@
       "action": "FYI"
     },
     {
-      "title": "\"Con un autócrata no se puede ceder ni un poco\": el apoyo de las estrellas de televisión a Jimmy Kimmel mientras Trump amenaza a las cadenas",
-      "url": "https://www.bbc.com/mundo/articles/cewnyyp7x9xo?at_medium=RSS&at_campaign=rss",
+      "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
+      "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
       "source": "",
-      "published_at": "2025-09-19T13:49:14.000Z",
-      "summary": "Los principales presentadores de programas nocturnos de televisión de Estados Unidos catalogan la suspensión de Jimmy Kimmel como un \"flagrante ataque a la libertad de expresión\".",
+      "published_at": "2025-09-20T01:38:35.000Z",
+      "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
       "impact": "Sin efecto directo en tu día a día.",
       "impact_adult": "Sin efecto directo en tu día a día.",
       "impact_teen": "Sin efecto directo en tu día a día.",
@@ -415,20 +415,6 @@
       "action": "planificar"
     },
     {
-      "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
-      "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
-      "source": "",
-      "published_at": "2025-09-20T01:38:35.000Z",
-      "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
-    },
-    {
       "title": "\"La presencia militar de EE.UU. en el Caribe es una desproporción. La mayoría del narcotráfico va por el Pacífico\": Yolanda Villavicencio, canciller de Colombia, en entrevista con BBC Mundo",
       "url": "https://www.bbc.com/mundo/articles/cly1rz0x7n5o?at_medium=RSS&at_campaign=rss",
       "source": "",
@@ -441,6 +427,20 @@
       "severity": 2,
       "horizon": "este mes",
       "action": "vigilar"
+    },
+    {
+      "title": "\"Con un autócrata no se puede ceder ni un poco\": el apoyo de las estrellas de televisión a Jimmy Kimmel mientras Trump amenaza a las cadenas",
+      "url": "https://www.bbc.com/mundo/articles/cewnyyp7x9xo?at_medium=RSS&at_campaign=rss",
+      "source": "",
+      "published_at": "2025-09-19T13:49:14.000Z",
+      "summary": "Los principales presentadores de programas nocturnos de televisión de Estados Unidos catalogan la suspensión de Jimmy Kimmel como un \"flagrante ataque a la libertad de expresión\".",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
     },
     {
       "title": "Los millonarios negocios televisivos que están detrás de la tensión entre Trump y las grandes cadenas de EE.UU.",
@@ -461,6 +461,20 @@
   "radios": [],
   "blocksOut": {
     "Catalunya": [
+      {
+        "title": "De pollería a 'paellería': la imparable transformación del Mercat Central de València",
+        "url": "https://www.lavanguardia.com/local/valencia/20250920/11070402/polleria-paelleria-imparable-transformacion-mercat-central-valencia.html",
+        "source": "Hèctor Sanjuán",
+        "published_at": "2025-09-20T02:40:00.000Z",
+        "summary": "Las paradas de comidas para llevar y souvenirs crecen: “Se venden más ensaladillas rusas que quilos de patatas”",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
       {
         "title": "El jefe de la Armada replica a Vox que no están para “combatir” a los cayucos",
         "url": "https://www.lavanguardia.com/politica/20250919/11078985/jefe-armada-replica-vox-combatir-cayucos.html",
@@ -551,20 +565,6 @@
         "source": "Autor Agencias",
         "published_at": "2025-09-19T09:40:05.000Z",
         "summary": "La reunión de este jueves se ha centrado en la falta de cumplimiento en los acuerdos sellados para investir a Sánchez, según los posconvergentes",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
-      },
-      {
-        "title": "El PSOE presentará en los ayuntamientos mociones de apoyo al pueblo palestino",
-        "url": "https://www.lavanguardia.com/politica/20250919/11076324/psoe-presentara-ayuntamientos-mociones-apoyo-pueblo-palestino.html",
-        "source": "Luis B. García García",
-        "published_at": "2025-09-19T09:07:27.000Z",
-        "summary": "Las resoluciones expresarán una condena al genocidio de Israel en Gaza y la exigencia de un alto el fuego inmediato y permanente",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
         "impact_teen": "Sin efecto directo en tu día a día.",
@@ -846,11 +846,11 @@
         "action": "FYI"
       },
       {
-        "title": "\"Con un autócrata no se puede ceder ni un poco\": el apoyo de las estrellas de televisión a Jimmy Kimmel mientras Trump amenaza a las cadenas",
-        "url": "https://www.bbc.com/mundo/articles/cewnyyp7x9xo?at_medium=RSS&at_campaign=rss",
+        "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
+        "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
         "source": "",
-        "published_at": "2025-09-19T13:49:14.000Z",
-        "summary": "Los principales presentadores de programas nocturnos de televisión de Estados Unidos catalogan la suspensión de Jimmy Kimmel como un \"flagrante ataque a la libertad de expresión\".",
+        "published_at": "2025-09-20T01:38:35.000Z",
+        "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
         "impact": "Sin efecto directo en tu día a día.",
         "impact_adult": "Sin efecto directo en tu día a día.",
         "impact_teen": "Sin efecto directo en tu día a día.",
@@ -874,20 +874,6 @@
         "action": "planificar"
       },
       {
-        "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
-        "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
-        "source": "",
-        "published_at": "2025-09-20T01:38:35.000Z",
-        "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
-      },
-      {
         "title": "\"La presencia militar de EE.UU. en el Caribe es una desproporción. La mayoría del narcotráfico va por el Pacífico\": Yolanda Villavicencio, canciller de Colombia, en entrevista con BBC Mundo",
         "url": "https://www.bbc.com/mundo/articles/cly1rz0x7n5o?at_medium=RSS&at_campaign=rss",
         "source": "",
@@ -900,6 +886,20 @@
         "severity": 2,
         "horizon": "este mes",
         "action": "vigilar"
+      },
+      {
+        "title": "\"Con un autócrata no se puede ceder ni un poco\": el apoyo de las estrellas de televisión a Jimmy Kimmel mientras Trump amenaza a las cadenas",
+        "url": "https://www.bbc.com/mundo/articles/cewnyyp7x9xo?at_medium=RSS&at_campaign=rss",
+        "source": "",
+        "published_at": "2025-09-19T13:49:14.000Z",
+        "summary": "Los principales presentadores de programas nocturnos de televisión de Estados Unidos catalogan la suspensión de Jimmy Kimmel como un \"flagrante ataque a la libertad de expresión\".",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
       },
       {
         "title": "Los millonarios negocios televisivos que están detrás de la tensión entre Trump y las grandes cadenas de EE.UU.",
