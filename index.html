@@ -3,51 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News App</title>
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/icons/icon-192.png">
-  <link rel="stylesheet" href="./styles.css">
-  <meta name="color-scheme" content="light dark">
+  <title>NotiBuddy — Demo</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="app-header">
-    <div class="brand">News App</div>
-
-    <div class="wx" id="wxBar" aria-live="polite">
-      <!-- Weather widget populated by JS -->
-      <span id="wxTemp">--°</span>
-      <span id="wxIcon" aria-hidden="true">•</span>
-      <span id="wxText">Cargando…</span>
-    </div>
-
-    <button id="btnTeens" class="toggle-teens" aria-pressed="false" title="Modo Teens (off=Adulto, on=Teens)">Teens</button>
+    <h1>NotiBuddy</h1>
+    <p class="subtitle">Noticias con impacto útil</p>
   </header>
 
-  <nav class="tabs">
-    <button class="tab active" data-target="#cataluna">Cataluña</button>
-    <button class="tab" data-target="#espana">España</button>
-    <button class="tab" data-target="#rioja">La Rioja</button>
-    <button class="tab" data-target="#global">Global</button>
-    <button class="tab" data-target="#deportes">Deportes</button>
-    <button class="tab" data-target="#radios">Radios</button>
-    <button id="refreshBtn" class="refresh">↻</button>
-  </nav>
-
   <main>
-    <section id="cataluna" class="pane active"></section>
-    <section id="espana" class="pane"></section>
-    <section id="rioja" class="pane"></section>
-    <section id="global" class="pane"></section>
-    <section id="deportes" class="pane"></section>
-    <section id="radios" class="pane"></section>
+    <section id="feed"></section>
   </main>
 
-  <footer class="app-footer">
-    <span id="generatedAt"></span>
-    <span class="spacer"></span>
-    <span id="versionBadge" class="version"></span>
-  </footer>
+  <footer id="app-footer"></footer>
 
-  <script src="./main.js" defer></script>
+  <script>
+    // ======= Config de la App (build estático) =======
+    const APP_VERSION = 'vTeen2.2';
+    const LATEST_URL = './latest.json'; // ajústalo si lo sirves desde otro origen
+  </script>
+  <script src="./main.js"></script>
 </body>
 </html>
