@@ -1,6 +1,6 @@
 {
-  "updated_at": "2025-09-19T23:55:03.328Z",
-  "version": "v-dev.1758326103328",
+  "updated_at": "2025-09-20T01:50:18.618Z",
+  "version": "v-dev.1758333018618",
   "commit": "local",
   "cataluna": [
     {
@@ -415,6 +415,20 @@
       "action": "planificar"
     },
     {
+      "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
+      "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
+      "source": "",
+      "published_at": "2025-09-20T01:38:35.000Z",
+      "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
+      "impact": "Sin efecto directo en tu día a día.",
+      "impact_adult": "Sin efecto directo en tu día a día.",
+      "impact_teen": "Sin efecto directo en tu día a día.",
+      "tag": "otros",
+      "severity": 0,
+      "horizon": "sin plazo",
+      "action": "FYI"
+    },
+    {
       "title": "\"La presencia militar de EE.UU. en el Caribe es una desproporción. La mayoría del narcotráfico va por el Pacífico\": Yolanda Villavicencio, canciller de Colombia, en entrevista con BBC Mundo",
       "url": "https://www.bbc.com/mundo/articles/cly1rz0x7n5o?at_medium=RSS&at_campaign=rss",
       "source": "",
@@ -427,20 +441,6 @@
       "severity": 2,
       "horizon": "este mes",
       "action": "vigilar"
-    },
-    {
-      "title": "\"No corro, no grito, no empujo\": qué cambió en Ciudad de México tras el devastador terremoto que dejó miles de muertos hace 40 años",
-      "url": "https://www.bbc.com/mundo/articles/cy0v8jyvw0lo?at_medium=RSS&at_campaign=rss",
-      "source": "",
-      "published_at": "2025-09-19T22:18:21.000Z",
-      "summary": "El terremoto de magnitud 8,1 que sacudió a Ciudad de México en 1985 expuso lo vulnerable y poco preparada que estaba la capital mexicana ante un evento como ese. El sismo marcó un antes y un después para el país.",
-      "impact": "Sin efecto directo en tu día a día.",
-      "impact_adult": "Sin efecto directo en tu día a día.",
-      "impact_teen": "Sin efecto directo en tu día a día.",
-      "tag": "otros",
-      "severity": 0,
-      "horizon": "sin plazo",
-      "action": "FYI"
     },
     {
       "title": "Los millonarios negocios televisivos que están detrás de la tensión entre Trump y las grandes cadenas de EE.UU.",
@@ -874,6 +874,20 @@
         "action": "planificar"
       },
       {
+        "title": "Trump impone una tarifa de US$100.000 para las visas H-1B destinadas a trabajadores cualificados",
+        "url": "https://www.bbc.com/mundo/articles/c77d65gdx11o?at_medium=RSS&at_campaign=rss",
+        "source": "",
+        "published_at": "2025-09-20T01:38:35.000Z",
+        "summary": "La orden, que entra en vigor el domingo, menciona el \"abuso\" del programa y restringirá la entrada a EE.UU. de los que tengan una visa H-1B si se encuentran fuera del país a menos que se realice el pago.",
+        "impact": "Sin efecto directo en tu día a día.",
+        "impact_adult": "Sin efecto directo en tu día a día.",
+        "impact_teen": "Sin efecto directo en tu día a día.",
+        "tag": "otros",
+        "severity": 0,
+        "horizon": "sin plazo",
+        "action": "FYI"
+      },
+      {
         "title": "\"La presencia militar de EE.UU. en el Caribe es una desproporción. La mayoría del narcotráfico va por el Pacífico\": Yolanda Villavicencio, canciller de Colombia, en entrevista con BBC Mundo",
         "url": "https://www.bbc.com/mundo/articles/cly1rz0x7n5o?at_medium=RSS&at_campaign=rss",
         "source": "",
@@ -886,20 +900,6 @@
         "severity": 2,
         "horizon": "este mes",
         "action": "vigilar"
-      },
-      {
-        "title": "\"No corro, no grito, no empujo\": qué cambió en Ciudad de México tras el devastador terremoto que dejó miles de muertos hace 40 años",
-        "url": "https://www.bbc.com/mundo/articles/cy0v8jyvw0lo?at_medium=RSS&at_campaign=rss",
-        "source": "",
-        "published_at": "2025-09-19T22:18:21.000Z",
-        "summary": "El terremoto de magnitud 8,1 que sacudió a Ciudad de México en 1985 expuso lo vulnerable y poco preparada que estaba la capital mexicana ante un evento como ese. El sismo marcó un antes y un después para el país.",
-        "impact": "Sin efecto directo en tu día a día.",
-        "impact_adult": "Sin efecto directo en tu día a día.",
-        "impact_teen": "Sin efecto directo en tu día a día.",
-        "tag": "otros",
-        "severity": 0,
-        "horizon": "sin plazo",
-        "action": "FYI"
       },
       {
         "title": "Los millonarios negocios televisivos que están detrás de la tensión entre Trump y las grandes cadenas de EE.UU.",
