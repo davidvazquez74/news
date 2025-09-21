@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>NotiBuddy</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="styles.weather.v1.css">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <meta name="theme-color" content="#111317">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.weather.v1.css">
 </head>
 <body>
   <div id="safe-area"></div>
 
+  <!-- Header -->
   <header class="nb-header">
     <div class="nb-header-left">
       <h1>Noticias</h1>
@@ -26,7 +27,7 @@
     </div>
 
     <div class="nb-header-right">
-      <label class="nb-switch">
+      <label class="nb-switch nb-switch--label" id="teenToggleLabel">
         <input type="checkbox" id="teenToggle" />
         <span class="slider"></span>
         <span class="label">Teen</span>
@@ -34,6 +35,7 @@
     </div>
   </header>
 
+  <!-- Pills Navigation -->
   <nav class="nb-pills" id="nbPills">
     <button data-target="cat-para-ti" class="pill active">Para ti</button>
     <button data-target="cat-cataluna" class="pill">Cataluña</button>
@@ -42,10 +44,12 @@
     <button data-target="cat-global" class="pill">Mundo</button>
   </nav>
 
-  <section id="weather" class="nb-weather-card">
+  <!-- Weather -->
+  <section id="weather" class="nb-weather-card" aria-live="polite">
     <div class="nb-weather-loading">Cargando el tiempo…</div>
   </section>
 
+  <!-- Content -->
   <main id="content">
     <section id="cat-cataluna"></section>
     <section id="cat-espana"></section>
@@ -53,6 +57,7 @@
     <section id="cat-global"></section>
   </main>
 
+  <!-- Footer -->
   <footer class="nb-footer">
     <div class="nb-footer-actions">
       <button id="btnClearCache" class="nb-btn">Limpiar caché</button>
@@ -67,7 +72,7 @@
     </div>
   </footer>
 
-  <script src="weather_client.js" defer></script>
-  <script src="main.js" defer></script>
+  <script src="./weather_client.js" defer></script>
+  <script src="./main.js" defer></script>
 </body>
 </html>
