@@ -2,15 +2,14 @@ name: Update News
 
 on:
   schedule:
-    - cron: "0 * * * *"     # cada hora
-  workflow_dispatch:        # lanzarlo a mano cuando quieras
-
-permissions:
-  contents: write           # necesario para poder commitear
+    - cron: "0 * * * *"   # cada hora
+  workflow_dispatch: {}   # lanzamiento manual
 
 jobs:
-  build:
+  update-latest:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -21,24 +20,77 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20       # Node 20 ya trae fetch nativo
+          node-version: "20"
 
-      # Si NO tienes package.json, deja esto comentado.
-      # Si lo añades en el futuro, descomenta para instalar deps.
-      # - name: Install dependencies
-      #   run: npm ci
+      # 1) Intento opcional de build si existe scripts/build_latest.js
+      - name: Try build latest.json with repo script (optional)
+        id: try_build
+        shell: bash
+        run: |
+          set -e
+          if [ -f scripts/build_latest.js ]; then
+            echo "🛠️ Encontrado scripts/build_latest.js -> ejecutando"
+            node scripts/build_latest.js
+            echo "built=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ℹ️ No existe scripts/build_latest.js -> se usará fallback"
+            echo "built=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Build latest.json
+      # 2) Fallback + saneamiento: asegura data/latest.json y actualiza metadatos (sin tocar noticias)
+      - name: Ensure latest.json exists and bump metadata
+        shell: bash
         run: |
           set -e
           mkdir -p data
-          node scripts/build_latest.js
-          test -s data/latest.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = 'data/latest.json';
+          const now = new Date().toISOString();
+          let obj = {};
 
-      - name: Commit changes
+          // Intentar leer latest.json si existe
+          if (fs.existsSync(path)) {
+            try {
+              obj = JSON.parse(fs.readFileSync(path, 'utf8'));
+            } catch (e) {
+              console.error('latest.json inválido. Se regenerará estructura mínima conservadora.');
+              obj = {};
+            }
+          }
+
+          // Si no tiene ninguna clave de contenido, crear estructura mínima (sin mockear noticias)
+          const hasAny =
+            obj.cataluna || obj.espana || obj.rioja || obj.background || obj.deportes || obj.radios || obj.blocksOut;
+
+          if (!hasAny) {
+            obj.cataluna = obj.cataluna || [];
+            obj.espana = obj.espana || [];
+            obj.rioja = obj.rioja || [];
+            obj.background = obj.background || [];
+            obj.deportes = obj.deportes || [];
+            obj.radios = obj.radios || [];
+            obj.blocksOut = obj.blocksOut || { Catalunya: [], España: [], MolinsDeRei: [], LaRioja: [], Global: [] };
+          }
+
+          // Actualizar metadatos sin tocar el contenido
+          obj.updated_at = now;
+          obj.version    = obj.version || 'ci';
+          obj.commit     = (process.env.GITHUB_SHA || 'ci').slice(0,7);
+
+          fs.writeFileSync(path, JSON.stringify(obj, null, 2));
+          console.log('✅ latest.json listo en', path);
+          NODE
+
+      - name: Commit changes (if any)
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git add data/latest.json
-          git diff --cached --quiet && echo "No changes to commit" || git commit -m "chore(news): auto-update latest.json (run $GITHUB_RUN_NUMBER)"
-          git push
+          git commit -m "chore(ci): update latest.json metadata (run ${{ github.run_number }})" || echo "No changes to commit"
+
+      - name: Push
+        run: |
+          # Empujar al mismo branch desde el que se ejecuta
+          git pull --rebase origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }}
