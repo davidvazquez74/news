@@ -1,0 +1,35 @@
+name: Update News
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # cada hora
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build latest.json
+        run: |
+          mkdir -p data
+          echo '{"updated_at":"test"}' > data/latest.json
+
+      - name: Commit changes
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add data/latest.json
+          git commit -m "test run $GITHUB_RUN_NUMBER" || echo "no changes"
+          git push
