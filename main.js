@@ -101,10 +101,11 @@ function renderAll(){
 
   // Mount "Para ti": pick top from each
   const forYou = []
-    .concat(d.cataluna||[])
-    .concat(d.espana||[])
-    .concat(d.rioja||[])
-    .concat(d.background||[]);
+const forYou = []
+  .concat((d.cataluna || []).slice(0,50))
+  .concat((d.espana   || []).slice(0,50))
+  .concat((d.rioja    || []).slice(0,50))
+  .concat((d.background || []).slice(0,50));
   let forYouEl = q('#cat-para-ti');
   if(!forYouEl){
     forYouEl = document.createElement('section');
