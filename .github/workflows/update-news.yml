@@ -2,16 +2,15 @@ name: Update News
 
 on:
   schedule:
-    - cron: "0 */3 * * *" # cada 3 horas
-  workflow_dispatch:      # ejecución manual
+    - cron: "0 * * * *"     # cada hora en el minuto 0
+  workflow_dispatch:        # ejecución manual
 
 permissions:
-  contents: write   # necesario para poder pushear
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -28,25 +27,30 @@ jobs:
           if [ -f package.json ]; then
             npm ci
           else
-            echo "⚠️ No package.json encontrado, se omite instalación"
+            echo "⚠️ No package.json encontrado, omito instalación"
           fi
 
       - name: Build latest.json (safe)
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p data
           if [ -f scripts/build_latest.js ]; then
             node scripts/build_latest.js
           else
             echo "⚠️ No existe scripts/build_latest.js; creo fallback mínimo"
-            cat > data/latest.json <<'JSON'
-            {
-              "updated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-              "version": "fallback",
-              "commit": "none",
-              "cataluna": []
-            }
-            JSON
+            cat > data/latest.json <<EOF
+{
+  "updated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "version": "fallback",
+  "commit": "${GITHUB_SHA:-none}",
+  "cataluna": []
+}
+EOF
+            echo "✅ Generado data/latest.json de fallback"
           fi
+          echo "Contenido generado:"
+          sed -n '1,80p' data/latest.json
 
       - name: Commit changes
         run: |
@@ -57,6 +61,5 @@ jobs:
 
       - name: Push changes
         run: |
-          # Evita conflictos en repos activos
           git pull --rebase origin main || true
           git push origin HEAD:main
