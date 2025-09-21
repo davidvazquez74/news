@@ -2,8 +2,8 @@ name: Update News
 
 on:
   schedule:
-    - cron: "0 * * * *"   # cada hora
-  workflow_dispatch:       # ejecutable manualmente
+    - cron: "0 * * * *" # cada hora
+  workflow_dispatch: # permite lanzarlo manualmente desde GitHub Actions
 
 jobs:
   build:
@@ -11,31 +11,36 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "18"
 
-      - name: Build latest.json
+      - name: Ensure data dir and seed latest.json
         run: |
-          set -e
           mkdir -p data
-          node scripts/build_latest.js
+          if [ ! -f data/latest.json ]; then
+            echo '{"updated_at": "1970-01-01T00:00:00Z", "version": "seed", "cataluna": [], "espana": [], "rioja": [], "background": [], "deportes": [], "radios": [], "blocksOut": {"Catalunya": [], "España": [], "LaRioja": [], "MolinsDeRei": [], "Global": []}}' > data/latest.json
+          fi
 
-      - name: Commit changes (if any)
+      - name: Install dependencies
+        run: npm install || true
+
+      - name: Run build script
+        run: node scripts/build_latest.js
+
+      - name: Commit changes
         run: |
-          set -e
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git add data/latest.json
-          git diff --quiet --exit-code data/latest.json || git commit -m "chore(news): auto-update latest.json (run ${{ github.run_number }})"
+          git add data/latest.json latest.json
+          git commit -m "chore(news): auto-update latest.json (v${{ github.run_number }})" || echo "No changes to commit"
 
-      - name: Push
-        if: success()
+      - name: Push changes
         run: |
           git pull --rebase origin main || true
           git push origin HEAD:main
