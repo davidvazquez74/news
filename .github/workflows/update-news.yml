@@ -2,63 +2,51 @@ name: Update News
 
 on:
   schedule:
-    - cron: "0 * * * *" # cada hora (UTC)
+    - cron: "0 * * * *" # cada hora
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          persist-credentials: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "18"
 
-      - name: Ensure data dir and seed latest.json
+      - name: Ensure folders
         run: |
-          set -e
-          mkdir -p data
+          mkdir -p data scripts
+
+      - name: Seed data/latest.json if missing
+        run: |
           if [ ! -f data/latest.json ]; then
-            echo '{"updated_at":"1970-01-01T00:00:00Z","version":"seed","cataluna":[],"espana":[],"rioja":[],"background":[],"deportes":[],"radios":[],"blocksOut":{"Catalunya":[],"España":[],"LaRioja":[],"MolinsDeRei":[],"Global":[]}}' > data/latest.json
+            echo '{"updated_at":"1970-01-01T00:00:00Z","version":"seed","cataluna":[],"espana":[],"rioja":[],"background":[],"deportes":[],"radios":[],"blocksOut":{"Catalunya":[],"Espana":[],"LaRioja":[],"MolinsDeRei":[],"Global":[]}}' > data/latest.json
           fi
 
       - name: Install deps (optional)
-        run: |
-          if [ -f package.json ]; then npm ci || npm install; else echo "No package.json"; fi
+        run: npm install || true
 
-      - name: Run build script
-        run: |
-          if [ -f scripts/build_latest.js ]; then node scripts/build_latest.js; else echo "WARN: scripts/build_latest.js no existe"; fi
-
-      - name: Copy latest.json to root
-        run: |
-          if [ -f data/latest.json ]; then cp data/latest.json latest.json; else echo "ERROR: data/latest.json no existe tras build" && exit 1; fi
-
-      - name: Validate JSON (no vacío)
-        run: |
-          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('data/latest.json','utf8'));const keys=['cataluna','espana','rioja','background'];const total=keys.reduce((n,k)=>n+(Array.isArray(d[k])?d[k].length:0),0);if(!d.updated_at) throw new Error('updated_at faltante');console.log('total items:',total);"
-
-      - name: Git config
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Build latest.json
+        run: node scripts/build_latest.js
 
       - name: Commit changes
         run: |
-          git add data/latest.json latest.json || true
-          git commit -m "chore(news): auto-update latest.json (v${{ github.run_number }})" || echo "No changes to commit"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add data/latest.json latest.json
+          git commit -m "chore(news): auto-update latest.json (run ${{ github.run_number }})" || echo "No changes to commit"
 
-      - name: Pull & push
+      - name: Push changes
         run: |
           git pull --rebase origin main || true
-          git push origin HEAD:main || echo "No push"
+          git push origin HEAD:main
