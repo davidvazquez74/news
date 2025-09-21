@@ -15,6 +15,7 @@ export const SOURCES = {
   ],
   rioja: [
     "https://www.larioja.com/rss/2.0/portada"
+    "https://actualidad.larioja.org/noticia?filtros={%22rango%22%3A%22Noticia%22}&formato=rss2"
   ],
   background: [
     "https://www.rtve.es/api/temas/ultimas-noticias.rss",
