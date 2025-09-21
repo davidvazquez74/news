@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NotiBuddy</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.weather.v1.css">
+  <meta name="theme-color" content="#111317">
+</head>
+<body>
+  <div id="safe-area"></div>
+
+  <header class="nb-header">
+    <div class="nb-header-left">
+      <h1>Noticias</h1>
+      <div class="nb-meta" id="nbMetaTop">
+        <span id="nbAppVersion"></span>
+        <span class="dot">•</span>
+        <span id="nbDataVersion"></span>
+        <span class="dot">•</span>
+        <span id="nbDataUpdatedAt"></span>
+      </div>
+    </div>
+    <div class="nb-header-right">
+      <label class="nb-switch nb-switch-inline" for="teenToggle">
+        <input type="checkbox" id="teenToggle" />
+        <span class="slider"></span>
+        <span class="label">Teen</span>
+      </label>
+    </div>
+  </header>
+
+  <nav class="nb-pills" id="nbPills">
+    <button data-target="cat-para-ti" class="pill active">Para ti</button>
+    <button data-target="cat-cataluna" class="pill">Cataluña</button>
+    <button data-target="cat-espana" class="pill">España</button>
+    <button data-target="cat-rioja" class="pill">La Rioja</button>
+    <button data-target="cat-global" class="pill">Mundo</button>
+  </nav>
+
+  <section id="weather" class="nb-weather-card">
+    <div class="nb-weather-loading">Cargando el tiempo…</div>
+  </section>
+
+  <main id="content">
+    <section id="cat-cataluna"></section>
+    <section id="cat-espana"></section>
+    <section id="cat-rioja"></section>
+    <section id="cat-global"></section>
+  </main>
+
+  <footer class="nb-footer">
+    <div class="nb-footer-actions">
+      <button id="btnClearCache" class="nb-btn">Limpiar caché</button>
+      <button id="btnForceApp" class="nb-btn">Forzar app</button>
+    </div>
+    <div class="nb-meta" id="nbMetaBottom">
+      <span id="nbAppVersionBottom"></span>
+      <span class="dot">•</span>
+      <span id="nbDataVersionBottom"></span>
+      <span class="dot">•</span>
+      <span id="nbDataUpdatedAtBottom"></span>
+    </div>
+  </footer>
+
+  <script src="./weather_client.js" defer></script>
+  <script src="./main.js" defer></script>
+</body>
+</html>
