@@ -6,6 +6,7 @@ export const SOURCES = {
     "https://www.lavanguardia.com/rss/politica.xml",
     "https://www.lavanguardia.com/rss/vida.xml",
     "https://www.lavanguardia.com/mvc/feed/rss/home.xml"
+    "https://www.catnoticias.es/rss/catalunya/"
   ],
   espana: [
     "https://www.elperiodico.com/es/rss/",
