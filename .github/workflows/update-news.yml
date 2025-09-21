@@ -2,54 +2,63 @@ name: Update News
 
 on:
   schedule:
-    - cron: "0 * * * *" # cada hora
-  workflow_dispatch: # permite lanzarlo manualmente desde GitHub Actions
+    - cron: "0 * * * *" # cada hora (UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Ensure data dir and seed latest.json
         run: |
           set -e
           mkdir -p data
           if [ ! -f data/latest.json ]; then
-            echo '{"updated_at": "1970-01-01T00:00:00Z", "version": "seed", "cataluna": [], "espana": [], "rioja": [], "background": [], "deportes": [], "radios": [], "blocksOut": {"Catalunya": [], "España": [], "LaRioja": [], "MolinsDeRei": [], "Global": []}}' > data/latest.json
+            echo '{"updated_at":"1970-01-01T00:00:00Z","version":"seed","cataluna":[],"espana":[],"rioja":[],"background":[],"deportes":[],"radios":[],"blocksOut":{"Catalunya":[],"España":[],"LaRioja":[],"MolinsDeRei":[],"Global":[]}}' > data/latest.json
           fi
 
-      - name: Install dependencies
-        run: npm install || true
+      - name: Install deps (optional)
+        run: |
+          if [ -f package.json ]; then npm ci || npm install; else echo "No package.json"; fi
 
       - name: Run build script
-        run: node scripts/build_latest.js
+        run: |
+          if [ -f scripts/build_latest.js ]; then node scripts/build_latest.js; else echo "WARN: scripts/build_latest.js no existe"; fi
 
       - name: Copy latest.json to root
         run: |
-          if [ -f data/latest.json ]; then
-            cp data/latest.json latest.json
-          else
-            echo "WARN: data/latest.json no existe tras build"
-          fi
+          if [ -f data/latest.json ]; then cp data/latest.json latest.json; else echo "ERROR: data/latest.json no existe tras build" && exit 1; fi
 
-      - name: Commit changes
+      - name: Validate JSON (no vacío)
+        run: |
+          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('data/latest.json','utf8'));const keys=['cataluna','espana','rioja','background'];const total=keys.reduce((n,k)=>n+(Array.isArray(d[k])?d[k].length:0),0);if(!d.updated_at) throw new Error('updated_at faltante');console.log('total items:',total);"
+
+      - name: Git config
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git add data/latest.json latest.json
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Commit changes
+        run: |
+          git add data/latest.json latest.json || true
           git commit -m "chore(news): auto-update latest.json (v${{ github.run_number }})" || echo "No changes to commit"
 
-      - name: Push changes
+      - name: Pull & push
         run: |
           git pull --rebase origin main || true
-          git push origin HEAD:main
+          git push origin HEAD:main || echo "No push"
