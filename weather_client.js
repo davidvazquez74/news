@@ -18,7 +18,7 @@
             <div>↑${Math.round(weather.hi)}° ↓${Math.round(weather.lo)}°</div>
           </div>
         </div>
-        <div style="margin-top:6px;font-size:12px;opacity:.65;">Actualizado: ${new Date().toISOString().split('T')[0]} ${new Date().toTimeString().slice(0,5)}</div>
+        <div style="margin-top:6px;font-size:12px;opacity:.65;">Actualizado: ${new Date().toISOStrintoISOString().split('T')[0]} ${new Date().toTimeString().slice(0,5)}</div>
       </div>`;
   }
 

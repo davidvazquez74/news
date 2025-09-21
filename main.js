@@ -1,6 +1,30 @@
 
 /**
- * main.js (producción, sin mocks)
+ * main.js (producción, sin mo
+  // Fallback: if primary categories are empty, hydrate from blocksOut
+  const mapBlocks = { cataluna: 'Catalunya', espana: 'España', rioja: 'LaRioja', background: 'Global' };
+  if (latestData && latestData.blocksOut) {
+    for (const [cat, boKey] of Object.entries(mapBlocks)) {
+      const arr = Array.isArray(latestData[cat]) ? latestData[cat] : [];
+      if (!arr.length && Array.isArray(latestData.blocksOut[boKey])) {
+        latestData[cat] = latestData.blocksOut[boKey].map(n => ({
+          title: n.title,
+          url: n.url,
+          source: n.source || '',
+          published_at: n.published_at,
+          summary: n.summary || '',
+          impact: n.impact || 'FYI',
+          impact_adult: n.impact_adult || n.impact || 'FYI',
+          impact_teen: n.impact_teen || n.impact || 'FYI',
+          tag: n.tag || 'otros',
+          severity: (n.severity !== undefined ? n.severity : 0),
+          horizon: n.horizon || 'sin plazo',
+          action: n.action || 'FYI'
+        }));
+      }
+    }
+  }
+cks)
  * - Carga /latest.json (raíz del sitio)
  * - Renderiza TODAS las noticias (sin límite de 3)
  * - Filtros por pills
