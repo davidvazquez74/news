@@ -1,70 +1,61 @@
 /**
- * scripts/build_latest.js
- * - Asegura data/latest.json (o crea scaffold si falta)
- * - Normaliza claves de blocksOut (España/LaRioja/etc)
- * - Copia a latest.json en raíz para servir en GitHub Pages
+ * build_latest.js — valida/normaliza y garantiza data/latest.json y /latest.json
  */
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const DATA_FILE = path.join(DATA_DIR, 'latest.json');
-const ROOT_LATEST = path.join(process.cwd(), 'latest.json');
+const DATA_DIR   = path.join(process.cwd(), 'data');
+const DATA_FILE  = path.join(DATA_DIR, 'latest.json');
+const ROOT_FILE  = path.join(process.cwd(), 'latest.json');
 
-function safeReadJSON(file){
-  try{
-    const raw = fs.readFileSync(file,'utf8');
-    return JSON.parse(raw);
-  }catch(e){ return null; }
+function readJSON(p){ try{ return JSON.parse(fs.readFileSync(p,'utf8')); } catch { return null; } }
+function writeJSON(p,o){ fs.mkdirSync(path.dirname(p),{recursive:true}); fs.writeFileSync(p, JSON.stringify(o,null,2),'utf8'); }
+
+function scaffold(){
+  return {
+    updated_at: new Date().toISOString(),
+    version: "local",
+    cataluna: [], espana: [], rioja: [], background: [],
+    deportes: [], radios: [],
+    blocksOut: { Catalunya: [], España: [], LaRioja: [], MolinsDeRei: [], Global: [] }
+  };
 }
 
-function writeJSON(file, obj){
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, JSON.stringify(obj, null, 2), 'utf8');
-}
-
-function normalizeBlocksOutKeys(obj){
-  if (!obj.blocksOut) return obj;
-  const bo = obj.blocksOut;
-  const fixed = {};
-  Object.keys(bo).forEach(k=>{
-    // Normalizar claves potencialmente mal-encodeadas
-    const map = {
-      'EspaÃ±a': 'España',
-      'LaRioja': 'LaRioja',
-      'Catalunya': 'Catalunya',
-      'Global': 'Global',
-      'MolinsDeRei': 'MolinsDeRei',
-      'España': 'España'
-    };
-    const key = map[k] || k;
-    fixed[key] = bo[k];
-  });
-  obj.blocksOut = fixed;
-  return obj;
-}
-
-function run(){
-  let data = safeReadJSON(DATA_FILE);
-  if (!data){
-    // scaffold mínimo si no existe aún
-    data = {
-      updated_at: new Date().toISOString(),
-      cataluna: [], espana: [], rioja: [], background: [],
-      deportes: [], radios: [],
-      blocksOut: { Catalunya: [], España: [], MolinsDeRei: [], LaRioja: [], Global: [] },
-      version: 'ci', commit: process.env.GITHUB_SHA ? process.env.GITHUB_SHA.slice(0,7) : 'local'
-    };
-  } else {
-    data.updated_at = new Date().toISOString();
+function normalize(data){
+  const base = scaffold();
+  const out = Object.assign(base, data||{});
+  // asegura arrays
+  for (const k of ['cataluna','espana','rioja','background','deportes','radios']) {
+    if (!Array.isArray(out[k])) out[k] = [];
   }
-
-  data = normalizeBlocksOutKeys(data);
-
-  writeJSON(DATA_FILE, data);
-  writeJSON(ROOT_LATEST, data);
-
-  console.log('latest.json actualizado en data/ y raíz.');
+  return out;
 }
 
-run();
+(function run(){
+  let data = readJSON(DATA_FILE) || readJSON(ROOT_FILE) || scaffold();
+  data = normalize(data);
+  // fallback desde blocksOut si todo viene vacío
+  const keys = ['cataluna','espana','rioja','background'];
+  const total = keys.reduce((n,k)=>n + (Array.isArray(data[k])?data[k].length:0),0);
+  if(total===0 && data.blocksOut){
+    const map = { cataluna:'Catalunya', espana:'España', rioja:'LaRioja', background:'Global' };
+    for (const k of keys){
+      const bo = data.blocksOut[map[k]];
+      if (Array.isArray(bo) && bo.length){
+        data[k] = bo.map(n=>({
+          title:String(n.title||'').trim(),
+          url:n.url||'#',
+          source:n.source||'',
+          published_at:n.published_at||new Date().toISOString(),
+          impact:n.impact||'',
+          impact_teen:n.impact_teen||'',
+          img:n.img||''
+        }));
+      }
+    }
+  }
+  data.updated_at = new Date().toISOString();
+  writeJSON(DATA_FILE, data);
+  writeJSON(ROOT_FILE, data);
+  console.log('OK: latest.json actualizado en data/ y raíz');
+})();

@@ -1,0 +1,4 @@
+/data/latest.json
+  Cache-Control: no-cache, no-store, must-revalidate
+/latest.json
+  Cache-Control: no-cache, no-store, must-revalidate

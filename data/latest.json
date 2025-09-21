@@ -1,18 +1,37 @@
 {
-  "updated_at": "2025-09-21T16:17:59.746Z",
-  "cataluna": [],
+  "updated_at": "2025-09-21T16:35:15Z",
+  "version": "seed",
+  "cataluna": [
+    {
+      "title": "Prueba \u2013 Catalu\u00f1a",
+      "url": "https://www.lavanguardia.com/",
+      "source": "La Vanguardia",
+      "published_at": "2025-09-21T16:35:15Z",
+      "impact": "Claves y efectos pr\u00e1cticos.",
+      "impact_teen": "Qu\u00e9 te afecta de verdad.",
+      "img": ""
+    }
+  ],
   "espana": [],
   "rioja": [],
-  "background": [],
+  "background": [
+    {
+      "title": "Prueba \u2013 Mundo",
+      "url": "https://www.bbc.com/mundo",
+      "source": "BBC Mundo",
+      "published_at": "2025-09-21T16:35:15Z",
+      "impact": "Contexto global resumido.",
+      "impact_teen": "Lo esencial en 10s.",
+      "img": ""
+    }
+  ],
   "deportes": [],
   "radios": [],
   "blocksOut": {
     "Catalunya": [],
-    "España": [],
+    "Espa\u00f1a": [],
     "MolinsDeRei": [],
     "LaRioja": [],
     "Global": []
-  },
-  "version": "ci",
-  "commit": "94d2bda"
+  }
 }

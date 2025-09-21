@@ -1,0 +1,13 @@
+{
+  "name": "news-app-static",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "serve": "python -m http.server 8080",
+    "build:news": "node scripts/build_latest.js",
+    "check:latest": "node scripts/check_latest.js"
+  }
+}
