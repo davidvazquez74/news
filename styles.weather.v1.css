@@ -8,3 +8,12 @@
 }
 .weather-now span{font-size:18px;font-weight:bold;margin-right:8px;}
 .weather-now small{color:#aaa;}
+
+.nb-weather-compact { padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.04); }
+.nb-weather-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.nb-weather-temp { font-size: 28px; font-weight: 700; line-height:1; }
+.nb-weather-desc { font-size: 14px; opacity: .8; margin-top: 4px; }
+.nb-weather-side { text-align:right; }
+.nb-weather-hi, .nb-weather-lo { font-size: 14px; }
+.nb-weather-meta { margin-top:8px; font-size:12px; opacity:.7; display:flex; gap:6px; align-items:center; }
+.nb-weather-loading { padding: 12px; font-size: 14px; opacity: .8; }
